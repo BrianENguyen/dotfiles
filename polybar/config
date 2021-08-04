@@ -432,7 +432,7 @@ font-3 = "Noto Sans Mono:size=10;0"
 
 modules-left = bspwm xwindow
 modules-center = 
-modules-right = pavolume memory2 cpu2 filesystem discord networkspeeddown date 
+modules-right = pavolume memory2 cpu2 filesystem discord temperature2 uptime date 
 
 tray-detached = false
 tray-offset-x = 0
@@ -1257,7 +1257,7 @@ ws-icon-3 = 4;%{F#A3BE8C}%{F-}
 ws-icon-4 = 5;%{F#5E81AC}
 
 ;Discord
-ws-icon-5 = 6;%{F#B48EAD}ﭮ
+ws-icon-5 = 6;%{F#738adb}ﭮ
 ws-icon-6 = 7;
 ws-icon-7 = 8;
 ws-icon-8 = 9;
@@ -1550,7 +1550,7 @@ format-prefix-foreground = #738adb
 format-underline = #738adb
 click-left = discord &
 click-right = killall Discord && killall Discord
-format-prefix = ""
+format-prefix = "ﭮ " 
 
 #################################################################
 
@@ -2034,8 +2034,8 @@ label = Uptime : %output%
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 format-prefix = " "
-format-prefix-foreground = #C15D3E
-format-underline = #C15D3E
+format-prefix-foreground = #B48EAD
+format-underline = #B48EAD
 
 ################################################################################
 
