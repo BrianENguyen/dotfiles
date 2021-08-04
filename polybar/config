@@ -40,7 +40,7 @@ format-offset =
 [colors]
 ; Nord theme ============
 ;background = #2F343F
-background = #000000
+background = #2E3440
 foreground = #f3f4f5
 alert = #d08770
 volume-min = #a3be8c
@@ -488,8 +488,8 @@ border-color = #00000000
 padding-left = 0
 padding-right = 1
 
-module-margin-left = 3
-module-margin-right = 3
+module-margin-left = 1
+module-margin-right = 1
 
 ;https://github.com/jaagr/polybar/wiki/Fonts
 font-0 = "Noto Sans:size=10;0"
@@ -1242,22 +1242,22 @@ reverse-scroll = true
 pin-workspaces = true
 
 ;Firefox
-ws-icon-0 = 1;%{F#FF2828}%{F-}
+ws-icon-0 = 1;%{F#BF616A}%{F-}
 
 ;Terminal
-ws-icon-1 = 2;%{F#ff873d}%{F-}
+ws-icon-1 = 2;%{F#D08770}%{F-}
 
 ;Folder
-ws-icon-2 = 3;%{F#F8FF28}%{F-}
+ws-icon-2 = 3;%{F#EBCB8B}%{F-}
 
 ;Spotify
-ws-icon-3 = 4;%{F#00E503}%{F-}
+ws-icon-3 = 4;%{F#A3BE8C}%{F-}
 
 ;Placeholder
-ws-icon-4 = 5;%{F#00A2FF}
+ws-icon-4 = 5;%{F#5E81AC}
 
 ;Discord
-ws-icon-5 = 6;%{F#5865F2}ﭮ
+ws-icon-5 = 6;%{F#B48EAD}ﭮ
 ws-icon-6 = 7;
 ws-icon-7 = 8;
 ws-icon-8 = 9;
@@ -1497,7 +1497,7 @@ format-prefix = "  "
 format-prefix-foreground = #cd1f3f
 format-underline = #cd1f3f
 
-label-font = 3
+label-font = 10
 
 ; Available tags:
 ;   <label> (default)
@@ -1867,7 +1867,8 @@ click-right = exec pavucontrol
 click-left = ~/.config/polybar/scripts/pavolume.sh --togmute
 scroll-up = ~/.config/polybar/scripts/pavolume.sh --up
 scroll-down = ~/.config/polybar/scripts/pavolume.sh --down
-format-underline = #3EC13F
+;format-underline = #3EC13F
+format-underline = #A3BE8C
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 
