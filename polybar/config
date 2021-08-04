@@ -425,14 +425,14 @@ module-margin-left = 1
 module-margin-right = 1
 
 ;https://github.com/jaagr/polybar/wiki/Fonts
-font-0 = "JetBrainsMono Nerd Font:style=Regular:size=14;2"
+font-0 = "JetBrainsMono Nerd Font:style=Regular:size=10;2"
 font-1 = "FontAwesome:size=13;0"
 font-2 = "Noto Sans:size=10;0"
 font-3 = "Noto Sans Mono:size=10;0"
 
-modules-left = bspwm
-modules-center = date
-modules-right = pavolume memory2 cpu2
+modules-left = bspwm xwindow
+modules-center = 
+modules-right = pavolume memory2 cpu2 filesystem discord networkspeeddown date 
 
 tray-detached = false
 tray-offset-x = 0
@@ -1523,8 +1523,10 @@ type = internal/date
 interval = 5
 ; See "http://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
 ; NOTE: if you want to use syntax tags here you need to use %%{...}
-date = " %Y-%m-%d%"
-date-alt = " %d-%m-%Y"
+date = " %B %d, %Y"
+date-alt = " %Y-%m-%d%"
+;date-alt = " %m-%d-%Y"
+
 time = %H:%M
 time-alt = %H:%M
 format-prefix = " "
@@ -1625,7 +1627,7 @@ spacing = 4
 format-mounted = <label-mounted>
 format-mounted-foreground = ${colors.foreground}
 format-mounted-background = ${colors.background}
-format-mounted-underline = #fe0000
+format-mounted-underline = #8FBCBB
 
 
 ; Available tokens:
