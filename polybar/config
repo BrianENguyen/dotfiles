@@ -442,7 +442,7 @@ font-1 = "FontAwesome:size=13;0"
 
 modules-left = bspwm xwindow
 modules-center = 
-modules-right = arrow1 pavolume arrow2 memory2 arrow3 cpu2 arrow4 filesystem arrow5 uptime arrow6 discord arrow7 temperature2 arrow8 date 
+modules-right = arrow1 pavolume arrow2 memory2 arrow3 cpu2 arrow4 filesystem arrow5 uptime arrow6 discord arrow7 temperature2 arrow8 date arrow9
 
 tray-detached = false
 tray-offset-x = 0
@@ -1401,6 +1401,14 @@ content-font = 2
 content-foreground = #D8DEE9
 content-background = #B48EAD
 
+[module/arrow9]
+; white to bar background
+type = custom/text
+content = "%{T2} %{T-}"
+content-font = 2
+content-foreground = ${colors.background}
+content-background = #D8DEE9
+
 
 ################################################################################
 ###############################################################################
@@ -2198,7 +2206,7 @@ tail = true
 [module/wired-network]
 ;https://github.com/jaagr/polybar/wiki/Module:-network
 type = internal/network
-interface = enp4s0
+interface = eth1
 ;interface = enp14s0
 interval = 3.0
 
@@ -2321,7 +2329,7 @@ type = internal/xwindow
 ;   %title%
 ; Default: %title%
 label = %title%
-label-maxlen = 50
+label-maxlen = 40
 
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
