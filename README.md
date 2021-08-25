@@ -1,9 +1,10 @@
 # Dotfiles
 
-## Required Packages
+## Required Installations
 
 - [pywal](https://github.com/dylanaraps/pywal) - a tool that generates a color palette from the dominant colors in an image
-- `zsh`, `zsh-syntax-highlighting`, `autojump`, `zsh-autosuggestions`
+- zsh
+- [picom-ibhagwan](https://github.com/ibhagwan/picom) - for rounded window corners and blurry terminal background
 
 ## ZSH Setup
 
