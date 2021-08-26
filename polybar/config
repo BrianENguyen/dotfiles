@@ -435,14 +435,14 @@ module-margin-left = 0
 module-margin-right = 0
 
 ;https://github.com/jaagr/polybar/wiki/Fonts
-font-0 = "JetBrainsMono Nerd Font:style=Regular:size=11;2"
+font-0 = "TerminessTTF Nerd Font:style=Regular:size=13;2"
 font-1 = "FontAwesome:size=13;0"
 ;font-2 = "Noto Sans:size=10;0"
 ;font-3 = "Noto Sans Mono:size=10;0"
 
 modules-left = bspwm xwindow
 modules-center = 
-modules-right = arrow1 pavolume arrow2 memory2 arrow3 cpu2 arrow4 filesystem arrow5 uptime arrow6 discord arrow7 temperature2 arrow8 date arrow9
+modules-right = arrow1 pavolume arrow2 memory2 arrow3 cpu2 arrow4 filesystem arrow5 networkspeeddown arrow6 discord arrow7 temperature2 arrow8 date arrow9
 
 tray-detached = false
 tray-offset-x = 0
@@ -1336,13 +1336,12 @@ format-background = ${colors.background}
 ################################################################################
 ################################################################################
 
-
 [module/arrow1]
 ; black to red
 type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
-content-foreground = #BF616A
+content-foreground = #ff665c
 content-background = #2E3440
 
 [module/arrow2]
@@ -1350,8 +1349,8 @@ content-background = #2E3440
 type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
-content-foreground = #D08770
-content-background = #BF616A
+content-foreground = #FFB25C
+content-background = #ff665c
 
 [module/arrow3]
 ; orange to yellow
@@ -1359,14 +1358,14 @@ type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
 content-foreground = #EBCB8B
-content-background = #D08770
+content-background = #FFB25C
 
 [module/arrow4]
 ; yellow to green
 type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
-content-foreground = #A3BE8C
+content-foreground = #7bc275
 content-background = #EBCB8B
 
 [module/arrow5]
@@ -1374,8 +1373,8 @@ content-background = #EBCB8B
 type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
-content-foreground = #88C0D0
-content-background = #A3BE8C
+content-foreground = #5cEfFF
+content-background = #7bc275
 
 [module/arrow6]
 ; blue to purple
@@ -1383,14 +1382,14 @@ type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
 content-foreground = #5865F2
-content-background = #88C0D0
+content-background = #5cEfFF
 
 [module/arrow7]
 ; purple to pink
 type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
-content-foreground = #B48EAD
+content-foreground = #C57BDB
 content-background = #5865F2
 
 [module/arrow8]
@@ -1399,7 +1398,7 @@ type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
 content-foreground = #D8DEE9
-content-background = #B48EAD
+content-background = #C57BDB
 
 [module/arrow9]
 ; white to bar background
@@ -1725,7 +1724,7 @@ spacing = 4
 ;   <ramp-capacity>
 format-mounted = <label-mounted>
 format-mounted-foreground = #FFFFFF
-format-mounted-background = #A3BE8C
+format-mounted-background = #7bc275
 ;format-mounted-underline = #8FBCBB
 
 
@@ -1842,7 +1841,7 @@ format-prefix = "  "
 format-prefix-foreground = #FFFFFF
 ;format-underline = #5E81AC
 format-foreground = #FFFFFF
-format-background = #D08770
+format-background = #FFB25C
 
 ################################################################################
 
@@ -1902,12 +1901,14 @@ type = internal/network
 ;interface = enp14s0
 interface = enp0s31f6
 ;interface = enp4s0
+;interface = enp3s0
 label-connected = "%upspeed:7%"
+
 format-connected = <label-connected>
 format-connected-prefix = ""
 format-connected-prefix-foreground = #FE522C
 format-connected-foreground = ${colors.foreground}
-format-connected-background = ${colors.background}
+format-connected-background = #88C0D0
 ;format-connected-underline = #62FF00
 
 ################################################################################
@@ -1917,14 +1918,16 @@ format-connected-background = ${colors.background}
 type = internal/network
 ;interface = wlp3s0
 ;interface = enp14s0
-interface = enp0s31f6
+;interface = enp0s31f6
 ;interface = enp4s0
+;interface = eth1
+interface = enp3s0
 label-connected = "%downspeed:7%"
 format-connected = <label-connected>
 format-connected-prefix = ""
 format-connected-prefix-foreground = #3EC13F
 format-connected-foreground = ${colors.foreground}
-format-connected-background = ${colors.background}
+format-connected-background = #5cEfFF
 ;format-connected-underline = #62FF00
 
 ################################################################################
@@ -1972,7 +1975,7 @@ scroll-down = ~/.config/polybar/scripts/pavolume.sh --down
 ;format-foreground = ${colors.foreground}
 ;format-background = ${colors.background}
 format-foreground = #FFFFFF
-format-background = #BF616A
+format-background = #ff665c
 
 
 
@@ -2117,7 +2120,7 @@ exec = ~/.config/polybar/scripts/tempcores.sh
 interval = 2
 format-padding = 1
 format-foreground = #FFFFFF
-format-background = #B48EAD
+format-background = #C57BDB
 ;format-underline = #C1B93E
 format-prefix-foreground = #C1B93E
 label =  %output:0:150:%
