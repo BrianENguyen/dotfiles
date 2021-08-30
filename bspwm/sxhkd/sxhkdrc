@@ -6,21 +6,6 @@
 # SUPER + FUNCTION KEYS
 #################################################################
 
-# Vivaldi
-super + F1
-	vivaldi-stable
-box
-super + F7
-    virtualbox
-
-#Thunar
-super + F8
-    thunar
-
-#Evolution
-super + F9
-    evolution
-
 #Spotify
 super + F10
     spotify
@@ -37,21 +22,9 @@ super + F12
 # SUPER + ... KEYS
 #################################################################
 
-#Atom
-super + e
-    atom
-
-#Browser
-super + w
-    vivaldi-stable
-
 #Conky-toggle
 super + c
     conky-toggle
-
-#Htop
-super + h
-    alacritty 'htop task manager' -e htop
 
 #arcolinux-logout
 super + x
@@ -65,26 +38,17 @@ super + r
 super + t
     alacritty
 
-#Pavucontrol
+#Pavucontrol (Post Audio Volume Control)
 super + v
     pavucontrol
-
-#Pragha
-super + m
-    pragha
 
 #alacritty
 super + Return
     alacritty
 
-#Xkill
+#Xkill - kills an app using your mouse
 super + Escape
     xkill
-
-#Keyboard dependent
-#alacritty
-super + KP_Enter
-	alacritty
 
 #################################################################
 # SUPER + SHIFT KEYS
@@ -92,12 +56,7 @@ super + KP_Enter
 
 #File-Manager
 super + shift + Return
-	thunar
-
-#Keyboard dependent
-#File-Manager
-#super + shift + KP_Enter
-#	thunar
+	dolphin
 
 #dmenu
 super + shift + d
@@ -106,11 +65,6 @@ super + shift + d
 #reload sxhkd:
 super + shift + s
 	pkill -USR1 -x sxhkd
-
-#Keyboard dependent
-#super + shift + KP_Enter
-#	thunar
-
 
 #################################################################
 # CONTROL + ALT KEYS
@@ -136,19 +90,11 @@ ctrl + alt + Prior
 ctrl + alt + b
      brave
 
-#Catfish
-ctrl + alt + c
-     catfish
-
-#Chromium
-ctrl + alt + g
-    chromium -no-default-browser-check
-
-#Firefox
+#Dolphin
 ctrl + alt + f
      dolphin
 
-#Nitrogen
+#Nitrogen - wallpaper manager
 ctrl + alt + i
      nitrogen
 
@@ -188,19 +134,9 @@ ctrl + alt + Return
 ctrl + alt + t
     alacritty
 
-#Vivaldi
-ctrl + alt + v
-    vivaldi-stable
-
 #Xfce4-appfinder
 ctrl + alt + a
     xfce4-appfinder
-
-
-#Keyboard dependent
-#alacritty
-#ctrl + alt + KP_Enter
-#     alacritty
 
 
 #################################################################
@@ -430,9 +366,6 @@ super + alt + {_,shift + }{Left,Down,Up,Right}
 # SUPER + CONTROL KEYS
 #################################################################
 
-# Cancel preselection
-super + ctrl + space
-	bspc node --presel-dir cancel
 
 #################################################################
 # SUPER + SHIFT KEYS
