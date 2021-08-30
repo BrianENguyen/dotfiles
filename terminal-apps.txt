@@ -1,5 +1,9 @@
+bat
 cava
 cbonsai
 colorscript
+gotop
+htop
 pipes.sh
+ranger
 spotify-tui
