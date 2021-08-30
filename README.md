@@ -31,3 +31,5 @@ then type
 Nord wallpaper color pallete generated using this website:
 
 - https://ign.schrodinger-hat.it/
+
+"Bubble Bay" wallpaper by [David Lanhan](https://dlanham.com/)
