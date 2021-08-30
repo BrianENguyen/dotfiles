@@ -2,7 +2,12 @@
 
 Welcome to my dotfiles repo! Please keep in mind that I use these configs on BSPWM ArcoLinux. You will see other window manager configs on some of the files, but those are not used yet. Also, I do apologize for some files being messy as well. Feel free to take a look around, maybe use some of my configs, and have fun with them!
 
-# Required Installations
+## Preview
+
+| ![img1](https://github.com/Brian-E-Nguyen/dotfiles/blob/master/screenshots/Screenshot%20from%202021-08-25%2022-14-48.png?raw=true) | ![img2](https://github.com/Brian-E-Nguyen/dotfiles/blob/master/screenshots/Screenshot%20from%202021-08-25%2022-23-05.png?raw=true) |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+
+## Required Installations
 
 - any type Nerd Font
 - [picom-ibhagwan](https://github.com/ibhagwan/picom) - for rounded window corners and blurry terminal background
@@ -12,9 +17,11 @@ Welcome to my dotfiles repo! Please keep in mind that I use these configs on BSP
 ## ZSH Setup
 
 ### Packages
+
 `yay -S zsh zsh-syntax-highlighting autojump zsh-autosuggestions`
 
 ### Initial Install
+
 ```
 touch "$HOME/.cache/zshhistory"
 #-- Setup Alias in $HOME/zsh/aliasrc
@@ -31,6 +38,7 @@ then type
 `/bin/zsh`
 
 ## Wallpaper
+
 Nord wallpaper color pallete generated using this website:
 
 - https://ign.schrodinger-hat.it/
