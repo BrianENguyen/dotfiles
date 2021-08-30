@@ -2,9 +2,9 @@
 
 ## Required Installations
 
-- [pywal](https://github.com/dylanaraps/pywal) - a tool that generates a color palette from the dominant colors in an image
-- zsh
+- any type Nerd Font
 - [picom-ibhagwan](https://github.com/ibhagwan/picom) - for rounded window corners and blurry terminal background
+- zsh shell
 
 ## ZSH Setup
 
