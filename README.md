@@ -1,6 +1,8 @@
 # Dotfiles
 
-## Required Installations
+Welcome to my dotfiles repo! Please keep in mind that I use these configs on BSPWM ArcoLinux. You will see other window manager configs on some of the files, but those are not used yet. Also, I do apologize for some files being messy as well. Feel free to take a look around, maybe use some of my configs, and have fun with them!
+
+# Required Installations
 
 - any type Nerd Font
 - [picom-ibhagwan](https://github.com/ibhagwan/picom) - for rounded window corners and blurry terminal background
