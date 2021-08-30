@@ -1,0 +1,5 @@
+cava
+cbonsai
+colorscript
+pipes.sh
+spotify-tui
