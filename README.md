@@ -6,6 +6,7 @@ Welcome to my dotfiles repo! Please keep in mind that I use these configs on BSP
 
 - any type Nerd Font
 - [picom-ibhagwan](https://github.com/ibhagwan/picom) - for rounded window corners and blurry terminal background
+- [ueberzug](https://github.com/seebye/ueberzug) - displaying images in ranger terminal app
 - zsh shell
 
 ## ZSH Setup
