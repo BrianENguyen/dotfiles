@@ -7,3 +7,5 @@ htop
 pipes.sh
 ranger
 spotify-tui
+ticker
+tickrs
