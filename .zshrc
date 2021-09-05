@@ -142,6 +142,8 @@ alias e='exit'
 alias r='ranger'
 alias v='vim'
 alias weather='curl wttr.in'
+alias nv='nvim'
+alias colors='colortest'
 
 # Fetches
 alias neo='neofetch'
@@ -150,6 +152,15 @@ alias pf='pfetch'
 # configs
 alias bashconf='vim ~/.bashrc'
 alias polybarconf='code ~/.config/polybar/config'
+alias zshconf='vim ~/.zshrc'
+alias bspwmconf='vim ~/.config/bspwm/bspwmrc'
+alias alacconf='vim ~/.config/alacritty/alacritty.yml'
+
+# Git
+alias status='git status'
+alias commit='git commit'
+alias addall='git add *'
+alias diff='git diff --staged'
 
 #list
 alias ls='ls --color=auto'
@@ -395,10 +406,12 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
 # Not supported in the "fish" shell.
-(cat ~/.cache/wal/sequences &)
+# (cat ~/.cache/wal/sequences &)
 
-# Alternative (blocks terminal for 0-3ms)
-cat ~/.cache/wal/sequences
+# # Alternative (blocks terminal for 0-3ms)
+# cat ~/.cache/wal/sequences
 
-# To add support for TTYs this line can be optionally added.
-source ~/.cache/wal/colors-tty.sh
+# # To add support for TTYs this line can be optionally added.
+# source ~/.cache/wal/colors-tty.sh
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+colorscript -r
