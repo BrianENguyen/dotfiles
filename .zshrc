@@ -150,17 +150,20 @@ alias neo='neofetch'
 alias pf='pfetch'
 
 # configs
-alias bashconf='vim ~/.bashrc'
-alias polybarconf='code ~/.config/polybar/config'
-alias zshconf='vim ~/.zshrc'
-alias bspwmconf='vim ~/.config/bspwm/bspwmrc'
-alias alacconf='vim ~/.config/alacritty/alacritty.yml'
+alias conf='cd ~/.config'
+alias polybarconf='nv ~/.config/polybar/config'
+alias zshconf='nv ~/.zshrc'
+alias bspwmconf='nv ~/.config/bspwm/bspwmrc'
+alias alacconf='nv ~/.config/alacritty/alacritty.yml'
+alias picomconf='nv ~/.config/picom/picom.conf'
+alias sxhkdconf='nv ~/.config/bspwm/sxhkd/sxhkdrc'
 
 # Git
 alias status='git status'
 alias commit='git commit'
 alias addall='git add *'
 alias diff='git diff --staged'
+alias push='git push'
 
 #list
 alias ls='ls --color=auto'
