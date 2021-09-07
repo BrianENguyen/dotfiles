@@ -140,10 +140,12 @@ alias e='exit'
 
 # Terminal apps
 alias r='ranger'
-alias v='vim'
+alias vim='nvim'
+alias v='nvim'
 alias weather='curl wttr.in'
 alias nv='nvim'
 alias colors='colortest'
+alias pipes='pipes.sh'
 
 # Fetches
 alias neo='neofetch'
@@ -162,8 +164,12 @@ alias sxhkdconf='nv ~/.config/bspwm/sxhkd/sxhkdrc'
 alias status='git status'
 alias commit='git commit'
 alias addall='git add *'
+alias add='git add'
 alias diff='git diff --staged'
 alias push='git push'
+
+# ( ͡° ͜ʖ ͡°) 
+alias please='sudo'
 
 #list
 alias ls='ls --color=auto'
