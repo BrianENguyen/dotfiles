@@ -1,3 +1,9 @@
+#  ___ ___ _  _ 
+# | _ ) __| \| | Brian E Nguyen
+# | _ \ _|| .` | brianenguyen.com 
+# |___/___|_|\_| github.com/Brian-E-Nguyen/               
+
+
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 # Import additional configuration files
@@ -107,11 +113,6 @@ font:
   # Normal (roman) font face
   normal:
     # Font family
-    #
-    #Default:
-    #   - (macOS) Menlo
-    #   - (Linux/BSD) monospace
-    #   - (Windows) Consolas
     family: JetBrainsMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
