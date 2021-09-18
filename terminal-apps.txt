@@ -4,8 +4,11 @@ cbonsai
 colorscript
 gotop
 htop
+nordvpn
 pipes.sh
 ranger
+redshift
 spotify-tui
 ticker
 tickrs
+tty-clock
