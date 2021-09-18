@@ -396,6 +396,10 @@ super + {_,shift + }{h,j,k,l}
 super + {_,shift + }a
 	bspc node @/ --flip {vertical,horizontal}
 
+# Rotate layout
+super + shift + z
+	bspc node @parent -R 90
+
 # Move focused window to other monitor
 super + shift + Left
 	bspc node -m next --follow
