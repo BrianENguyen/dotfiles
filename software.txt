@@ -1,0 +1,3 @@
+discord
+emojione-picker
+spotify
