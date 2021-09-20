@@ -1,10 +1,5 @@
 #!/bin/sh
 
-#  ___ ___ _  _
-# | _ ) __| \| | Brian E Nguyen
-# | _ \ _|| .` | brianenguyen.com
-# |___/___|_|\_| github.com/Brian-E-Nguyen/
-
 #LAUNCHERS
 $HOME/.config/bspwm/autostart.sh
 #fix for moving spotify to specific workspace

@@ -98,6 +98,9 @@ ctrl + alt + d
 ctrl + alt + f
      dolphin
 
+ctrl + alt + v
+	 emacs -fs
+
 #Nitrogen - wallpaper manager
 ctrl + alt + i
      nitrogen
@@ -397,7 +400,7 @@ super + {_,shift + }a
 	bspc node @/ --flip {vertical,horizontal}
 
 # Rotate layout
-super + shift + z
+super + shift + m
 	bspc node @parent -R 90
 
 # Move focused window to other monitor
