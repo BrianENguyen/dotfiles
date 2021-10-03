@@ -38,6 +38,10 @@ super + r
 super + t
     alacritty
 
+#Brave
+super + b
+	brave
+
 #Pavucontrol (Post Audio Volume Control)
 super + v
     pavucontrol
