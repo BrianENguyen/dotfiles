@@ -1,3 +1,4 @@
+ckb-next
 discord
 emojione-picker
 spotify
