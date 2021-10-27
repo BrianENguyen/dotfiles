@@ -1,0 +1,8 @@
+map i recolor
+
+set default-bg "#232323"
+set recolor-lightcolor rgba(0,0,0,0)
+
+set recolor "true"
+set recolor-lightcolor "#232323" #00
+set recolor-darkcolor "#E0E0E0" #06

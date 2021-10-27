@@ -1,9 +1,3 @@
-#  ___ ___ _  _
-# | _ ) __| \| | Brian E Nguyen
-# | _ \ _|| .` | brianenguyen.com
-# |___/___|_|\_| github.com/Brian-E-Nguyen/
-
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -123,10 +117,10 @@ setopt GLOB_DOTS
 
 export HISTCONTROL=ignoreboth:erasedups
 
-# Make nano the default editor
+# Make nvim the default editor
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 #PS1='[\u@\h \W]\$ '
 
@@ -138,7 +132,9 @@ if [ -d "$HOME/.local/bin" ] ;
   then PATH="$HOME/.local/bin:$PATH"
 fi
 
-# MY CUSTOM ALIASES
+#####################
+# MY CUSTOM ALIASES #
+#####################
 
 # Basic cmds
 alias c='clear'
@@ -152,6 +148,8 @@ alias weather='curl wttr.in'
 alias nv='nvim'
 alias colors='colortest'
 alias pipes='pipes.sh'
+alias ticker='ticker -w GME,SPY,VGT,TQQQ,TECL,SPXL'
+alias tclock='tty-clock -s -c'
 
 # Fetches
 alias neo='neofetch'
@@ -166,23 +164,34 @@ alias alacconf='nv ~/.config/alacritty/alacritty.yml'
 alias picomconf='nv ~/.config/picom/picom.conf'
 alias sxhkdconf='nv ~/.config/bspwm/sxhkd/sxhkdrc'
 
+# Doom
+alias doomsync='~/.emacs.d/bin/doom sync'
+
 # Git
 alias status='git status'
 alias commit='git commit'
 alias addall='git add *'
+alias clone='git clone'
+alias branch='git branch'
 alias add='git add'
 alias diff='git diff --staged'
 alias push='git push'
+alias pull='git pull'
+
+# NordVPN
+alias nord='nordvpn'
+alias nordstat='nordvpn status'
+
+# ls to exa
+alias ls='exa -lh --color=always --group-directories-first'
+alias la='exa -lha --color=always --group-directories-first'
 
 # ( ͡° ͜ʖ ͡°) 
 alias please='sudo'
 
-#list
-alias ls='ls --color=auto'
-alias la='ls -a'
-alias ll='ls -la'
-alias l='ls'
-alias l.="ls -A | egrep '^\.'"
+######################
+# END CUSTOM ALIASES #
+######################
 
 #fix obvious typo's
 alias cd..='cd ..'

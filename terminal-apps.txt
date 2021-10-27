@@ -3,6 +3,7 @@ cava
 cbonsai
 colorscript
 gotop
+exa
 htop
 nordvpn
 pipes.sh

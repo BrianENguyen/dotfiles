@@ -2,3 +2,4 @@ ckb-next
 discord
 emojione-picker
 spotify
+zathura

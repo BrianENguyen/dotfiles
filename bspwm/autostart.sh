@@ -46,13 +46,13 @@ run volumeicon &
 
 #Some ways to set your wallpaper besides variety or nitrogen
 #feh --bg-scale ~/.config/bspwm/wall.png &
-feh --bg-fill /home/buraiyen/Pictures/Photography/BEN_2858.jpg
+#feh --bg-fill /home/buraiyen/Pictures/Photography/BEN_2858.jpg
 #feh --randomize --bg-fill ~/Képek/*
 #feh --randomize --bg-fill ~/Dropbox/Apps/Desktoppr/*
 
 $HOME/.config/polybar/launch.sh &
 
-emojione-picker
+#emojione-picker
 redshift -x
 redshift -O 4000
-ckb-next
+#ckb-next
