@@ -2,22 +2,39 @@
 
 Software that I mainly use on my machine. Download download any of these to suit your needs
 
-** Accessories
-- dupeGuru - find duplicate files
-- stacer - Linux system optimizing and monitoring
-
 ** Development
 - vscode
 - emacs
 
+** Graphics
+- gThumb - image viewer
+- Darktable - image development
+
+** Internet
+- librewolf
+- firefox development edition
+- zoom
+
 ** Messaging
 - discord
+- signal
 
-** Music Player
+** Media
+- cheese - webcam photos and videos
 - spotify
 - nuclear
+- kdenlive
+- VLC media player
+
+** Office
+- libreoffice
+- zathura - PDF viewer
+
+** System Management
+- ksysguard
+- dupeGuru - find duplicate files
+- stacer - Linux system optimizing and monitoring
 
 ** Other
 - ckb-next - RGB driver
 - emojione-picker - emoji picker
-- zathura - PDF viewer
