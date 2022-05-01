@@ -2,6 +2,14 @@
 
 Software that I mainly use on my machine. Download download any of these to suit your needs
 
+** Accessories
+- dupeGuru - find duplicate files
+- stacer - Linux system optimizing and monitoring
+
+** Development
+- vscode
+- emacs
+
 ** Messaging
 - discord
 
