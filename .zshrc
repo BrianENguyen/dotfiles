@@ -20,7 +20,7 @@ export ZSH=/usr/share/oh-my-zsh/
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # if you installed the package oh-my-zsh-powerline-theme-git then you type here "powerline" as zsh theme
 # ZSH_THEME="random"
-ZSH_THEME="robbyrussell"
+ZSH_THEME="headline"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -150,6 +150,7 @@ alias colors='colortest'
 alias pipes='pipes.sh'
 alias ticker='ticker -w GME,SPY,VGT,TQQQ,TECL,SPXL'
 alias tclock='tty-clock -s -c'
+alias py='python3'
 
 # Fetches
 alias neo='neofetch'
@@ -157,26 +158,30 @@ alias pf='pfetch'
 
 # configs
 alias conf='cd ~/.config'
-alias polybarconf='nv ~/.config/polybar/config'
-alias zshconf='nv ~/.zshrc'
-alias bspwmconf='nv ~/.config/bspwm/bspwmrc'
-alias alacconf='nv ~/.config/alacritty/alacritty.yml'
-alias picomconf='nv ~/.config/picom/picom.conf'
-alias sxhkdconf='nv ~/.config/bspwm/sxhkd/sxhkdrc'
+alias confpolybar='nv ~/.config/polybar/config'
+alias confzsh='nv ~/.zshrc'
+alias confbspwm='nv ~/.config/bspwm/bspwmrc'
+alias confalac='nv ~/.config/alacritty/alacritty.yml'
+alias confpicom='nv ~/.config/picom/picom.conf'
+alias confsxhkd='nv ~/.config/bspwm/sxhkd/sxhkdrc'
 
 # Doom
 alias doomsync='~/.emacs.d/bin/doom sync'
 
 # Git
-alias status='git status'
-alias commit='git commit'
-alias addall='git add *'
-alias clone='git clone'
-alias branch='git branch'
 alias add='git add'
+alias addall='git add *'
+alias branch='git branch'
+alias clone='git clone'
+alias commit='git commit'
+alias cout='git checkout'
 alias diff='git diff --staged'
-alias push='git push'
+alias gfetch='git fetch'
+alias merge='git merge'
 alias pull='git pull'
+alias push='git push'
+alias stash='git stash'
+alias status='git status'
 
 # NordVPN
 alias nord='nordvpn'
@@ -187,7 +192,7 @@ alias ls='exa -lh --color=always --group-directories-first'
 alias la='exa -lha --color=always --group-directories-first'
 
 # ( ͡° ͜ʖ ͡°) 
-alias please='sudo'
+alias plz='sudo'
 
 ######################
 # END CUSTOM ALIASES #
@@ -229,9 +234,6 @@ alias wget="wget -c"
 
 #userlist
 alias userlist="cut -d: -f1 /etc/passwd"
-
-#merge new settings
-alias merge="xrdb -merge ~/.Xresources"
 
 # Aliases for software managment
 # pacman or pm
@@ -295,25 +297,6 @@ alias mirrorxx="sudo reflector --age 6 --latest 20  --fastest 20 --threads 20 --
 #mounting the folder Public for exchange between host and guest on virtualbox
 alias vbm="sudo /usr/local/bin/arcolinux-vbox-share"
 
-#shopt
-#shopt -s autocd # change to named directory
-#shopt -s cdspell # autocorrects cd misspellings
-#shopt -s cmdhist # save multi-line commands in history as single line
-#shopt -s dotglob
-#shopt -s histappend # do not overwrite history
-#shopt -s expand_aliases # expand aliases
-
-#youtube-dl
-alias yta-aac="youtube-dl --extract-audio --audio-format aac "
-alias yta-best="youtube-dl --extract-audio --audio-format best "
-alias yta-flac="youtube-dl --extract-audio --audio-format flac "
-alias yta-m4a="youtube-dl --extract-audio --audio-format m4a "
-alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
-alias yta-opus="youtube-dl --extract-audio --audio-format opus "
-alias yta-vorbis="youtube-dl --extract-audio --audio-format vorbis "
-alias yta-wav="youtube-dl --extract-audio --audio-format wav "
-
-alias ytv-best="youtube-dl -f bestvideo+bestaudio "
 
 #Recent Installed Packages
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
@@ -330,21 +313,6 @@ alias rg="rg --sort path"
 
 #get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
-
-#nano for important configuration files
-#know what you do in these files
-alias nlightdm="sudo $EDITOR /etc/lightdm/lightdm.conf"
-alias npacman="sudo $EDITOR /etc/pacman.conf"
-alias ngrub="sudo $EDITOR /etc/default/grub"
-alias nconfgrub="sudo $EDITOR /boot/grub/grub.cfg"
-alias nmkinitcpio="sudo $EDITOR /etc/mkinitcpio.conf"
-alias nmirrorlist="sudo $EDITOR /etc/pacman.d/mirrorlist"
-alias nsddm="sudo $EDITOR /etc/sddm.conf"
-alias nfstab="sudo $EDITOR /etc/fstab"
-alias nnsswitch="sudo $EDITOR /etc/nsswitch.conf"
-alias nsamba="sudo $EDITOR /etc/samba/smb.conf"
-alias nb="$EDITOR ~/.bashrc"
-alias nz="$EDITOR ~/.zshrc"
 
 #gpg
 #verify signature for isos
@@ -403,25 +371,6 @@ ex ()
 #in there. They will not be overwritten by skel.
 
 [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
-
-# reporting tools - install when not installed
-# install neofetch
-#neofetch
-# install screenfetch
-#screenfetch
-# install ufetch-git
-#ufetch
-# install ufetch-arco-git
-#ufetch-arco
-# install arcolinux-paleofetch-git
-#paleofetch
-# install alsi
-#alsi
-# install arcolinux-bin-git - standard on ArcoLinux isos (or sfetch - smaller)
-#hfetch
-# install lolcat
-#sfetch | lolcat
-source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
