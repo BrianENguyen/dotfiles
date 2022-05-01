@@ -3,8 +3,9 @@
 Welcome to my dotfiles repo! Please keep in mind that I use these configs on BSPWM ArcoLinux. You will see other window manager configs on some of the files, but those are not used yet. Also, I do apologize for some files being messy as well. Feel free to take a look around, maybe use some of my configs, and have fun with them!
 
 ## Preview
-![img1](https://github.com/Brian-E-Nguyen/dotfiles/blob/master/screenshots/Screenshot%20from%202021-09-06%2007-47-15.png?raw=true)  
-![img2](https://github.com/Brian-E-Nguyen/dotfiles/blob/master/screenshots/Screenshot%20from%202021-09-06%2007-51-16.png?raw=true)
+
+![img1](./screenshots/img1.png)  
+![img2](./screenshots/img2.png)
 
 ## Required Installations
 
