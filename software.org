@@ -1,0 +1,15 @@
+* Software
+
+Software that I mainly use on my machine. Download download any of these to suit your needs
+
+** Messaging
+- discord
+
+** Music Player
+- spotify
+- nuclear
+
+** Other
+- ckb-next - RGB driver
+- emojione-picker - emoji picker
+- zathura - PDF viewer
