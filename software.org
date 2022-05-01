@@ -1,6 +1,6 @@
 * Software
 
-Software that I mainly use on my machine. Download download any of these to suit your needs
+Software that I mainly use on my machine. Download any of these to suit your needs
 
 ** Development
 - vscode
