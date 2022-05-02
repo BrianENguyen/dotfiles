@@ -9,20 +9,20 @@ located in the `/.config/` folder and they all start with a period (.) - hence,
 *dotfiles*. This repository contains my personal dotfiles for you to analyze,
 edit, or use.
 
-## Required Installations
+## Initial Installations
 
 - any type Nerd Font
 - [picom-jonaburg](https://github.com/jonaburg/picom) - for rounded window corners and blurry terminal background. **NEW!**: now comes with animations
 - [ueberzug](https://github.com/seebye/ueberzug) - displaying images in ranger terminal app
 - zsh shell
 
-## ZSH Setup
+## ZSH 
 
-### Packages
+### Packages to Download
 
 `yay -S zsh zsh-syntax-highlighting autojump zsh-autosuggestions`
 
-### Initial Install
+### Setup
 
 ```
 touch "$HOME/.cache/zshhistory"
@@ -38,11 +38,3 @@ echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
 then type
 
 `/bin/zsh`
-
-## Wallpaper
-
-Nord wallpaper color pallete generated using this website:
-
-- https://ign.schrodinger-hat.it/
-
-"Bubble Bay" wallpaper by [David Lanhan](https://dlanham.com/)
