@@ -55,13 +55,30 @@ case $desktop in
     ;;
 
     bspwm|/usr/share/xsessions/bspwm)
-    if type "xrandr" > /dev/null; then
-      for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-        MONITOR=$m polybar --reload mainbar-bspwm -c ~/.config/polybar/config &
-      done
+    screens=$(xrandr --listactivemonitors | grep -v "Monitors" | cut -d" " -f6)
+
+    if [[ $(xrandr --listactivemonitors | grep -v "Monitors" | cut -d" " -f4 | cut -d"+" -f2- | uniq | wc -l) == 1 ]]; then
+      MONITOR=$(polybar --list-monitors | cut -d":" -f1) TRAY_POS=right polybar main &
     else
-    polybar --reload mainbar-bspwm -c ~/.config/polybar/config &
+      primary=$(xrandr --query | grep primary | cut -d" " -f1)
+      right=$(xrandr --query | grep DP-1 | cut -d" " -f1)
+      for m in $screens; do
+        if [[ $primary == $m ]]; then
+            MONITOR=$m TRAY_POS=right polybar mainbar-bspwm &
+        elif [[ $right == $m ]]; then
+            MONITOR=$m TRAY_POS=none polybar mainbar-bspwm-right &
+        else
+            MONITOR=$m TRAY_POS=none polybar mainbar-bspwm-left &
+        fi
+      done
     fi
+    # if type "xrandr" > /dev/null; then
+    #   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+    #     MONITOR=$m polybar --reload mainbar-bspwm -c ~/.config/polybar/config_main &
+    #   done
+    # else
+    # polybar --reload mainbar-bspwm-extra -c ~/.config/polybar/config &
+    # fi
     # second polybar at bottom
     # if type "xrandr" > /dev/null; then
     #   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
