@@ -5,7 +5,6 @@ Welcome to my dotfiles repo! Please keep in mind that I use these configs on BSP
 ## Preview
 
 ![img1](./screenshots/img1.png)  
-![img2](./screenshots/img2.png)
 
 ## Required Installations
 
