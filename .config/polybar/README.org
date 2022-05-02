@@ -1,0 +1,2 @@
+These polybar scripts support my own personal setup using triple monitors. You
+most likely would have to change these settings for your own monitor
