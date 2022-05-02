@@ -31,6 +31,7 @@ Software that I mainly use on my machine. Download any of these to suit your nee
 - zathura - PDF viewer
 
 ** System Management
+- bleachbit - unnecessary file cleaner
 - ksysguard
 - dupeGuru - find duplicate files
 - stacer - Linux system optimizing and monitoring
