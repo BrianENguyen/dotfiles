@@ -2,6 +2,8 @@
 # KEYBOARD BINDINGS FOR ANY TWM
 #################################################################
 
+#START_KEYS
+
 #################################################################
 # SUPER + FUNCTION KEYS
 #################################################################
@@ -40,7 +42,7 @@ super + t
 
 #Brave
 super + b
-	brave
+	librewolf
 
 #Pavucontrol (Post Audio Volume Control)
 super + v
@@ -63,8 +65,8 @@ super + shift + Return
 	dolphin
 
 #dmenu
-super + shift + d
-	dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
+super + shift + F12
+	dmenu_run -i -nb '#191919' -nf '#61AFEF' -sb '#61AFEF' -sf '#282C34' -fn 'NotoMonoRegular:bold:pixelsize=15'
 
 #reload sxhkd:
 super + shift + s
@@ -226,7 +228,7 @@ alt + shift + u
 
 #Xcfe4-TaskManager
 ctrl + shift + Escape
-    xfce4-taskmanager
+    ksysguard
 
 
 #################################################################
@@ -251,8 +253,8 @@ ctrl + shift + Print
 #################################################################
 
 #xfce4-terminal dropdown
-F12
-    xfce4-terminal --drop-down
+#F12
+#    xfce4-terminal --drop-down
 
 
 #################################################################
@@ -404,33 +406,23 @@ super + {_,shift + }a
 super + shift + o
 	bspc node @parent -R 90
 
-# Move focused window to other monitor
-super + shift + Left
-	bspc node -m next --follow
-
-# Move focused window to other monitor
-super + shift + Right
-		bspc node -m next --follow
-
-# Move focused window to other monitor
-super + shift + Up
-	bspc node -m next --follow
-
-# Move focused window to other monitor
-super + shift + Down
-		bspc node -m next --follow
+# # Move focused window to certain monitor
+super + shift + {Left,Down,Up,Right}
+	dir={west,south,north,east}; \
+	bspc node -s "$dir.local" --follow \
+	    || bspc node -m "$dir" --follow
 
 super + shift + v
-   bspc node --focus west
+	bspc node --focus west
 
 super + shift + b
-   bspc node --focus south
+	bspc node --focus south
 
 super + shift + n
-   bspc node --focus north
+	bspc node --focus north
 
 super + shift + m
-   bspc node --focus east
+	bspc node --focus east
 
 
 
@@ -542,3 +534,5 @@ super + shift + {1-9,0}
 # Focused desktop window gap
 super + button{4,5}
   bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 2 ))
+
+#END_KEYS
