@@ -1,10 +1,13 @@
 # Dotfiles
 
-Welcome to my dotfiles repo! Please keep in mind that I use these configs on BSPWM ArcoLinux. You will see other window manager configs on some of the files, but those are not used yet. Also, I do apologize for some files being messy as well. Feel free to take a look around, maybe use some of my configs, and have fun with them!
-
-## Preview
+## What are Dotfiles?
 
 ![img1](./screenshots/img1.png)  
+
+Dotfiles are a way to customize your Linux / UNIX machine! This files are
+located in the `/.config/` folder and they all start with a period (.) - hence,
+*dotfiles*. This repository contains my personal dotfiles for you to analyze,
+edit, or use.
 
 ## Required Installations
 
