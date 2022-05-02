@@ -33,16 +33,6 @@ picom --experimental-backends --config $HOME/.config/picom/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 run volumeicon &
-#nitrogen --restore &
-#run caffeine &
-#run vivaldi-stable &
-#run firefox &
-#run thunar &
-#run dropbox &
-#run insync start &
-#run discord &
-#run spotify &
-#run atom &
 
 #Some ways to set your wallpaper besides variety or nitrogen
 #feh --bg-scale ~/.config/bspwm/wall.png &
@@ -50,9 +40,12 @@ run volumeicon &
 #feh --randomize --bg-fill ~/Képek/*
 #feh --randomize --bg-fill ~/Dropbox/Apps/Desktoppr/*
 
-$HOME/.config/polybar/launch.sh &
 
 #emojione-picker
 redshift -x
 redshift -O 4000
 #ckb-next
+#fetchcord --nohardware
+
+$HOME/.config/polybar/launch.sh &
+
