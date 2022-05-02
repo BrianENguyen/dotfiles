@@ -1,7 +1,16 @@
 * Wallpapers
 
+** Alena Nord
 [[./alena-nord.png]]
 
+** Bubble Bay
 [[./bubble-bay.jpg]]
 
+** Torii Sunset
 [[./torii-sunset.jpg]]
+
+** Your Name - Sunset
+[[./your-name-sunset.jpg]]
+
+** Your Name - Meteors
+[[./your-name-meteors.jpg]]
