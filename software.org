@@ -3,8 +3,8 @@
 Software that I mainly use on my machine. Download any of these to suit your needs
 
 ** Development
-- vscode
-- emacs
+- vscodium - VS Code without the telemetry
+- (doom) emacs
 
 ** Graphics
 - gThumb - image viewer
