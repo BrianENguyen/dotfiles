@@ -13,13 +13,12 @@ edit, or use.
 
 - **WM** -> `bspwm`
 - **Terminal** -> `alacritty`
-
-## Initial Installations
-
-- any type of Nerd Font
-- [picom-jonaburg](https://github.com/jonaburg/picom) - for rounded window corners and blurry terminal background. **NEW!**: now comes with animations
-- [ueberzug](https://github.com/seebye/ueberzug) - displaying images in ranger terminal app
-- zsh shell
+- **Shell** -> `ZSH`
+- **Compositor** -> `picom-jonaburg-git`
+- **Font** -> JetBrains Mono Nerd Font
+- **Color Scheme** -> `onedark`
+- **App Launcher** -> `rofi`
+- **Keybinding Daemon** -> `sxhkd`
 
 ## ZSH 
 
