@@ -11,15 +11,17 @@ edit, or use.
 
 ## Info
 
-- **WM** -> `bspwm`
-- **Terminal** -> `alacritty`
-- **Shell** -> `ZSH`
-- **Compositor** -> `picom-jonaburg-git`
-- **Bar** -> `polybar`
-- **Font** -> JetBrains Mono Nerd Font
-- **Color Scheme** -> `onedark`
-- **App Launcher** -> `rofi`
-- **Keybinding Daemon** -> `sxhkd`
+| -                 | -                        |
+|-------------------|--------------------------|
+| WM                | bspwm                    |
+| Terminal          | alacritty                |
+| Shell             | ZSH                      |
+| Compositor        | picom-jonaburg-git       |
+| Bar               | polybar                  |
+| Font              | JetBrains Mono Nerd Font |
+| Color Scheme      | One Dark                 |
+| App Launcher      | rofi                     |
+| Keybinding Daemon | sxhkd                    |
 
 ## ZSH 
 
