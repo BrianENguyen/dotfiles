@@ -1,4 +1,5 @@
 {
+  "_comment": "BEN VSCodium config",
   "workbench.colorTheme": "One Dark Pro",
   "workbench.iconTheme": "material-icon-theme",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
