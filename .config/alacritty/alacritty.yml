@@ -1,7 +1,7 @@
 #  ___ ___ _  _
 # | _ ) __| \| | Brian E Nguyen
 # | _ \ _|| .` | brianenguyen.com
-# |___/___|_|\_| github.com/Brian-E-Nguyen/
+# |___/___|_|\_| github.com/Buraiyen/
 #
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
@@ -133,7 +133,6 @@ schemes:
       white: '#eceff4'
 
 colors: *one-dark
-
 # Bell
 #
 # The bell is rung every time the BEL control character is received.
@@ -174,7 +173,6 @@ colors: *one-dark
 #     args: ["Hello, World!"]
 #
 #command: None
-
 
 # When set to `true`, selected text will be copied to the primary clipboard.
 #save_to_clipboard: false
