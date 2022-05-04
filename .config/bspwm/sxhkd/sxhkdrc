@@ -1,3 +1,10 @@
+#  ___ ___ _  _
+# | _ ) __| \| | Brian E Nguyen
+# | _ \ _|| .` | brianenguyen.com
+# |___/___|_|\_| github.com/Buraiyen/
+#
+# Configuration for sxhkd, a hotkey daemon
+
 #################################################################
 # KEYBOARD BINDINGS FOR ANY TWM
 #################################################################
@@ -101,20 +108,12 @@ ctrl + alt + d
 	discord
 
 #Dolphin
-ctrl + alt + f
+ctrl + alt + l
      dolphin
 
 #Emacs
 ctrl + alt + k
 	 emacs
-
-#Nitrogen - wallpaper manager
-ctrl + alt + i
-     nitrogen
-
-#arcolinux-logout
-ctrl + alt + l
-    arcolinux-logout
 
 #Pamac-manager
 ctrl + alt + p
@@ -124,25 +123,9 @@ ctrl + alt + p
 ctrl + alt + m
      xfce4-settings-manager
 
-#Pulse Audio Control
-ctrl + alt + u
-     pavucontrol
-
-#Rofi theme selector
-ctrl + alt + r
-  rofi-theme-selector
-
 #Spotify
 ctrl + alt + s
    spotify
-
-#alacritty
-ctrl + alt + Return
-    alacritty
-
-#alacritty
-ctrl + alt + t
-    alacritty
 
 #Xfce4-appfinder
 ctrl + alt + a
@@ -185,42 +168,9 @@ alt + Up
 alt + Down
     variety --resume
 
-#Xfce appfinder
-alt + F2
-    xfce4-appfinder --collapsed
-
-#Xfce4-appfinder
-alt + F3
-    xfce4-appfinder
-
 #Xlunch app launcher
 #alt + F5
 #    xlunch --config ~/.config/xlunch/default.conf --input ~/.config/xlunch/entries.dsv   
-
-
-#################################################################
-#VARIETY KEYS WITH PYWAL
-#################################################################
-
-#Wallpaper trash
-alt + shift + t
-    variety -t && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&
-
-#Wallpaper next
-alt + shift + n
-    variety -n && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&
-
-#Wallpaper previous
-alt + shift + p
-    variety -p && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&
-
-#Wallpaper favorite
-alt + shift + f
-    variety -f && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&
-
-#Wallpaper update
-alt + shift + u
-    wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&
 
 #################################################################
 # CONTROL + SHIFT KEYS
@@ -229,33 +179,6 @@ alt + shift + u
 #Xcfe4-TaskManager
 ctrl + shift + Escape
     ksysguard
-
-
-#################################################################
-#     SCREENSHOTS
-#################################################################
-
-#Scrot
-Print
-    scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
-
-#screeenshooter
-ctrl + Print
-     xfce4-screenshooter
-
-#Gnome-Screenshot
-ctrl + shift + Print
-     gnome-screenshot -i
-
-
-#################################################################
-#     FUNCTION KEYS
-#################################################################
-
-#xfce4-terminal dropdown
-#F12
-#    xfce4-terminal --drop-down
-
 
 #################################################################
 #     MULTIMEDIA KEYS
@@ -357,8 +280,9 @@ super + bracket{left,right}
 	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5 ))
 
 # set the window state
+# There's also a pseudotiled state if needed
 super + space
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+	bspc node -t {tiled,floating,fullscreen}
 
 # Move focus to other monitor
 super + BackSpace
@@ -385,10 +309,6 @@ super + alt + {_,shift + }{Left,Down,Up,Right}
 #Reload bspwm
 super + shift + r
 	~/.config/bspwm/bspwmrc
-
-#kill
-super + shift + q
-	bspc node -c
 
 #Logout
 #super + shift + x
@@ -423,9 +343,6 @@ super + shift + n
 
 super + shift + m
 	bspc node --focus east
-
-
-
 
 #################################################################
 # SUPER + CONTROL KEYS
