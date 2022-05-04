@@ -2,17 +2,17 @@
 
 ## What are Dotfiles?
 
-![img1](./screenshots/img1.png)  
+![img1](./screenshots/img1.png)
 
 Dotfiles are a way to customize your Linux / UNIX machine! This files are
 located in the `/.config/` folder and they all start with a period (.) - hence,
-*dotfiles*. This repository contains my personal dotfiles for you to analyze,
+_dotfiles_. This repository contains my personal dotfiles for you to analyze,
 edit, or use.
 
 ## Info
 
 | -                 | -                        |
-|-------------------|--------------------------|
+| ----------------- | ------------------------ |
 | WM                | bspwm                    |
 | Terminal          | alacritty                |
 | Shell             | ZSH                      |
@@ -23,7 +23,7 @@ edit, or use.
 | App Launcher      | rofi                     |
 | Keybinding Daemon | sxhkd                    |
 
-## ZSH 
+## ZSH
 
 ### Packages to Download
 
@@ -46,11 +46,10 @@ then type
 
 `/bin/zsh`
 
-
 ## Preview
 
-![img1](./screenshots/img1.png)  
+![img1](./.screenshots/img1.png)
 
-![img2](./screenshots/img2.png)  
+![img2](./.screenshots/img2.png)
 
-![img3](./screenshots/img3.png)  
+![img3](./.screenshots/img3.png)
