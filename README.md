@@ -2,7 +2,7 @@
 
 ## What are Dotfiles?
 
-![img1](./screenshots/img1.png)
+![img1](./.screenshots/img1.png)
 
 Dotfiles are a way to customize your Linux / UNIX machine! This files are
 located in the `/.config/` folder and they all start with a period (.) - hence,
