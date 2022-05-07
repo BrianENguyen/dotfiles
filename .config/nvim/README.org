@@ -1,0 +1,5 @@
+* NVChad
+
+This NeoVim repository uses config files for [[https://github.com/NvChad/NvChad][NvChad]] with some minor tweaks.
+
+
