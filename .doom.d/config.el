@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-vibrant)
+(setq doom-theme 'doom-one)
 
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 15))
 
@@ -56,11 +56,15 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Configuration
+;;(setq org-latex-listings 'minted)
 ;; set transparency
-(set-frame-parameter (selected-frame) 'alpha '(85 85))
-(add-to-list 'default-frame-alist '(alpha 85 85))
+(set-frame-parameter (selected-frame) 'alpha '(90 90))
+;;(add-to-list 'default-frame-alist '(alpha 85 85))
 
 (require 'neotree)
+(global-set-key [f6] 'org-bullets-mode)
+(global-set-key [f7] 'org-export-dispatch)
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key [f9] 'neotree-refresh)
 
