@@ -62,10 +62,25 @@
 (set-frame-parameter (selected-frame) 'alpha '(90 90))
 ;;(add-to-list 'default-frame-alist '(alpha 85 85))
 
+
+;; Org Journal
+(setq org-journal-dir "~/Documents/journal/"
+      org-journal-file-header "#+TITLE: %M %Y"
+      org-journal-date-format "%A, %Y-%m-%d"
+      org-journal-file-type 'monthly
+      org-journal-file-format "%Y-%m.org")
+(setq org-fold-core-style 'overlays)
+
+;; Org Agenda
+(after! org
+  (setq org-agenda-files '("~/Documents/journal/agenda.org"))
+)
+
 (require 'neotree)
 (global-set-key [f6] 'org-bullets-mode)
 (global-set-key [f7] 'org-export-dispatch)
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key [f9] 'neotree-refresh)
+(global-set-key (kbd "C-c c") '=calendar)
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
