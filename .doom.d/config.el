@@ -84,3 +84,9 @@
 (global-set-key (kbd "C-c c") '=calendar)
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(defalias 'holiday-bahai-ridvan #'ignore)
+(defalias 'holiday-islamic-holidays #'ignore)
+(defalias 'holiday-hebrew-holidays #'ignore)
+'(holiday-bahai-holidays nil)
+'(holiday-hebrew-holidays nil)
+'(holiday-islamic-holidays nil)
