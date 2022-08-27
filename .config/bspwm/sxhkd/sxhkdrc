@@ -37,7 +37,7 @@ super + c
 
 #arcolinux-logout
 super + x
-    arcolinux-logout
+    archlinux-logout
 
 #Rofi theme selector
 super + r
@@ -63,6 +63,8 @@ super + Return
 super + Escape
     xkill
 
+super + e 
+    emacs
 #################################################################
 # SUPER + SHIFT KEYS
 #################################################################
@@ -110,10 +112,6 @@ ctrl + alt + d
 #Dolphin
 ctrl + alt + l
      dolphin
-
-#Emacs
-ctrl + alt + k
-	 emacs
 
 #Pamac-manager
 ctrl + alt + p
