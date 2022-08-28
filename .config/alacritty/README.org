@@ -1,8 +1,24 @@
+#+title: Alacritty Config
+#+AUTHOR: Brian Nguyen (Buraiyen)
+#+PROPERTY: header-args :tangle alacritty.yml
+#+auto_tangle: t
+#+STARTUP: showeverything
+
+* ABOUT THIS CONFIG
+Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+#+begin_src shell
 #  ___ ___ _  _
 # | _ ) __| \| | Brian E Nguyen
 # | _ \ _|| .` | brianenguyen.com
 # |___/___|_|\_| github.com/Brian-E-Nguyen/
+#+end_src
 
+* BASIC CONFIGURATION
+Mostly just generic configuration, such as the font, window, etc.
+
+** Window
+#+begin_src shell
 # Window padding (changes require restart)
 #
 # Blank space added around the window in pixels. This padding is scaled
@@ -12,13 +28,19 @@ window:
     x: 25
     y: 25
   opacity: 0.85
+#+end_src
 
+** Scrolling
+#+begin_src shell
 # Window scrolling
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
   history: 50000
+#+end_src
 
+** Font
+#+begin_src shell
 # Font configuration
 font:
   # Normal (roman) font face
@@ -62,7 +84,12 @@ font:
 
   # Point size
   size: 11.0
+#+end_src
 
+* Colors
+Current color themes include One Dark, Nord, and Catpuccin
+
+#+begin_src shell
 schemes:
   one-dark: &one-dark
     primary:
@@ -154,3 +181,4 @@ schemes:
       white: '#D9E0EE'
 
 colors: *one-dark
+#+end_src
