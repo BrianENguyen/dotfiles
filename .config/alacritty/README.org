@@ -22,7 +22,7 @@ Configuration for Alacritty, the GPU enhanced terminal emulator.
 #  ___ ___ _  _
 # | _ ) __| \| | Brian E Nguyen
 # | _ \ _|| .` | brianenguyen.com
-# |___/___|_|\_| github.com/Brian-E-Nguyen/
+# |___/___|_|\_| github.com/Buraiyen/
 #+end_src
 
 * BASIC CONFIGURATION
