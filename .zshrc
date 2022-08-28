@@ -1,7 +1,7 @@
 #  ___ ___ _  _
 # | _ ) __| \| | Brian E Nguyen
 # | _ \ _|| .` | brianenguyen.com
-# |___/___|_|\_| github.com/Buraiyen/
+# |___/___|_|\_| github.com/Brian-E-Nguyen/
 #
 # ZSH configurations. Most of them are automatically impletmented
 # from ArcoLinux
@@ -97,7 +97,6 @@ alias vim='nvim'
 alias v='nvim'
 alias weather='curl wttr.in'
 alias nv='nvim'
-alias colors='colortest'
 alias pipes='pipes.sh'
 alias ticker='ticker -w GME,SPY,VGT,TQQQ,TECL,SPXL'
 alias tclock='tty-clock -s -c'
@@ -137,6 +136,9 @@ alias status='git status'
 # NordVPN
 alias nord='nordvpn'
 alias nordstat='nordvpn status'
+
+# VS Codium
+alias code='codium'
 
 # ls to exa
 alias ls='exa -lh --color=always --group-directories-first'
@@ -184,6 +186,8 @@ alias userlist="cut -d: -f1 /etc/passwd"
 # pacman or pm
 alias pacman='sudo pacman --color auto'
 alias update='sudo pacman -Syyu'
+alias cleanorphan='sudo pacman -Rs $(pacman -Qqtd)'
+alias update-arco-keyring='sudo pacman -Sy arcolinux-keyring'
 
 # yay as aur helper - updates everything
 alias pksyua="paru -Syu --noconfirm"
@@ -310,4 +314,5 @@ ex ()
 # # To add support for TTYs this line can be optionally added.
 # source ~/.cache/wal/colors-tty.sh
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+#neofetch
 colorscript -r
