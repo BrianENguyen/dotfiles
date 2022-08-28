@@ -10,7 +10,10 @@
   - [[#window][Window]]
   - [[#scrolling][Scrolling]]
   - [[#font][Font]]
-- [[#colors][Colors]]
+- [[#colors][COLORS]]
+  - [[#one-dark][One Dark]]
+  - [[#nord][Nord]]
+  - [[#catppuccin][Catppuccin]]
 
 * ABOUT THIS CONFIG
 Configuration for Alacritty, the GPU enhanced terminal emulator.
@@ -94,9 +97,10 @@ font:
   size: 11.0
 #+end_src
 
-* Colors
-Current color themes include One Dark, Nord, and Catpuccin
+* COLORS
+Current color themes include One Dark, Nord, and Catppuccin
 
+** One Dark
 #+begin_src shell
 schemes:
   one-dark: &one-dark
@@ -127,7 +131,10 @@ schemes:
       magenta: '#c57bdb'
       cyan: '#51afef'
       white: '#bbc2cf'
+#+end_src
 
+** Nord
+#+begin_src shell
   nord: &nord
     primary:
       background: '#232323'
@@ -156,7 +163,10 @@ schemes:
       magenta: '#b48ead'
       cyan: '#8fbcbb'
       white: '#eceff4'
+#+end_src
 
+** Catppuccin
+#+begin_src shell
   catppuccin: &catppuccin
     primary:
       background: '#1E1D2F'
