@@ -4,6 +4,14 @@
 #+auto_tangle: t
 #+STARTUP: showeverything
 
+* TABLE OF CONTENTS :toc:
+- [[#about-this-config][ABOUT THIS CONFIG]]
+- [[#basic-configuration][BASIC CONFIGURATION]]
+  - [[#window][Window]]
+  - [[#scrolling][Scrolling]]
+  - [[#font][Font]]
+- [[#colors][Colors]]
+
 * ABOUT THIS CONFIG
 Configuration for Alacritty, the GPU enhanced terminal emulator.
 
