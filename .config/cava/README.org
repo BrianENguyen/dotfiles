@@ -1,3 +1,23 @@
+#+title: Cava Config
+#+AUTHOR: Brian Nguyen (Buraiyen)
+#+PROPERTY: header-args :tangle config
+#+auto_tangle: t
+#+STARTUP: showeverything
+
+* TABLE OF CONTENTS :toc:
+- [[#about][ABOUT]]
+- [[#general][GENERAL]]
+- [[#input][INPUT]]
+- [[#output][OUTPUT]]
+- [[#color][COLOR]]
+- [[#smoothing][SMOOTHING]]
+- [[#equalizer][EQUALIZER]]
+
+* ABOUT
+Configuration for *C*onsole-based *A*udio *V*isualizer for *A*LSA (CAVA)
+
+* GENERAL
+#+begin_src shell
 [general]
 
 # Smoothing mode. Can be 'normal', 'scientific' or 'waves'. DEPRECATED as of 0.6.0
@@ -34,7 +54,10 @@ framerate = 60
 # Seconds with no input before cava goes to sleep mode. Cava will not perform FFT or drawing and
 # only check for input once per second. Cava will wake up once input is detected. 0 = disable.
 ; sleep_timer = 0
+#+end_src
 
+* INPUT
+#+begin_src shell
 [input]
 
 # Audio capturing method. Possible methods are: 'pulse', 'alsa', 'fifo', 'sndio' or 'shmem'
@@ -65,7 +88,10 @@ framerate = 60
 
 ; method = portaudio
 ; source = auto
+#+end_src
 
+* OUTPUT
+#+begin_src shell
 [output]
 
 # Output method. Can be 'ncurses', 'noncurses' or 'raw'.
@@ -100,7 +126,12 @@ framerate = 60
 # Use decimal value in ascii table (i.e. 59 = ';' and 10 = '\n' (line feed)).
 ; bar_delimiter = 59
 ; frame_delimiter = 10
+#+end_src
 
+
+* COLOR
+Currently uses One Dark color scheme
+#+begin_src shell
 [color]
 
 # Colors can be one of seven predefined: black, blue, cyan, green, magenta, red, white, yellow.
@@ -123,7 +154,10 @@ framerate = 60
  gradient_color_4 = "#FCCE7B" # Yellow
  gradient_color_5 = '#cc5933' # Orange
  gradient_color_6 = "#ff665c" # Red
+#+end_src
 
+* SMOOTHING
+#+begin_src shell
 [smoothing]
 
 # Percentage value for integral smoothing. Takes values from 0 - 100.
@@ -141,7 +175,10 @@ waves = 1
 
 # In bar height, bars that would have been lower that this will not be drawn.
 ; ignore = 0
+#+end_src
 
+* EQUALIZER
+#+begin_src shell
 [eq]
 
 # This one is tricky. You can have as much keys as you want.
@@ -152,3 +189,4 @@ waves = 1
 ; 3 = 1 # midtone
 ; 4 = 1
 ; 5 = 1 # treble
+#+end_src
