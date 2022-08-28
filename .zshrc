@@ -1,7 +1,7 @@
 #  ___ ___ _  _
 # | _ ) __| \| | Brian E Nguyen
 # | _ \ _|| .` | brianenguyen.com
-# |___/___|_|\_| github.com/Brian-E-Nguyen/
+# |___/___|_|\_| github.com/Buraiyen/
 #
 # ZSH configurations. Most of them are automatically impletmented
 # from ArcoLinux
