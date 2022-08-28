@@ -1,0 +1,65 @@
+#+title: Dotfiles
+#+AUTHOR: Brian Nguyen (Buraiyen)
+
+* Table of Contents :toc:
+- [[#what-are-dotfiles][What are Dotfiles?]]
+- [[#info][Info]]
+- [[#zsh-installation][ZSH Installation]]
+  - [[#packages-to-download][Packages to Download]]
+  - [[#setup][Setup]]
+  - [[#bash-to-zsh][Bash to ZSH]]
+- [[#preview][Preview]]
+
+* What are Dotfiles?
+
+Dotfiles are a way to customize your Linux / UNIX machine! This files are
+located in the ~/.config/~ folder and they all start with a period (.) - hence,
+_dotfiles_. This repository contains my personal dotfiles for you to analyze,
+edit, or use.
+
+* Info
+
+|------------------------+--------------------------|
+| WM                     | bspwm                    |
+| Terminal               | alacritty                |
+| Shell                  | ZSH                      |
+| Compositor             | picom-jonaburg-git       |
+| Bar                    | Polybar                  |
+| Font                   | JetBrains Mono Nerd Font |
+| (Primary) Color Scheme | One Dark                 |
+| App Launcher           | rofi                     |
+| Keybinding Daemon      | sxhkd                    |
+
+* ZSH Installation
+** Packages to Download
+
+#+begin_src shell
+$ yay -S zsh zsh-syntax-highlighting autojump zsh-autosuggestions
+#+end_src
+
+** Setup
+
+#+begin_src shell
+$ touch "$HOME/.cache/zshhistory"
+#-- Setup Alias in $HOME/zsh/aliasrc
+$ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+$ echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
+#+end_src
+
+** Bash to ZSH
+
+#+begin_src shell
+$chsh $USER
+#+end_src
+
+then type
+
+#+begin_src shell
+$ /bin/zsh
+#+end_src
+
+* Preview
+
+[[./.screenshots/img1.png]]
+[[./.screenshots/img2.png]]
+[[./.screenshots/img3.png]]
