@@ -1,4 +1,4 @@
-#+title: Alacritty Config
+#+title: Polybar Config
 #+AUTHOR: Brian Nguyen (Buraiyen)
 #+PROPERTY: header-args :tangle config
 #+auto_tangle: t
