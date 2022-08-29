@@ -16,7 +16,7 @@
 
 Dotfiles are a way to customize your Linux / UNIX machine! This files are
 located in the ~/.config/~ folder and they all start with a period (.) - hence,
-_dotfiles_. This repository contains my personal dotfiles for you to analyze,
+/dotfiles/. This repository contains my personal dotfiles for you to analyze,
 edit, or use.
 
 * Info
