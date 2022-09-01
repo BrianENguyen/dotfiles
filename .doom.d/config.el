@@ -27,7 +27,7 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 15))
+(setq doom-font (font-spec :family "JetBrainsMonoMedium Nerd Font" :size 15))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -62,6 +62,11 @@
 (set-frame-parameter (selected-frame) 'alpha '(90 90))
 ;;(add-to-list 'default-frame-alist '(alpha 85 85))
 
+;; Beacon
+(beacon-mode 1)
+(setq beacon-blink-when-point-moves-vertically 1)
+(setq beacon-blink-when-buffer-changes t)
+(setq beacon-blink-when-window-scrolls t)
 
 ;; Org Journal
 (setq org-journal-dir "~/Documents/journal/"
@@ -76,17 +81,19 @@
   (setq org-agenda-files '("~/Documents/journal/agenda.org"))
 )
 
+(use-package! org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode)
+  :config
+  (setq org-auto-tangle-default t))
+
+
 (require 'neotree)
 (global-set-key [f6] 'org-bullets-mode)
 (global-set-key [f7] 'org-export-dispatch)
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key [f9] 'neotree-refresh)
 (global-set-key (kbd "C-c c") '=calendar)
-
+(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
-(defalias 'holiday-bahai-ridvan #'ignore)
-(defalias 'holiday-islamic-holidays #'ignore)
-(defalias 'holiday-hebrew-holidays #'ignore)
-'(holiday-bahai-holidays nil)
-'(holiday-hebrew-holidays nil)
-'(holiday-islamic-holidays nil)
