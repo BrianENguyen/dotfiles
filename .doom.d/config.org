@@ -4,45 +4,80 @@
 #+auto_tangle: t
 #+STARTUP: showeverything
 
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+* TABLE OF CONTENTS :toc:
+- [[#about-this-config--doom-emacs][ABOUT THIS CONFIG / DOOM EMACS]]
+- [[#full-name--email][FULL NAME / EMAIL]]
+- [[#looks][LOOKS]]
+  - [[#font][Font]]
+  - [[#theme][Theme]]
+  - [[#window-transparency][Window Transparency]]
+- [[#line-numbers][LINE NUMBERS]]
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
+* ABOUT THIS CONFIG / DOOM EMACS
+Doom Emacs is a configuration framework for GNU Emacs. It uses the "evil"
+keybindings set to emulate Vim keybindings. Doom Emacs has various different
+packages and customization for you to choose. Below is my custom configuration
+of it, and feel free to use / modify whatever you like
 
+[[https://github.com/doomemacs/][Link to Doom Emacs GitHub project]]
 
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
+* FULL NAME / EMAIL
+
+Some functionality uses this to identify you, e.g. GPG configuration, email
+clients, file templates and snippets. If you don't use any of these services, then
+you don't have to fill out these fields
+
+#+begin_src emacs-lisp
 (setq user-full-name "Brian Nguyen"
       user-mail-address "brian.edison.nguyen@gmail.com")
+#+end_src
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+* LOOKS
+** Font
+Doom exposes five (optional) variables for controlling fonts in Doom. Here
+are the three important ones:
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
++ `doom-font'
++ `doom-variable-pitch-font'
++ `doom-big-font' -- used for `doom-big-font-mode'; use this for
+  presentations or streaming.
 
+They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
+font string. You generally only need these two:
+
+~(setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)~
+      ~doom-variable-pitch-font (font-spec :family "sans" :size 13))~
+
+
+#+begin_src emacs-lisp
 (setq doom-font (font-spec :family "JetBrainsMonoMedium Nerd Font" :size 15))
+#+end_src
+
+** Theme
+There are two ways to load a theme. Both assume the theme is installed and
+available. You can either set `doom-theme' or manually load a theme with the
+`load-theme' function. This is the default:
+
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-one)
+#+end_src
+
+** Window Transparency
+#+begin_src emacs-lisp
+(set-frame-parameter (selected-frame) 'alpha '(90 90))
+#+end_src
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-;;(setq display-line-numbers-type t)
+* LINE NUMBERS
+This determines the style of line numbers in effect. If set to `nil', line
+numbers are disabled. For relative line numbers, set this to `relative'.
+~(setq display-line-numbers-type t)~
+#+begin_src emacs-lisp
 (setq display-line-numbers-type 'relative)
+#+end_src
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -62,11 +97,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; Configuration
-;;(setq org-latex-listings 'minted)
-;; set transparency
-(set-frame-parameter (selected-frame) 'alpha '(90 90))
-;;(add-to-list 'default-frame-alist '(alpha 85 85))
 
 ;; Beacon
 (beacon-mode 1)
