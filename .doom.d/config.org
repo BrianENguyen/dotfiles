@@ -7,11 +7,18 @@
 * TABLE OF CONTENTS :toc:
 - [[#about-this-config--doom-emacs][ABOUT THIS CONFIG / DOOM EMACS]]
 - [[#full-name--email][FULL NAME / EMAIL]]
+- [[#general-keybindings][GENERAL KEYBINDINGS]]
 - [[#looks][LOOKS]]
   - [[#font][Font]]
   - [[#theme][Theme]]
+  - [[#window-size][Window Size]]
   - [[#window-transparency][Window Transparency]]
 - [[#line-numbers][LINE NUMBERS]]
+- [[#beacon][BEACON]]
+- [[#org-mode][ORG MODE]]
+  - [[#agenda-and-journal][Agenda and Journal]]
+  - [[#org-auto-tangle][Org Auto Tangle]]
+- [[#neotree][NEOTREE]]
 
 * ABOUT THIS CONFIG / DOOM EMACS
 Doom Emacs is a configuration framework for GNU Emacs. It uses the "evil"
@@ -30,6 +37,12 @@ you don't have to fill out these fields
 #+begin_src emacs-lisp
 (setq user-full-name "Brian Nguyen"
       user-mail-address "brian.edison.nguyen@gmail.com")
+#+end_src
+
+* GENERAL KEYBINDINGS
+#+begin_src emacs-lisp
+(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 #+end_src
 
 * LOOKS
@@ -62,6 +75,15 @@ available. You can either set `doom-theme' or manually load a theme with the
 (setq doom-theme 'doom-one)
 #+end_src
 
+** Window Size
+The setting below sets Emacs to open maximized without it being fully
+fullscreen. For some reason this works well on my main machine but not my
+laptop. I'll have to look into it
+
+#+begin_src emacs-lisp
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+end_src
+
 ** Window Transparency
 #+begin_src emacs-lisp
 (set-frame-parameter (selected-frame) 'alpha '(90 90))
@@ -69,67 +91,71 @@ available. You can either set `doom-theme' or manually load a theme with the
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
 
 * LINE NUMBERS
 This determines the style of line numbers in effect. If set to `nil', line
 numbers are disabled. For relative line numbers, set this to `relative'.
 ~(setq display-line-numbers-type t)~
+
 #+begin_src emacs-lisp
 (setq display-line-numbers-type 'relative)
 #+end_src
 
+* BEACON
+Very useful package for locating your cursor. Whenever you scroll, a flashing light flashes horizontally on your cursor
 
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
-
-
-;; Beacon
+#+begin_src emacs-lisp
 (beacon-mode 1)
 (setq beacon-blink-when-point-moves-vertically 1)
 (setq beacon-blink-when-buffer-changes t)
 (setq beacon-blink-when-window-scrolls t)
+#+end_src
 
-;; Org Journal
-(setq org-journal-dir "~/Documents/journal/"
+* ORG MODE
+Org mode is a markdown mode for note-taking, writing journals, planning agendas,
+etc. This is the main reason why I'm using Doom Emacs, and it has been an
+enjoyable experience for me
+
+https://orgmode.org/
+
+** Agenda and Journal
+Configs for my agenda and journal files. These setting are loaded after org is loaded so there wouldn't be any problems
+
+#+begin_src emacs-lisp
+(after! org
+  (setq org-directory "~/org/")
+  (setq org-agenda-files '("~/Documents/journal/agenda.org"))
+  (setq org-journal-dir "~/Documents/journal/"
       org-journal-file-header "#+TITLE: %M %Y"
       org-journal-date-format "%A, %Y-%m-%d"
       org-journal-file-type 'monthly
       org-journal-file-format "%Y-%m.org")
-(setq org-fold-core-style 'overlays)
-
-;; Org Agenda
-(after! org
-  (setq org-agenda-files '("~/Documents/journal/agenda.org"))
+  ;; Needed to fix tabbing on headers
+  (setq org-fold-core-style 'overlays)
 )
+#+end_src
 
+Opens up a full graphical 12-month calendar with agendas listed
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c c") '=calendar)
+#+end_src
+
+
+** Org Auto Tangle
+Org auto tangle is used for taking block code inside org documents and transferring them to other files. I mainly use this to write these config documents
+
+#+begin_src emacs-lisp
 (use-package! org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode)
   :config
   (setq org-auto-tangle-default t))
+#+end_src
 
+* NEOTREE
+Neotree displays the list of files in your current project, just like VS Code or any IDE
 
+#+begin_src emacs-lisp
 (require 'neotree)
-(global-set-key [f6] 'org-bullets-mode)
-(global-set-key [f7] 'org-export-dispatch)
-(global-set-key [f8] 'neotree-toggle)
-(global-set-key [f9] 'neotree-refresh)
-(global-set-key (kbd "C-c c") '=calendar)
-(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+end_src
+
