@@ -6,20 +6,23 @@
 
 * TABLE OF CONTENTS :toc:
 - [[#about-this-config--doom-emacs][ABOUT THIS CONFIG / DOOM EMACS]]
-- [[#full-name--email][FULL NAME / EMAIL]]
-- [[#general-keybindings][GENERAL KEYBINDINGS]]
+- [[#general-configs][GENERAL CONFIGS]]
+  - [[#full-name--email][Full Name / Email]]
+  - [[#general-keybindings][General Keybindings]]
+  - [[#line-numbers][Line numbers]]
+  - [[#open-specific-files][Open Specific Files]]
 - [[#looks][LOOKS]]
   - [[#font][Font]]
   - [[#theme][Theme]]
   - [[#window-size][Window Size]]
   - [[#window-transparency][Window Transparency]]
-- [[#line-numbers][LINE NUMBERS]]
 - [[#beacon][BEACON]]
 - [[#dashboard][DASHBOARD]]
 - [[#org-mode][ORG MODE]]
   - [[#agenda-and-journal][Agenda and Journal]]
   - [[#org-auto-tangle][Org Auto Tangle]]
 - [[#neotree][NEOTREE]]
+- [[#rainbow-mode][RAINBOW MODE]]
 
 * ABOUT THIS CONFIG / DOOM EMACS
 Doom Emacs is a configuration framework for GNU Emacs. It uses the "evil"
@@ -29,7 +32,8 @@ of it, and feel free to use / modify whatever you like
 
 [[https://github.com/doomemacs/][Link to Doom Emacs GitHub project]]
 
-* FULL NAME / EMAIL
+* GENERAL CONFIGS
+** Full Name / Email
 
 Some functionality uses this to identify you, e.g. GPG configuration, email
 clients, file templates and snippets. If you don't use any of these services, then
@@ -40,10 +44,34 @@ you don't have to fill out these fields
       user-mail-address "brian.edison.nguyen@gmail.com")
 #+end_src
 
-* GENERAL KEYBINDINGS
+** General Keybindings
+In default Vim, navigating up and down around a word wrap would just jump to the first or last character. The bindings below makes it so that navigating though a word wrap would go through each line
+
+As always, if you want to separate text bodies into different lines, you could use ~gq~
+
 #+begin_src emacs-lisp
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+#+end_src
+
+** Line numbers
+Line numbers are currently set to relative. Using ~'nil~ removes line numbers
+
+#+begin_src emacs-lisp
+(setq display-line-numbers-type 'relative)
+#+end_src
+
+** Open Specific Files
+These are keybindings to open files that I commonly use
+
+| PATH TO FILE                            | DESCRIPTION            | KEYBINDING |
+|-----------------------------------------+------------------------+------------|
+| ~/Documents/dotfiles/.doom.d/config.org | /Edit doom config.org/ | ~SPC = c~  |
+
+#+begin_src emacs-lisp
+(map! :leader
+      (:prefix ("=" . "open file")
+       :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/Documents/dotfiles/.doom.d/config.org"))))
 #+end_src
 
 * LOOKS
@@ -83,18 +111,12 @@ laptop. I'll have to look into it
 #+end_src
 
 ** Window Transparency
+The transparency is set to 90%. It looks great if you are using window blur with a compisitor
+
 #+begin_src emacs-lisp
 (set-frame-parameter (selected-frame) 'alpha '(90 90))
 #+end_src
 
-* LINE NUMBERS
-This determines the style of line numbers in effect. If set to `nil', line
-numbers are disabled. For relative line numbers, set this to `relative'.
-~(setq display-line-numbers-type t)~
-
-#+begin_src emacs-lisp
-(setq display-line-numbers-type 'relative)
-#+end_src
 
 * BEACON
 Very useful package for locating your cursor. Whenever you scroll, a flashing light flashes horizontally on your cursor
@@ -169,7 +191,24 @@ Org auto tangle is used for taking block code inside org documents and transferr
 * NEOTREE
 Neotree displays the list of files in your current project, just like VS Code or any IDE
 
+| COMMAND      | DESCRIPTION                                     | KEYBINDING |
+|--------------+-------------------------------------------------+------------|
+| neotree/open | Displays neotree on the left side of the window | ~SPC o p~  |
+
 #+begin_src emacs-lisp
 (require 'neotree)
 #+end_src
 
+* RAINBOW MODE
+Rainbow mode displays the actual color for any hex value. The following enables
+global rainbow mode (except org agenda since rainbow-mode destroys all
+highlighting)
+
+#+begin_src emacs-lisp
+(define-globalized-minor-mode global-rainbow-mode rainbow-mode
+  (lambda ()
+    (when (not (memq major-mode
+                (list 'org-agenda-mode)))
+     (rainbow-mode 1))))
+(global-rainbow-mode 1 )
+#+end_src

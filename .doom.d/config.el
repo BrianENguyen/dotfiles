@@ -4,6 +4,12 @@
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
+(setq display-line-numbers-type 'relative)
+
+(map! :leader
+      (:prefix ("=" . "open file")
+       :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/Documents/dotfiles/.doom.d/config.org"))))
+
 (setq doom-font (font-spec :family "JetBrainsMonoMedium Nerd Font Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15))
 
@@ -17,8 +23,6 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (set-frame-parameter (selected-frame) 'alpha '(90 90))
-
-(setq display-line-numbers-type 'relative)
 
 (beacon-mode 1)
 (setq beacon-blink-when-point-moves-vertically 1)
@@ -60,3 +64,10 @@
   (setq org-auto-tangle-default t))
 
 (require 'neotree)
+
+(define-globalized-minor-mode global-rainbow-mode rainbow-mode
+  (lambda ()
+    (when (not (memq major-mode
+                (list 'org-agenda-mode)))
+     (rainbow-mode 1))))
+(global-rainbow-mode 1 )
