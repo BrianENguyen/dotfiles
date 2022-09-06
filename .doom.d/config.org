@@ -132,9 +132,10 @@ Very useful package for locating your cursor. Whenever you scroll, a flashing li
 
 #+begin_src emacs-lisp
 (beacon-mode 1)
-(setq beacon-blink-when-point-moves-vertically 1)
-(setq beacon-blink-when-buffer-changes t)
-(setq beacon-blink-when-window-scrolls t)
+(setq beacon-blink-when-point-moves-vertically 1
+      beacon-color "#F28AB3" ;; light pink color
+      beacon-blink-when-buffer-changes t
+      beacon-blink-when-window-scrolls t)
 #+end_src
 
 * DASHBOARD

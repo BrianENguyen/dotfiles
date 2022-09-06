@@ -29,9 +29,10 @@
 (set-frame-parameter (selected-frame) 'alpha '(90 90)) ;;
 
 (beacon-mode 1)
-(setq beacon-blink-when-point-moves-vertically 1)
-(setq beacon-blink-when-buffer-changes t)
-(setq beacon-blink-when-window-scrolls t)
+(setq beacon-blink-when-point-moves-vertically 1
+      beacon-color "#F28AB3" ;; light pink color
+      beacon-blink-when-buffer-changes t
+      beacon-blink-when-window-scrolls t)
 
 (use-package dashboard
   :ensure t
