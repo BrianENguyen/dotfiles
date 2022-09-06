@@ -4,10 +4,15 @@
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15)
+(setq doom-font (font-spec :family "JetBrainsMonoMedium Nerd Font Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15))
 
-(setq doom-theme 'doom-one)
+(use-package doom-themes
+  :ensure t
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-one t))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
