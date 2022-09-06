@@ -9,6 +9,8 @@
 (map! :leader
       (:prefix ("=" . "open file")
        :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.org"))
+       :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.doom.d/init.el"))
+       :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.doom.d/packages.el"))
        :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/Documents/journal/agenda.org"))
 ))
 
@@ -37,9 +39,11 @@
   (dashboard-setup-startup-hook))
 (setq
    dashboard-banner-logo-title "\nKEYBINDINGS\
-                                 \nFind file        (SPC .)\
-                                 \nEdit Doom Config (SPC = c)\
-                                 \nEdit agenda      (SPC = a)"
+                                 \nFind file          (SPC .)\
+                                 \nEdit Doom Config   (SPC = c)\
+                                 \nEdit Doom Init     (SPC = i)\
+                                 \nEdit Doom Packages (SPC = p)\
+                                 \nEdit agenda        (SPC = a)"
    dashboard-startup-banner "~/.doom.d/doom-emacs-dash.png"
    dashboard-set-heading-icons t
    dashboard-set-file-icons t

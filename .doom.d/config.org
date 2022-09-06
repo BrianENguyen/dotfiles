@@ -45,7 +45,9 @@ you don't have to fill out these fields
 #+end_src
 
 ** General Keybindings
-In default Vim, navigating up and down around a word wrap would just jump to the first or last character. The bindings below makes it so that navigating though a word wrap would go through each line
+In default Vim, navigating up and down around a word wrap would just jump to the
+first or last character. The bindings below makes it so that navigating though a
+word wrap would go through each line
 
 As always, if you want to separate text bodies into different lines, you could use ~gq~
 
@@ -64,15 +66,19 @@ Line numbers are currently set to relative. Using ~'nil~ removes line numbers
 ** Open Specific Files
 These are keybindings to open files that I commonly use
 
-| PATH TO FILE                   | DESCRIPTION            | KEYBINDING |
-|--------------------------------+------------------------+------------|
-| ~/.doom.d/config.org           | /Edit doom config.org/ | ~SPC = c~  |
-| ~/Documents/journal/agenda.org | /Edit agenda file/     | ~SPC = a~  |
+| PATH TO FILE                   | DESCRIPTION              | KEYBINDING |
+|--------------------------------+--------------------------+------------|
+| ~/.doom.d/config.org           | /Edit doom config.org/   | ~SPC = c~  |
+| ~/.doom.d/init.el              | /Edit doom init.el/      | ~SPC = i~  |
+| ~/.doom.d/packages.el          | /Edit doom packages.org/ | ~SPC = p~  |
+| ~/Documents/journal/agenda.org | /Edit agenda file/       | ~SPC = a~  |
 
 #+begin_src emacs-lisp
 (map! :leader
       (:prefix ("=" . "open file")
        :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.org"))
+       :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.doom.d/init.el"))
+       :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.doom.d/packages.el"))
        :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/Documents/journal/agenda.org"))
 ))
 #+end_src
@@ -141,9 +147,11 @@ A customizable startup screen when launching Emacs.
   (dashboard-setup-startup-hook))
 (setq
    dashboard-banner-logo-title "\nKEYBINDINGS\
-                                 \nFind file        (SPC .)\
-                                 \nEdit Doom Config (SPC = c)\
-                                 \nEdit agenda      (SPC = a)"
+                                 \nFind file          (SPC .)\
+                                 \nEdit Doom Config   (SPC = c)\
+                                 \nEdit Doom Init     (SPC = i)\
+                                 \nEdit Doom Packages (SPC = p)\
+                                 \nEdit agenda        (SPC = a)"
    dashboard-startup-banner "~/.doom.d/doom-emacs-dash.png"
    dashboard-set-heading-icons t
    dashboard-set-file-icons t
