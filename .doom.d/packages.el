@@ -49,6 +49,9 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+(package! beacon)
 (package! emojify)
+(package! dashboard)
 (package! calfw-org)
 (package! org-bullets)
+(package! org-auto-tangle)

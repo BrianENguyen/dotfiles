@@ -64,14 +64,17 @@ Line numbers are currently set to relative. Using ~'nil~ removes line numbers
 ** Open Specific Files
 These are keybindings to open files that I commonly use
 
-| PATH TO FILE                            | DESCRIPTION            | KEYBINDING |
-|-----------------------------------------+------------------------+------------|
-| ~/Documents/dotfiles/.doom.d/config.org | /Edit doom config.org/ | ~SPC = c~  |
+| PATH TO FILE                   | DESCRIPTION            | KEYBINDING |
+|--------------------------------+------------------------+------------|
+| ~/.doom.d/config.org           | /Edit doom config.org/ | ~SPC = c~  |
+| ~/Documents/journal/agenda.org | /Edit agenda file/     | ~SPC = a~  |
 
 #+begin_src emacs-lisp
 (map! :leader
       (:prefix ("=" . "open file")
-       :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/Documents/dotfiles/.doom.d/config.org"))))
+       :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.org"))
+       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/Documents/journal/agenda.org"))
+))
 #+end_src
 
 * LOOKS
@@ -114,7 +117,7 @@ laptop. I'll have to look into it
 The transparency is set to 90%. It looks great if you are using window blur with a compisitor
 
 #+begin_src emacs-lisp
-(set-frame-parameter (selected-frame) 'alpha '(90 90))
+(set-frame-parameter (selected-frame) 'alpha '(90 90)) ;;
 #+end_src
 
 
@@ -136,7 +139,11 @@ A customizable startup screen when launching Emacs.
   :ensure t
   :config
   (dashboard-setup-startup-hook))
-(setq dashboard-banner-logo-title "Welcome to Doom Emacs!"
+(setq
+   dashboard-banner-logo-title "\nKEYBINDINGS\
+                                 \nFind file        (SPC .)\
+                                 \nEdit Doom Config (SPC = c)\
+                                 \nEdit agenda      (SPC = a)"
    dashboard-startup-banner "~/.doom.d/doom-emacs-dash.png"
    dashboard-set-heading-icons t
    dashboard-set-file-icons t
@@ -159,13 +166,14 @@ Configs for my agenda and journal files. These setting are loaded after org is l
 
 #+begin_src emacs-lisp
 (after! org
-  (setq org-directory "~/org/")
-  (setq org-agenda-files '("~/Documents/journal/agenda.org"))
-  (setq org-journal-dir "~/Documents/journal/"
+  (setq org-agenda-files '("~/Documents/journal/agenda.org")
+      org-journal-dir "~/Documents/journal/"
       org-journal-file-header "#+TITLE: %M %Y"
       org-journal-date-format "%A, %Y-%m-%d"
       org-journal-file-type 'monthly
-      org-journal-file-format "%Y-%m.org")
+      org-journal-file-format "%Y-%m.org"
+      org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
+      )
   ;; Needed to fix tabbing on headers
   (setq org-fold-core-style 'overlays)
 )
@@ -210,5 +218,5 @@ highlighting)
     (when (not (memq major-mode
                 (list 'org-agenda-mode)))
      (rainbow-mode 1))))
-(global-rainbow-mode 1 )
+(global-rainbow-mode 1 ) ;'
 #+end_src

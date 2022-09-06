@@ -8,7 +8,9 @@
 
 (map! :leader
       (:prefix ("=" . "open file")
-       :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/Documents/dotfiles/.doom.d/config.org"))))
+       :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.org"))
+       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/Documents/journal/agenda.org"))
+))
 
 (setq doom-font (font-spec :family "JetBrainsMonoMedium Nerd Font Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15))
@@ -22,7 +24,7 @@
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-(set-frame-parameter (selected-frame) 'alpha '(90 90))
+(set-frame-parameter (selected-frame) 'alpha '(90 90)) ;;
 
 (beacon-mode 1)
 (setq beacon-blink-when-point-moves-vertically 1)
@@ -33,7 +35,11 @@
   :ensure t
   :config
   (dashboard-setup-startup-hook))
-(setq dashboard-banner-logo-title "Welcome to Doom Emacs!"
+(setq
+   dashboard-banner-logo-title "\nKEYBINDINGS\
+                                 \nFind file        (SPC .)\
+                                 \nEdit Doom Config (SPC = c)\
+                                 \nEdit agenda      (SPC = a)"
    dashboard-startup-banner "~/.doom.d/doom-emacs-dash.png"
    dashboard-set-heading-icons t
    dashboard-set-file-icons t
@@ -44,13 +50,14 @@
                           (registers . 5)))
 
 (after! org
-  (setq org-directory "~/org/")
-  (setq org-agenda-files '("~/Documents/journal/agenda.org"))
-  (setq org-journal-dir "~/Documents/journal/"
+  (setq org-agenda-files '("~/Documents/journal/agenda.org")
+      org-journal-dir "~/Documents/journal/"
       org-journal-file-header "#+TITLE: %M %Y"
       org-journal-date-format "%A, %Y-%m-%d"
       org-journal-file-type 'monthly
-      org-journal-file-format "%Y-%m.org")
+      org-journal-file-format "%Y-%m.org"
+      org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
+      )
   ;; Needed to fix tabbing on headers
   (setq org-fold-core-style 'overlays)
 )
@@ -70,4 +77,4 @@
     (when (not (memq major-mode
                 (list 'org-agenda-mode)))
      (rainbow-mode 1))))
-(global-rainbow-mode 1 )
+(global-rainbow-mode 1 ) ;'
