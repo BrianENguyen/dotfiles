@@ -4,7 +4,8 @@
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
-(setq doom-font (font-spec :family "JetBrainsMonoMedium Nerd Font" :size 15))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15)
+      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15))
 
 (setq doom-theme 'doom-one)
 
@@ -18,6 +19,20 @@
 (setq beacon-blink-when-point-moves-vertically 1)
 (setq beacon-blink-when-buffer-changes t)
 (setq beacon-blink-when-window-scrolls t)
+
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
+(setq dashboard-banner-logo-title "Welcome to Doom Emacs!"
+   dashboard-startup-banner "~/.doom.d/doom-emacs-dash.png"
+   dashboard-set-heading-icons t
+   dashboard-set-file-icons t
+   dashboard-items '((recents . 5)
+                          (agenda . 5 )
+                          (bookmarks . 5)
+                          (projects . 5)
+                          (registers . 5)))
 
 (after! org
   (setq org-directory "~/org/")

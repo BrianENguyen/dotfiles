@@ -15,6 +15,7 @@
   - [[#window-transparency][Window Transparency]]
 - [[#line-numbers][LINE NUMBERS]]
 - [[#beacon][BEACON]]
+- [[#dashboard][DASHBOARD]]
 - [[#org-mode][ORG MODE]]
   - [[#agenda-and-journal][Agenda and Journal]]
   - [[#org-auto-tangle][Org Auto Tangle]]
@@ -63,7 +64,8 @@ font string. You generally only need these two:
 
 
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "JetBrainsMonoMedium Nerd Font" :size 15))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15)
+      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15))
 #+end_src
 
 ** Theme
@@ -109,6 +111,25 @@ Very useful package for locating your cursor. Whenever you scroll, a flashing li
 (setq beacon-blink-when-point-moves-vertically 1)
 (setq beacon-blink-when-buffer-changes t)
 (setq beacon-blink-when-window-scrolls t)
+#+end_src
+
+* DASHBOARD
+A customizable startup screen when launching Emacs.
+
+#+begin_src emacs-lisp
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
+(setq dashboard-banner-logo-title "Welcome to Doom Emacs!"
+   dashboard-startup-banner "~/.doom.d/doom-emacs-dash.png"
+   dashboard-set-heading-icons t
+   dashboard-set-file-icons t
+   dashboard-items '((recents . 5)
+                          (agenda . 5 )
+                          (bookmarks . 5)
+                          (projects . 5)
+                          (registers . 5)))
 #+end_src
 
 * ORG MODE
