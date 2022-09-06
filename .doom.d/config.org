@@ -68,10 +68,10 @@ These are keybindings to open files that I commonly use
 
 | PATH TO FILE                   | DESCRIPTION              | KEYBINDING |
 |--------------------------------+--------------------------+------------|
-| ~/.doom.d/config.org           | /Edit doom config.org/   | ~SPC = c~  |
-| ~/.doom.d/init.el              | /Edit doom init.el/      | ~SPC = i~  |
-| ~/.doom.d/packages.el          | /Edit doom packages.org/ | ~SPC = p~  |
-| ~/Documents/journal/agenda.org | /Edit agenda file/       | ~SPC = a~  |
+| ~/.doom.d/config.org           | /Edit doom config.org/   | SPC = c  |
+| ~/.doom.d/init.el              | /Edit doom init.el/      | SPC = i  |
+| ~/.doom.d/packages.el          | /Edit doom packages.org/ | SPC = p  |
+| ~/Documents/journal/agenda.org | /Edit agenda file/       | SPC = a  |
 
 #+begin_src emacs-lisp
 (map! :leader
