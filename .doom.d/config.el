@@ -11,7 +11,7 @@
        :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.org"))
        :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.doom.d/init.el"))
        :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.doom.d/packages.el"))
-       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/Documents/journal/agenda.org"))
+       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/Documents/notes/agenda.org"))
 ))
 
 (setq doom-font (font-spec :family "JetBrainsMonoMedium Nerd Font Mono" :size 15)
@@ -35,7 +35,6 @@
       beacon-blink-when-window-scrolls t)
 
 (use-package dashboard
-  :ensure t
   :config
   (dashboard-setup-startup-hook))
 (setq
@@ -56,12 +55,13 @@
 
 (after! org
   (setq org-agenda-files '("~/Documents/notes/agenda.org")
-      org-journal-dir "~/Documents/notes/"
+      org-journal-dir "~/Documents/notes/journal/"
       org-journal-file-header "#+TITLE: %M %Y"
       org-journal-date-format "%A, %Y-%m-%d"
       org-journal-file-type 'monthly
       org-journal-file-format "%Y-%m.org"
       org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
+      org-roam-directory "~/Documents/notes/"
       )
   ;; Needed to fix tabbing on headers
   (setq org-fold-core-style 'overlays)
@@ -76,6 +76,10 @@
   (setq org-auto-tangle-default t))
 
 (require 'neotree)
+(with-eval-after-load 'doom-themes
+  (doom-themes-neotree-config)
+  (setq doom-themes-neotree-file-icons t)
+ )
 
 (define-globalized-minor-mode global-rainbow-mode rainbow-mode
   (lambda ()

@@ -19,7 +19,7 @@
 - [[#beacon][BEACON]]
 - [[#dashboard][DASHBOARD]]
 - [[#org-mode][ORG MODE]]
-  - [[#agenda-and-journal][Agenda and Journal]]
+  - [[#basic-setup][Basic Setup]]
   - [[#org-auto-tangle][Org Auto Tangle]]
 - [[#neotree][NEOTREE]]
 - [[#rainbow-mode][RAINBOW MODE]]
@@ -79,7 +79,7 @@ These are keybindings to open files that I commonly use
        :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.org"))
        :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.doom.d/init.el"))
        :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.doom.d/packages.el"))
-       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/Documents/journal/agenda.org"))
+       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/Documents/notes/agenda.org"))
 ))
 #+end_src
 
@@ -143,7 +143,6 @@ A customizable startup screen when launching Emacs.
 
 #+begin_src emacs-lisp
 (use-package dashboard
-  :ensure t
   :config
   (dashboard-setup-startup-hook))
 (setq
@@ -170,18 +169,18 @@ enjoyable experience for me
 
 https://orgmode.org/
 
-** Agenda and Journal
-Configs for my agenda and journal files. These setting are loaded after org is loaded so there wouldn't be any problems
-
+** Basic Setup
+Included in this setup are org-agenda, org-journal, and org-roam
 #+begin_src emacs-lisp
 (after! org
   (setq org-agenda-files '("~/Documents/notes/agenda.org")
-      org-journal-dir "~/Documents/notes/"
+      org-journal-dir "~/Documents/notes/journal/"
       org-journal-file-header "#+TITLE: %M %Y"
       org-journal-date-format "%A, %Y-%m-%d"
       org-journal-file-type 'monthly
       org-journal-file-format "%Y-%m.org"
       org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
+      org-roam-directory "~/Documents/notes/"
       )
   ;; Needed to fix tabbing on headers
   (setq org-fold-core-style 'overlays)
@@ -214,6 +213,10 @@ Neotree displays the list of files in your current project, just like VS Code or
 
 #+begin_src emacs-lisp
 (require 'neotree)
+(with-eval-after-load 'doom-themes
+  (doom-themes-neotree-config)
+  (setq doom-themes-neotree-file-icons t)
+ )
 #+end_src
 
 * RAINBOW MODE
