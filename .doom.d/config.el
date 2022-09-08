@@ -71,9 +71,6 @@
                           (projects . 5)
                           (registers . 5))))
 
-(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
-(add-to-list 'emmet-jsx-major-modes 'jsx-mode)
-
 (use-package emmet-mode
   :ensure t
   :config

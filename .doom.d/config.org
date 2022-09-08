@@ -205,9 +205,6 @@ A customizable startup screen when launching Emacs.
 
 * EMMET MODE
 #+begin_src emacs-lisp
-(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
-(add-to-list 'emmet-jsx-major-modes 'jsx-mode)
-
 (use-package emmet-mode
   :ensure t
   :config
