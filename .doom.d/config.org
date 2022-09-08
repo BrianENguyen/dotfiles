@@ -20,6 +20,7 @@
 - [[#centaur-tabs][CENTAUR TABS]]
 - [[#beacon][BEACON]]
 - [[#dashboard][DASHBOARD]]
+- [[#emmet-mode][EMMET MODE]]
 - [[#org-mode][ORG MODE]]
   - [[#basic-setup][Basic Setup]]
   - [[#org-auto-tangle][Org Auto Tangle]]
@@ -202,6 +203,17 @@ A customizable startup screen when launching Emacs.
 
 #+end_src
 
+* EMMET MODE
+#+begin_src emacs-lisp
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+(add-to-list 'emmet-jsx-major-modes 'jsx-mode)
+
+(use-package emmet-mode
+  :ensure t
+  :config
+  (add-to-list 'emmet-jsx-major-modes 'jsx-mode))
+
+#+end_src
 
 * ORG MODE
 Org mode is a markdown mode for note-taking, writing journals, planning agendas,
