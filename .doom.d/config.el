@@ -22,11 +22,17 @@
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
+  :init
   (load-theme 'doom-one t))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-(set-frame-parameter (selected-frame) 'alpha '(90 90)) ;;
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+        (lambda (frame)
+            (select-frame frame)
+            (set-frame-parameter (selected-frame) 'alpha '(90 90)))
+   (set-frame-parameter (selected-frame) 'alpha '(90 90))))
 
 (beacon-mode 1)
 (setq beacon-blink-when-point-moves-vertically 1
@@ -35,9 +41,11 @@
       beacon-blink-when-window-scrolls t)
 
 (use-package dashboard
+  :ensure t
   :config
   (dashboard-setup-startup-hook))
-(setq
+(after! dashboard
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))
    dashboard-banner-logo-title "\nKEYBINDINGS\
                                  \nFind file          (SPC .)\
                                  \nEdit Doom Config   (SPC = c)\
@@ -51,7 +59,7 @@
                           (agenda . 5 )
                           (bookmarks . 5)
                           (projects . 5)
-                          (registers . 5)))
+                          (registers . 5))))
 
 (after! org
   (setq org-agenda-files '("~/Documents/notes/agenda.org")
@@ -86,4 +94,4 @@
     (when (not (memq major-mode
                 (list 'org-agenda-mode)))
      (rainbow-mode 1))))
-(global-rainbow-mode 1 ) ;'
+(global-rainbow-mode 1 )

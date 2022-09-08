@@ -6,6 +6,7 @@
 
 * TABLE OF CONTENTS :toc:
 - [[#about-this-config--doom-emacs][ABOUT THIS CONFIG / DOOM EMACS]]
+- [[#emacs-client--emacs-daemon][EMACS CLIENT / EMACS DAEMON]]
 - [[#general-configs][GENERAL CONFIGS]]
   - [[#full-name--email][Full Name / Email]]
   - [[#general-keybindings][General Keybindings]]
@@ -31,6 +32,17 @@ packages and customization for you to choose. Below is my custom configuration
 of it, and feel free to use / modify whatever you like
 
 [[https://github.com/doomemacs/][Link to Doom Emacs GitHub project]]
+
+* EMACS CLIENT / EMACS DAEMON
+Doom Emacs is optimized for speed. The appropriate way to launch Doom Emacs is to set up an Emacs daemon
+
+~/usr/bin/emacs --daemon~
+
+Then to start emacsclient, you would run this command
+
+~emacsclient -c -a 'emacs'~
+
+This will launch emacs a lot quicker than if you were to do it just by using the regular ~emacs~ command. The ~-a~ flag ensures that in case emacsclient fails to launch, then Emacs would launch instead
 
 * GENERAL CONFIGS
 ** Full Name / Email
@@ -107,6 +119,7 @@ Set the theme for Doom Emacs. The 'enable' commands seem to not work for me. Wou
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
+  :init
   (load-theme 'doom-one t))
 #+end_src
 
@@ -120,10 +133,15 @@ laptop. I'll have to look into it
 #+end_src
 
 ** Window Transparency
-The transparency is set to 90%. It looks great if you are using window blur with a compisitor
+The transparency is set to 90%. It looks great if you are using window blur with a compositor
 
 #+begin_src emacs-lisp
-(set-frame-parameter (selected-frame) 'alpha '(90 90)) ;;
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+        (lambda (frame)
+            (select-frame frame)
+            (set-frame-parameter (selected-frame) 'alpha '(90 90)))
+   (set-frame-parameter (selected-frame) 'alpha '(90 90))))
 #+end_src
 
 
@@ -143,9 +161,11 @@ A customizable startup screen when launching Emacs.
 
 #+begin_src emacs-lisp
 (use-package dashboard
+  :ensure t
   :config
   (dashboard-setup-startup-hook))
-(setq
+(after! dashboard
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))
    dashboard-banner-logo-title "\nKEYBINDINGS\
                                  \nFind file          (SPC .)\
                                  \nEdit Doom Config   (SPC = c)\
@@ -159,8 +179,10 @@ A customizable startup screen when launching Emacs.
                           (agenda . 5 )
                           (bookmarks . 5)
                           (projects . 5)
-                          (registers . 5)))
+                          (registers . 5))))
+
 #+end_src
+
 
 * ORG MODE
 Org mode is a markdown mode for note-taking, writing journals, planning agendas,
@@ -230,5 +252,5 @@ highlighting)
     (when (not (memq major-mode
                 (list 'org-agenda-mode)))
      (rainbow-mode 1))))
-(global-rainbow-mode 1 ) ;'
+(global-rainbow-mode 1 )
 #+end_src
