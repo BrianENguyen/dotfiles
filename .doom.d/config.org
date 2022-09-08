@@ -17,6 +17,7 @@
   - [[#theme][Theme]]
   - [[#window-size][Window Size]]
   - [[#window-transparency][Window Transparency]]
+- [[#centaur-tabs][CENTAUR TABS]]
 - [[#beacon][BEACON]]
 - [[#dashboard][DASHBOARD]]
 - [[#org-mode][ORG MODE]]
@@ -45,6 +46,8 @@ Then to start emacsclient, you would run this command
 This will launch emacs a lot quicker than if you were to do it just by using the regular ~emacs~ command. The ~-a~ flag ensures that in case emacsclient fails to launch, then Emacs would launch instead
 
 * GENERAL CONFIGS
+The configs in this section are not related to any third-pary packages
+
 ** Full Name / Email
 
 Some functionality uses this to identify you, e.g. GPG configuration, email
@@ -103,7 +106,7 @@ are the three important ones:
 + `doom-font' - your standard font
 + `doom-variable-pitch-font' - used for some Emacs applications
 + `doom-big-font' - used for `doom-big-font-mode'; use this for
-  presentations or streaming.
+  presentations or streaming. Use ~SPC t b~ to enable big font mode
 
 #+begin_src emacs-lisp
 (setq doom-font (font-spec :family "JetBrainsMonoMedium Nerd Font Mono" :size 15)
@@ -144,9 +147,25 @@ The transparency is set to 90%. It looks great if you are using window blur with
    (set-frame-parameter (selected-frame) 'alpha '(90 90))))
 #+end_src
 
+* CENTAUR TABS
+Centaur tabs is part of the modern IDE look where different buffers are separated into tabs at the top of the screen
+
+#+begin_src emacs-lisp
+;; needed to work in emacsclient
+(require 'centaur-tabs)
+(setq centaur-tabs-set-bar 'over
+      centaur-tabs-set-icons t
+      centaur-tabs-gray-out-icons 'buffer
+      centaur-tabs-height 24
+      centaur-tabs-set-modified-marker t
+      centaur-tabs-style "bar"
+      centaur-tabs-modified-marker "•")
+
+#+end_src
+
 
 * BEACON
-Very useful package for locating your cursor. Whenever you scroll, a flashing light flashes horizontally on your cursor
+Beacon is a very useful package for locating your cursor. Whenever you scroll, a flashing light flashes horizontally on your cursor
 
 #+begin_src emacs-lisp
 (beacon-mode 1)
@@ -254,3 +273,4 @@ highlighting)
      (rainbow-mode 1))))
 (global-rainbow-mode 1 )
 #+end_src
+

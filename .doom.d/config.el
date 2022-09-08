@@ -34,6 +34,16 @@
             (set-frame-parameter (selected-frame) 'alpha '(90 90)))
    (set-frame-parameter (selected-frame) 'alpha '(90 90))))
 
+;; needed to work in emacsclient
+(require 'centaur-tabs)
+(setq centaur-tabs-set-bar 'over
+      centaur-tabs-set-icons t
+      centaur-tabs-gray-out-icons 'buffer
+      centaur-tabs-height 24
+      centaur-tabs-set-modified-marker t
+      centaur-tabs-style "bar"
+      centaur-tabs-modified-marker "•")
+
 (beacon-mode 1)
 (setq beacon-blink-when-point-moves-vertically 1
       beacon-color "#F28AB3" ;; light pink color
