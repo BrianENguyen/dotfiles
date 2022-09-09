@@ -10,19 +10,18 @@
 - [[#general-configs][GENERAL CONFIGS]]
   - [[#full-name--email][Full Name / Email]]
   - [[#general-keybindings][General Keybindings]]
-  - [[#line-numbers][Line numbers]]
+  - [[#line-numbers][Line Numbers]]
   - [[#open-specific-files][Open Specific Files]]
-- [[#looks][LOOKS]]
-  - [[#font][Font]]
-  - [[#theme][Theme]]
-  - [[#window-size][Window Size]]
-  - [[#window-transparency][Window Transparency]]
-- [[#centaur-tabs][CENTAUR TABS]]
+  - [[#looks][Looks]]
 - [[#beacon][BEACON]]
+- [[#calendar][CALENDAR]]
+- [[#centaur-tabs][CENTAUR TABS]]
 - [[#dashboard][DASHBOARD]]
 - [[#emmet-mode][EMMET MODE]]
 - [[#org-mode][ORG MODE]]
   - [[#basic-setup][Basic Setup]]
+  - [[#org-roam][Org Roam]]
+  - [[#org-roam-ui][Org Roam UI]]
   - [[#org-auto-tangle][Org Auto Tangle]]
 - [[#neotree][NEOTREE]]
 - [[#rainbow-mode][RAINBOW MODE]]
@@ -72,7 +71,7 @@ As always, if you want to separate text bodies into different lines, you could u
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 #+end_src
 
-** Line numbers
+** Line Numbers
 Line numbers are currently set to relative. Using ~'nil~ removes line numbers
 
 #+begin_src emacs-lisp
@@ -99,22 +98,26 @@ These are keybindings to open files that I commonly use
 ))
 #+end_src
 
-* LOOKS
-** Font
-Doom exposes five (optional) variables for controlling fonts in Doom. Here
-are the three important ones:
+** Looks
+*** Font
+Doom exposes five (optional) variables for controlling fonts in Doom.
 
-+ `doom-font' - your standard font
-+ `doom-variable-pitch-font' - used for some Emacs applications
-+ `doom-big-font' - used for `doom-big-font-mode'; use this for
-  presentations or streaming. Use ~SPC t b~ to enable big font mode
+| Font Type                  | Description                                                  |
+|----------------------------+--------------------------------------------------------------|
+| `doom-font'                | Your standard font                                           |
+| `doom-variable-pitch-font' | For some Emacs applications                                  |
+| `doom-big-font'            | For `doom-big-font-mode' ~SPC t b~                           |
+| `font-lock-comment-face'   | For comments                                                 |
+| `font-lock-keyword-face'   | For keywords with special significance, like `setq` in elips |
+
 
 #+begin_src emacs-lisp
 (setq doom-font (font-spec :family "JetBrainsMonoMedium Nerd Font Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15))
+
 #+end_src
 
-** Theme
+*** Theme
 Set the theme for Doom Emacs. The 'enable' commands seem to not work for me. Would need to find out why
 
 #+begin_src emacs-lisp
@@ -125,9 +128,13 @@ Set the theme for Doom Emacs. The 'enable' commands seem to not work for me. Wou
         doom-themes-enable-italic t)
   :init
   (load-theme 'doom-one t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+
 #+end_src
 
-** Window Size
+*** Window Size
 The setting below sets Emacs to open maximized without it being fully
 fullscreen. For some reason this works well on my main machine but not my
 laptop. I'll have to look into it
@@ -136,7 +143,7 @@ laptop. I'll have to look into it
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+end_src
 
-** Window Transparency
+*** Window Transparency
 The transparency is set to 90%. It looks great if you are using window blur with a compositor
 
 #+begin_src emacs-lisp
@@ -146,6 +153,33 @@ The transparency is set to 90%. It looks great if you are using window blur with
             (select-frame frame)
             (set-frame-parameter (selected-frame) 'alpha '(90 90)))
    (set-frame-parameter (selected-frame) 'alpha '(90 90))))
+#+end_src
+
+
+
+* BEACON
+Beacon is a very useful tool for locating your cursor. Whenever you scroll, a flashing light flashes horizontally on your cursor
+
+#+begin_src emacs-lisp
+(beacon-mode 1)
+(setq beacon-blink-when-point-moves-vertically 1
+      beacon-color "#F28AB3" ;; light pink color
+      beacon-blink-when-buffer-changes t
+      beacon-blink-when-window-scrolls t)
+#+end_src
+
+* CALENDAR
+Opens up a full graphical 12-month calendar with agendas and holidays listed.
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c c") '=calendar)
+
+(setq holiday-general-holidays nil
+      holiday-christian-holidays nil
+      holiday-hebrew-holidays nil
+      holiday-islamic-holidays nil
+      holiday-bahai-holidays nil
+      holiday-oriental-holidays nil)
 #+end_src
 
 * CENTAUR TABS
@@ -162,18 +196,6 @@ Centaur tabs is part of the modern IDE look where different buffers are separate
       centaur-tabs-style "bar"
       centaur-tabs-modified-marker "•")
 
-#+end_src
-
-
-* BEACON
-Beacon is a very useful package for locating your cursor. Whenever you scroll, a flashing light flashes horizontally on your cursor
-
-#+begin_src emacs-lisp
-(beacon-mode 1)
-(setq beacon-blink-when-point-moves-vertically 1
-      beacon-color "#F28AB3" ;; light pink color
-      beacon-blink-when-buffer-changes t
-      beacon-blink-when-window-scrolls t)
 #+end_src
 
 * DASHBOARD
@@ -204,12 +226,17 @@ A customizable startup screen when launching Emacs.
 #+end_src
 
 * EMMET MODE
+Emmet is a plugin that improves HTML and CSS workflow
+
 #+begin_src emacs-lisp
 (use-package emmet-mode
   :ensure t
   :config
   (add-to-list 'emmet-jsx-major-modes 'jsx-mode))
 
+(map! :leader
+      :desc "Toggle emmet mode"
+      "e m" #'emmet-mode)
 #+end_src
 
 * ORG MODE
@@ -220,7 +247,7 @@ enjoyable experience for me
 https://orgmode.org/
 
 ** Basic Setup
-Included in this setup are org-agenda, org-journal, and org-roam
+Included in this setup are org-agenda and org-journal
 #+begin_src emacs-lisp
 (after! org
   (setq org-agenda-files '("~/Documents/notes/agenda.org")
@@ -230,18 +257,45 @@ Included in this setup are org-agenda, org-journal, and org-roam
       org-journal-file-type 'monthly
       org-journal-file-format "%Y-%m.org"
       org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
-      org-roam-directory "~/Documents/notes/"
       )
   ;; Needed to fix tabbing on headers
   (setq org-fold-core-style 'overlays)
 )
+
 #+end_src
 
-Opens up a full graphical 12-month calendar with agendas listed
+** Org Roam
+Org roam is an efficient way of note-taking. Creating a org file creates a node, and you can
+link nodes together, forming a chain of relevant documents
+
 #+begin_src emacs-lisp
-(global-set-key (kbd "C-c c") '=calendar)
+(after! org
+  (setq org-roam-directory "~/Documents/notes/"))
 #+end_src
 
+** Org Roam UI
+org-roam-ui is a beautiful frontend for your org-roam
+
+#+begin_src emacs-lisp
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+
+(map! :leader
+      :desc "Toggle org-roam-ui-mode"
+      "n r u" #'org-roam-ui-mode)
+#+end_src
 
 ** Org Auto Tangle
 Org auto tangle is used for taking block code inside org documents and transferring them to other files. I mainly use this to write these config documents

@@ -55,3 +55,5 @@
 (package! calfw-org)
 (package! org-bullets)
 (package! org-auto-tangle)
+(unpin! org-roam)
+(package! org-roam-ui)

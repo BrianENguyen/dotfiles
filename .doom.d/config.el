@@ -24,6 +24,9 @@
         doom-themes-enable-italic t)
   :init
   (load-theme 'doom-one t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -34,6 +37,21 @@
             (set-frame-parameter (selected-frame) 'alpha '(90 90)))
    (set-frame-parameter (selected-frame) 'alpha '(90 90))))
 
+(beacon-mode 1)
+(setq beacon-blink-when-point-moves-vertically 1
+      beacon-color "#F28AB3" ;; light pink color
+      beacon-blink-when-buffer-changes t
+      beacon-blink-when-window-scrolls t)
+
+(global-set-key (kbd "C-c c") '=calendar)
+
+(setq holiday-general-holidays nil
+      holiday-christian-holidays nil
+      holiday-hebrew-holidays nil
+      holiday-islamic-holidays nil
+      holiday-bahai-holidays nil
+      holiday-oriental-holidays nil)
+
 ;; needed to work in emacsclient
 (require 'centaur-tabs)
 (setq centaur-tabs-set-bar 'over
@@ -43,12 +61,6 @@
       centaur-tabs-set-modified-marker t
       centaur-tabs-style "bar"
       centaur-tabs-modified-marker "•")
-
-(beacon-mode 1)
-(setq beacon-blink-when-point-moves-vertically 1
-      beacon-color "#F28AB3" ;; light pink color
-      beacon-blink-when-buffer-changes t
-      beacon-blink-when-window-scrolls t)
 
 (use-package dashboard
   :ensure t
@@ -76,6 +88,10 @@
   :config
   (add-to-list 'emmet-jsx-major-modes 'jsx-mode))
 
+(map! :leader
+      :desc "Toggle emmet mode"
+      "e m" #'emmet-mode)
+
 (after! org
   (setq org-agenda-files '("~/Documents/notes/agenda.org")
       org-journal-dir "~/Documents/notes/journal/"
@@ -84,13 +100,32 @@
       org-journal-file-type 'monthly
       org-journal-file-format "%Y-%m.org"
       org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
-      org-roam-directory "~/Documents/notes/"
       )
   ;; Needed to fix tabbing on headers
   (setq org-fold-core-style 'overlays)
 )
 
-(global-set-key (kbd "C-c c") '=calendar)
+(after! org
+  (setq org-roam-directory "~/Documents/notes/"))
+
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+
+(map! :leader
+      :desc "Toggle org-roam-ui-mode"
+      "n r u" #'org-roam-ui-mode)
 
 (use-package! org-auto-tangle
   :defer t
