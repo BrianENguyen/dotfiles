@@ -13,7 +13,7 @@ function run {
 dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
 xsetroot -cursor_name left_ptr &
 run sxhkd -c ~/.config/bspwm/sxhkd/sxhkdrc &
-
+killall conky
 conky -c $HOME/.config/bspwm/system-overview &
 run nm-applet &
 run pamac-tray &
@@ -28,7 +28,6 @@ run volumeicon &
 redshift -x
 redshift -O 4000
 #ckb-next
-
-$HOME/.config/polybar/launch.sh &
 dunst &
-run nitrogen --restore
+emacsclient -e '(kill-emacs)'
+/usr/bin/emacs --daemon
