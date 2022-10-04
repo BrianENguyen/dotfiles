@@ -1,19 +1,29 @@
-* Wallpapers
+#+TITLE: Wallpapers
 
-** Alena Nord
+Below are various wallpapers that I use on my machine
+
+* TABLE OF CONTENTS :TOC:
+- [[#alena-nord][Alena Nord]]
+- [[#bubble-bay][Bubble Bay]]
+- [[#the-witcher][The Witcher]]
+- [[#torii-sunset][Torii Sunset]]
+- [[#your-name---sunset][Your Name - Sunset]]
+- [[#your-name---meteors][Your Name - Meteors]]
+
+* Alena Nord
 [[./alena-nord.png]]
 
-** Bubble Bay
+* Bubble Bay
 [[./bubble-bay.jpg]]
 
-** The Witcher
+* The Witcher
 [[./the-witcher.jpg]]
 
-** Torii Sunset
+* Torii Sunset
 [[./torii-sunset.jpg]]
 
-** Your Name - Sunset
+* Your Name - Sunset
 [[./your-name-sunset.jpg]]
 
-** Your Name - Meteors
+* Your Name - Meteors
 [[./your-name-meteors.jpg]]
