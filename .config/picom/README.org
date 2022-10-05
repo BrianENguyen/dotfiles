@@ -1,13 +1,60 @@
+#+title: Picom Config
+#+AUTHOR: Brian Nguyen (Buraiyen)
+#+PROPERTY: header-args :tangle picom.conf
+#+auto_tangle: t
+#+STARTUP: showeverything
+
+* TABLE OF CONTENTS :TOC:
+- [[#about-this-config][ABOUT THIS CONFIG]]
+- [[#animations][ANIMATIONS]]
+- [[#shadows][SHADOWS]]
+  - [[#shadow-colors][Shadow Colors]]
+  - [[#shadow-excludes][Shadow Excludes]]
+- [[#fading][FADING]]
+- [[#transparency--opacity][TRANSPARENCY / OPACITY]]
+- [[#corner-radius][CORNER RADIUS]]
+- [[#background-blurring][BACKGROUND BLURRING]]
+- [[#general-settings][GENERAL SETTINGS]]
+
+* ABOUT THIS CONFIG
+A /compositor/ is a software that runs on the linux desktop. It's function is to provide aesthetics on
+the displayed windows. Various styles that compositors include are
+
+ * Transparency in windows
+ * Transition animations
+ * Drop shadows around windows which give them a 3D effect
+ * V sync: Waits for the display to update before updating the display
+
+/Picom/ is a fork of the original compositor called /compton/. I am using the /jonaburg/ fork of picom
+to provide my windows with transparency blur
+
+* ANIMATIONS
+These animations require the jonaburg fork of picom found here:
+
+https://github.com/jonaburg/picom
+
+#+begin_src sh
 transition-length = 150
 transition-pow-x = 0.1
 transition-pow-y = 0.1
 transition-pow-w = 0.1
 transition-pow-h = 0.1
 size-transition = true
+#+end_src
 
+* SHADOWS
+Enabled client-side shadows on windows. Note desktop windows
+(windows with '_NET_WM_WINDOW_TYPE_DESKTOP') never get shadow,
+unless explicitly requested using the wintypes option.
+
+Use the values ~true~ or ~false~ to toggle shadows
+#+begin_src sh
 shadow = false
 # shadow = true;
+#+end_src
 
+The options below control the looks and positioning of the shadows
+#+begin_src sh
 # The blur radius for shadows, in pixels. (defaults to 12)
 # shadow-radius = 12
 shadow-radius = 50;
@@ -22,7 +69,13 @@ shadow-offset-x = -50;
 # The top offset for shadows, in pixels. (defaults to -15)
 # shadow-offset-y = -15
 shadow-offset-y = -30;
+#+end_src
 
+** Shadow Colors
+If you wish to add colors to your shadows, then the settings below will let
+you do that. I'm not using these, but I'm leaving them here if you wish to
+do so
+#+begin_src sh
 # Red color value of shadow (0.0 - 1.0, defaults to 0).
 # shadow-red = 0
 
@@ -34,7 +87,16 @@ shadow-offset-y = -30;
 
 # Hex string color value of shadow (#000000 - #FFFFFF, defaults to #000000). This option will override options set shadow-(red/green/blue)
 # shadow-color = "#000000"
+#+end_src
 
+** Shadow Excludes
+Specify a list of conditions of windows that should have no shadow. Use the ~xprop~ program to get
+the specific name of a displayed application
+
+Examples:
+   ~shadow-exclude = "n:e:Notification";~
+
+#+begin_src sh
 # shadow-exclude = []
 shadow-exclude = [
   "name = 'Notification'",
@@ -43,7 +105,11 @@ shadow-exclude = [
   "class_g = 'Cairo-clock'",
   "_GTK_FRAME_EXTENTS@:c"
 ];
+#+end_src
 
+* FADING
+Fade windows in/out when opening/closing and when opacity changes, unless no-fading-openclose is used.
+#+begin_src sh
 # fading = false
 fading = true;
 
@@ -54,7 +120,11 @@ fade-in-step = 0.5;
 # Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)
 # fade-out-step = 0.03
 fade-out-step = 0.2;
+#+end_src
 
+* TRANSPARENCY / OPACITY
+
+#+begin_src sh
 # Opacity of inactive windows. (0.1 - 1.0, defaults to 1.0)
 # inactive-opacity = 1
 inactive-opacity = 0.8;
@@ -76,7 +146,13 @@ inactive-opacity-override = false;
 # Specify a list of conditions of windows that should never be considered focused.
 # focus-exclude = []
 focus-exclude = [ "class_g = 'Cairo-clock'" ];
+#+end_src
 
+* CORNER RADIUS
+Sets the radius of rounded window corners. When > 0, the compositor will
+round the corners of windows.
+
+#+begin_src sh
 corner-radius = 7
 
 # Exclude conditions for rounded corners.
@@ -86,7 +162,10 @@ rounded-corners-exclude = [
 ];
 
 round-borders = 7;
+#+end_src
 
+* BACKGROUND BLURRING
+#+begin_src sh
 # Parameters for background blurring, see the *BLUR* section for more information.
 blur:
 {
@@ -109,6 +188,11 @@ blur-background-exclude = [
   "window_type = 'desktop'",
   "_GTK_FRAME_EXTENTS@:c"
 ];
+#+end_src
+
+* GENERAL SETTINGS
+
+#+begin_src sh
 
 # Daemonize process. Fork to background after initialization. Causes issues with certain (badly-written) drivers.
 # daemon = false
@@ -230,3 +314,6 @@ wintypes:
   normal = { blur-background = true; }
   splash = { blur-background = false; }
 };
+#+end_src
+
+#+RESULTS:
