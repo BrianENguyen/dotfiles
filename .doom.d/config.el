@@ -95,7 +95,6 @@
 (after! org
   (setq org-agenda-files '("~/Documents/notes/agenda.org")
       org-journal-dir "~/Documents/notes/journal/"
-      org-journal-file-header "#+TITLE: %M %Y"
       org-journal-date-format "%A, %Y-%m-%d"
       org-journal-file-type 'monthly
       org-journal-file-format "%Y-%m.org"
