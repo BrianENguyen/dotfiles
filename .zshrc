@@ -27,7 +27,7 @@ export ZSH=/usr/share/oh-my-zsh/
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # if you installed the package oh-my-zsh-powerline-theme-git then you type here "powerline" as zsh theme
-ZSH_THEME="headline"
+ZSH_THEME="jovial"
 
 # Case senstive completion
 CASE_SENSITIVE="false"
@@ -70,8 +70,8 @@ export HISTCONTROL=ignoreboth:erasedups
 
 # Make nvim the default editor
 
-export EDITOR='nvim'
-export VISUAL='nvim'
+export EDITOR="emacsclient -c -a emacs"
+export VISUAL="emacsclient -c -a emacs"
 
 #PS1='[\u@\h \W]\$ '
 
@@ -115,8 +115,16 @@ alias confalac='nv ~/.config/alacritty/alacritty.yml'
 alias confpicom='nv ~/.config/picom/picom.conf'
 alias confsxhkd='nv ~/.config/bspwm/sxhkd/sxhkdrc'
 
-# Doom
+# Emacs
+alias emacsstartdaemon='/usr/bin/emacs --daemon'
+alias emacskilldaemon="emacsclient -e '(kill-emacs)'"
+# Doom Emacs
 alias doomsync='~/.emacs.d/bin/doom sync'
+alias doomupgrade='~/.emacs.d/bin/doom upgrade'
+alias doombuild='~/.emacs.d/bin/doom build'
+
+# Discord
+alias discordupdate='sudo vim /opt/discord/resources/build_info.json'
 
 # Git
 alias add='git add'
