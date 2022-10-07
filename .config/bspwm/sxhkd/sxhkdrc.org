@@ -1,14 +1,40 @@
+#+title: sxhkdrc Config
+#+AUTHOR: Brian Nguyen (Buraiyen)
+#+PROPERTY: header-args :tangle sxhkdrc
+#+auto_tangle: t
+#+STARTUP: showeverything
+
+* TABLE OF CONTENTS :TOC:
+- [[#about-sxhkdrc][ABOUT SXHKDRC]]
+- [[#reload-bspwm][RELOAD BSPWM]]
+- [[#window-state][WINDOW STATE]]
+- [[#monitor--desktop-focus][MONITOR / DESKTOP FOCUS]]
+- [[#window-focus][WINDOW FOCUS]]
+- [[#window-preselection][WINDOW PRESELECTION]]
+- [[#window-size][WINDOW SIZE]]
+- [[#app-launching][APP LAUNCHING]]
+
+* ABOUT SXHKDRC
+#+begin_src sh
 #  ___ ___ _  _
 # | _ ) __| \| | Brian E Nguyen
 # | _ \ _|| .` | brianenguyen.com
 # |___/___|_|\_| github.com/Buraiyen/
 #
 # Configuration for sxhkd, a hotkey daemon
+#+end_src
 
+* RELOAD BSPWM
+#+begin_src sh
 #Reload bspwm
 super + shift + r
 	~/.config/bspwm/bspwmrc
+#+end_src
 
+* WINDOW STATE
+Windows can be toggled from tiled, floating, and fullscreen
+
+#+begin_src sh
 #Toggle fullscreen of window
 super + f
 	bspc node --state \~fullscreen
@@ -25,7 +51,11 @@ super + q
 # There's also a pseudotiled state if needed
 super + space
 	bspc node -t {tiled,floating,fullscreen}
+#+end_src
 
+* MONITOR / DESKTOP FOCUS
+
+#+begin_src sh
 #Focus selected desktop
 super + Tab
 	bspc desktop -f '^{1-9,10}'
@@ -51,6 +81,10 @@ alt + space
 super + {1-9,0}
 	bspc desktop -f '^{1-9,10}'
 
+#+end_src
+
+* WINDOW FOCUS
+#+begin_src sh
 # Increase/decrease window gap on focused desktop
 super + bracket{left,right}
 	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5 ))
@@ -80,7 +114,10 @@ super + shift + {Left,Down,Up,Right}
 	dir={west,south,north,east}; \
 	bspc node -s "$dir.local" --follow \
 	    || bspc node -m "$dir" --follow
+#+end_src
 
+* WINDOW PRESELECTION
+#+begin_src sh
 # Preselect the splitting area for next window on leaf/parent
 super + ctrl + {u,i,o,p}
 	bspc node --presel-dir \~{west,south,north,east}
@@ -88,7 +125,10 @@ super + ctrl + {u,i,o,p}
 # Define splitting ratio for next window on leaf/parent
 super + ctrl + {_,shift +}{1-9}
 	bspc node {_,@/} --presel-ratio 0.{1-9}
+#+end_src
 
+* WINDOW SIZE
+#+begin_src sh
 # Contract tiled space
 super + ctrl + {h,j,k,l}
 	bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
@@ -105,7 +145,10 @@ super + shift + {1-9,0}
 # Focused desktop window gap
 super + button{4,5}
   bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 2 ))
+#+end_src
 
+* APP LAUNCHING
+#+begin_src sh
 #Rofi Fullscreen
 super + F11
     rofi -show drun -fullscreen
@@ -332,3 +375,5 @@ super + y
 #Picom Toggle
 ctrl + alt + o
     ~/.config/bspwm/scripts/picom-toggle.sh
+
+#+end_src
