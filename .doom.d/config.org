@@ -10,13 +10,17 @@
 - [[#general-configs][GENERAL CONFIGS]]
   - [[#full-name--email][Full Name / Email]]
   - [[#general-keybindings][General Keybindings]]
-  - [[#line-numbers][Line Numbers]]
   - [[#open-specific-files][Open Specific Files]]
   - [[#looks][Looks]]
 - [[#beacon][BEACON]]
 - [[#calendar][CALENDAR]]
 - [[#centaur-tabs][CENTAUR TABS]]
 - [[#dashboard][DASHBOARD]]
+- [[#dired][DIRED]]
+  - [[#keybindings-to-open-dired][Keybindings to Open Dired]]
+  - [[#keybindings-within-dired][Keybindings Within Dired]]
+  - [[#peep-dired-mode][Peep-Dired Mode]]
+  - [[#making-deleted-files-go-to-the-trash-can][Making deleted files go to the trash can]]
 - [[#emmet-mode][EMMET MODE]]
 - [[#org-mode][ORG MODE]]
   - [[#basic-setup][Basic Setup]]
@@ -71,12 +75,6 @@ As always, if you want to separate text bodies into different lines, you could u
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 #+end_src
 
-** Line Numbers
-Line numbers are currently set to relative. Using ~'nil~ removes line numbers
-
-#+begin_src emacs-lisp
-(setq display-line-numbers-type 'relative)
-#+end_src
 
 ** Open Specific Files
 These are keybindings to open files that I commonly use
@@ -106,15 +104,31 @@ Doom exposes five (optional) variables for controlling fonts in Doom.
 |----------------------------+--------------------------------------------------------------|
 | `doom-font'                | Your standard font                                           |
 | `doom-variable-pitch-font' | For some Emacs applications                                  |
-| `doom-big-font'            | For `doom-big-font-mode' ~SPC t b~                           |
+| `doom-big-font'            | For `doom-big-font-mode' ~SPC t b~                             |
 | `font-lock-comment-face'   | For comments                                                 |
-| `font-lock-keyword-face'   | For keywords with special significance, like `setq` in elips |
+| `font-lock-keyword-face'   | For keywords with special significance, like `setq` in elisp |
 
 
 #+begin_src emacs-lisp
 (setq doom-font (font-spec :family "JetBrainsMonoMedium Nerd Font Mono" :size 15)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15))
 
+#+end_src
+
+*** Hiding Emphasis Markers
+Emacs by default shows emphasis markers (e.g. / ... / for italics, * ... * for bold, etc).
+The setting below hides the emphasis markers; note that they are still there even if hidden.
+You would need to backspace into the emphasis marker if you want to change the text
+
+#+begin_src emacs-lisp
+(setq org-hide-emphasis-markers t)
+#+end_src
+
+*** Line Numbers
+Line numbers are currently set to relative. Using ~'nil~ removes line numbers
+
+#+begin_src emacs-lisp
+(setq display-line-numbers-type 'relative)
 #+end_src
 
 *** Theme
@@ -224,6 +238,134 @@ A customizable startup screen when launching Emacs.
                           (registers . 5))))
 
 #+end_src
+
+* DIRED
+dired (/directory editor/) is a built-in file explorer / manager for Emacs
+
+Credit to Distrotube for these keybindings
+
+** Keybindings to Open Dired
+
+| COMMAND    | DESCRIPTION                          | KEYBINDING |
+|------------+--------------------------------------+------------|
+| dired      | /Open dired file manager/            | SPC d d    |
+| dired-jump | /Jump to current directory in dired/ | SPC d j    |
+
+** Keybindings Within Dired
+
+*** Basic dired commands
+
+| COMMAND                | DESCRIPTION                                   | KEYBINDING |
+|------------------------+-----------------------------------------------+------------|
+| dired-view-file        | /View file in dired/                          | SPC d v    |
+| dired-up-directory     | /Go up in directory tree/                     | h          |
+| dired-find-file        | /Go down in directory tree (or open if file)/ | l          |
+| dired-next-line        | Move down to next line                        | j          |
+| dired-previous-line    | Move up to previous line                      | k          |
+| dired-mark             | Mark file at point                            | m          |
+| dired-unmark           | Unmark file at point                          | u          |
+| dired-do-copy          | Copy current file or marked files             | C          |
+| dired-do-rename        | Rename current file or marked files           | R          |
+| dired-hide-details     | Toggle detailed listings on/off               | (          |
+| dired-git-info-mode    | Toggle git information on/off                 | )          |
+| dired-create-directory | Create new empty directory                    | +          |
+| dired-diff             | Compare file at point with another            | =          |
+| dired-subtree-toggle   | Toggle viewing subtree at point               | TAB        |
+
+*** Dired commands using regex
+
+| COMMAND                 | DESCRIPTION                | KEYBINDING |
+|-------------------------+----------------------------+------------|
+| dired-mark-files-regexp | Mark files using regex     | % m        |
+| dired-do-copy-regexp    | Copy files using regex     | % C        |
+| dired-do-rename-regexp  | Rename files using regex   | % R        |
+| dired-mark-files-regexp | Mark all files using regex | * %        |
+
+
+*** File permissions and ownership
+
+| COMMAND         | DESCRIPTION                      | KEYBINDING |
+|-----------------+----------------------------------+------------|
+| dired-do-chgrp  | Change the group of marked files | g G        |
+| dired-do-chmod  | Change the mode of marked files  | M          |
+| dired-do-chown  | Change the owner of marked files | O          |
+| dired-do-rename | Rename file or all marked files  | R          |
+
+
+#+begin_src emacs-lisp
+(map! :leader
+      (:prefix ("d" . "dired")
+       :desc "Open dired" "d" #'dired
+       :desc "Dired jump to current" "j" #'dired-jump)
+      (:after dired
+       (:map dired-mode-map
+        :desc "Peep-dired image previews" "d p" #'peep-dired
+        :desc "Dired view file" "d v" #'dired-view-file)))
+
+(evil-define-key 'normal dired-mode-map
+  (kbd "M-RET") 'dired-display-file
+  (kbd "h") 'dired-up-directory
+  (kbd "l") 'dired-find-file ; use dired-find-file instead of dired-open.
+  (kbd "m") 'dired-mark
+  (kbd "t") 'dired-toggle-marks
+  (kbd "u") 'dired-unmark
+  (kbd "C") 'dired-do-copy
+  (kbd "D") 'dired-do-delete
+  (kbd "J") 'dired-goto-file
+  (kbd "M") 'dired-do-chmod
+  (kbd "O") 'dired-do-chown
+  (kbd "P") 'dired-do-print
+  (kbd "R") 'dired-do-rename
+  (kbd "T") 'dired-do-touch
+  (kbd "Y") 'dired-copy-filenamecopy-filename-as-kill ; copies filename to kill ring.
+  (kbd "Z") 'dired-do-compress
+  (kbd "+") 'dired-create-directory
+  (kbd "-") 'dired-do-kill-lines
+  (kbd "% l") 'dired-downcase
+  (kbd "% m") 'dired-mark-files-regexp
+  (kbd "% u") 'dired-upcase
+  (kbd "* %") 'dired-mark-files-regexp
+  (kbd "* .") 'dired-mark-extension
+  (kbd "* /") 'dired-mark-directories
+  (kbd "; d") 'epa-dired-do-decrypt
+  (kbd "; e") 'epa-dired-do-encrypt)
+;; Get file icons in dired
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+;; With dired-open plugin, you can launch external programs for certain extensions
+;; For example, I set all .png files to open in 'sxiv' and all .mp4 files to open in 'mpv'
+(setq dired-open-extensions '(("gif" . "sxiv")
+                              ("jpg" . "sxiv")
+                              ("png" . "sxiv")
+                              ("mkv" . "mpv")
+                              ("mp4" . "mpv")))
+#+end_src
+
+** Peep-Dired Mode
+peep-dired allows you to get image previews as you navigate through image files
+
+Be sure that the package is installed in ~package.el~
+
+#+begin_src emacs-lisp
+(evil-define-key 'normal peep-dired-mode-map
+  (kbd "j") 'peep-dired-next-file
+  (kbd "k") 'peep-dired-prev-file)
+(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
+#+end_src
+
+** Making deleted files go to the trash can
+While navigating dired, use the ~D~ key to move files to the trash bin
+
+#+begin_src emacs-lisp
+(setq delete-by-moving-to-trash t
+      trash-directory "~/.local/share/Trash/files/")
+#+end_src
+
+=NOTE=: For convenience, you may want to create a symlink to 'local/share/Trash' in your home directory:
+
+#+begin_example
+cd ~/
+ln -s ~/.local/share/Trash .
+#+end_example
 
 * EMMET MODE
 Emmet is a plugin that improves HTML and CSS workflow
