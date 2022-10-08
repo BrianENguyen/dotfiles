@@ -192,6 +192,10 @@ super + Escape
 super + e
     emacsclient -c -a 'emacs'
 
+#Dolphin
+ctrl + alt + l
+     emacsclient -c -a '' --eval '(dired nil)'
+
 #################################################################
 # SUPER + SHIFT KEYS
 #################################################################
@@ -236,9 +240,6 @@ ctrl + alt + b
 ctrl + alt + d
 	discord
 
-#Dolphin
-ctrl + alt + l
-     dolphin
 
 #Pamac-manager
 ctrl + alt + p
