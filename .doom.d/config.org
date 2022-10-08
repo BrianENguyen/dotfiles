@@ -149,9 +149,7 @@ Set the theme for Doom Emacs. The 'enable' commands seem to not work for me. Wou
 #+end_src
 
 *** Window Size
-The setting below sets Emacs to open maximized without it being fully
-fullscreen. For some reason this works well on my main machine but not my
-laptop. I'll have to look into it
+The setting below sets Emacs to open maximized without it being fully fullscreen
 
 #+begin_src emacs-lisp
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -168,7 +166,6 @@ The transparency is set to 90%. It looks great if you are using window blur with
             (set-frame-parameter (selected-frame) 'alpha '(90 90)))
    (set-frame-parameter (selected-frame) 'alpha '(90 90))))
 #+end_src
-
 
 
 * BEACON
@@ -213,7 +210,7 @@ Centaur tabs is part of the modern IDE look where different buffers are separate
 #+end_src
 
 * DASHBOARD
-A customizable startup screen when launching Emacs.
+A customizable startup screen when launching Emacs. Be sure to comment-out ~doom-dashboard~ in ~init.el~ so that this wouldn't break
 
 #+begin_src emacs-lisp
 (use-package dashboard

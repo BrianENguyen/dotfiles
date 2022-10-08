@@ -80,7 +80,9 @@
 
        :checkers
        syntax
-       (spell +aspell) ; tasing you for misspelling mispelling
+       (spell +aspell)   ; tasing you for misspelling mispelling.
+                         ; NOTE: make sure you have aspell packages installed
+                         ; apsell and aspell-en
        grammar           ; tasing grammar mistake every you make
 
        :tools

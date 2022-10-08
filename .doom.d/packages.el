@@ -58,3 +58,4 @@
 (unpin! org-roam)
 (package! org-roam-ui)
 (package! peep-dired)
+(package! flycheck-aspell)
