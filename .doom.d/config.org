@@ -13,6 +13,8 @@
   - [[#open-specific-files][Open Specific Files]]
   - [[#looks][Looks]]
 - [[#beacon][BEACON]]
+- [[#bookmarks-and-buffers][BOOKMARKS AND BUFFERS]]
+  - [[#buffers][Buffers]]
 - [[#calendar][CALENDAR]]
 - [[#centaur-tabs][CENTAUR TABS]]
 - [[#dashboard][DASHBOARD]]
@@ -31,10 +33,13 @@
 - [[#rainbow-mode][RAINBOW MODE]]
 
 * ABOUT THIS CONFIG / DOOM EMACS
+[[./doom-emacs-dash.png]]
+
 Doom Emacs is a configuration framework for GNU Emacs. It uses the "evil"
 keybindings set to emulate Vim keybindings. Doom Emacs has various different
-packages and customization for you to choose. Below is my custom configuration
-of it, and feel free to use / modify whatever you like
+packages and customization for you to choose.
+
+The majority of these configurations are inspired by [[https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/doom/config.org][Distrotube's Doom Emacs configurations.]]
 
 [[https://github.com/doomemacs/][Link to Doom Emacs GitHub project]]
 
@@ -167,7 +172,6 @@ The transparency is set to 90%. It looks great if you are using window blur with
    (set-frame-parameter (selected-frame) 'alpha '(90 90))))
 #+end_src
 
-
 * BEACON
 Beacon is a very useful tool for locating your cursor. Whenever you scroll, a flashing light flashes horizontally on your cursor
 
@@ -177,6 +181,54 @@ Beacon is a very useful tool for locating your cursor. Whenever you scroll, a fl
       beacon-color "#F28AB3" ;; light pink color
       beacon-blink-when-buffer-changes t
       beacon-blink-when-window-scrolls t)
+#+end_src
+
+
+* BOOKMARKS AND BUFFERS
+Doom Emacs uses ~SPC b~ for keybindings related to bookmarks and buffers
+
+** Buffers
+Emacs uses /buffers/ to hold the file's text. Multiple buffers can be running at
+the same time, allowing you to conveniently switch between them
+
+| COMMAND         | DESCRIPTION           | KEYBINDING |
+|-----------------+-----------------------+------------|
+| ibuffer         | Launch ibuffer        | SPC b i    |
+| kill-buffer     | Kill current buffer   | SPC b k    |
+| next-buffer     | Go to next buffer     | SPC b n    |
+| previous-buffer | Go to previous buffer | SPC b p    |
+| save-buffer     | Save current buffer   | SPC b s    |
+
+*** ibuffer mode
+#+attr_org: :width 500
+[[./config-img/ibuffer.png]]
+
+ibuffer mode is a user interface that lets you view and manage running buffers
+
+| COMMAND                           | DESCRIPTION                            | KEYBINDING |
+|-----------------------------------+----------------------------------------+------------|
+| ibuffer-mark-forward              | Mark the buffer                        | m          |
+| ibuffer-unmark-forward            | Unmark the buffer                      | u          |
+| ibuffer-do-kill-on-deletion-marks | Kill the marked buffers                | x          |
+| ibuffer-filter-by-content         | Ibuffer filter by content              | f c        |
+| ibuffer-filter-by-directory       | Ibuffer filter by directory            | f d        |
+| ibuffer-filter-by-filename        | Ibuffer filter by filename (full path) | f f        |
+| ibuffer-filter-by-mode            | Ibuffer filter by mode                 | f m        |
+| ibuffer-filter-by-name            | Ibuffer filter by name                 | f n        |
+| ibuffer-filter-disable            | Disable ibuffer filter                 | f x        |
+| ibuffer-do-kill-lines             | Hide marked buffers                    | g h        |
+| ibuffer-update                    | Restore hidden buffers                 | g H        |
+
+#+begin_src emacs-lisp
+(evil-define-key 'normal ibuffer-mode-map
+  (kbd "f c") 'ibuffer-filter-by-content
+  (kbd "f d") 'ibuffer-filter-by-directory
+  (kbd "f f") 'ibuffer-filter-by-filename
+  (kbd "f m") 'ibuffer-filter-by-mode
+  (kbd "f n") 'ibuffer-filter-by-name
+  (kbd "f x") 'ibuffer-filter-disable
+  (kbd "g h") 'ibuffer-do-kill-lines
+  (kbd "g H") 'ibuffer-update)
 #+end_src
 
 * CALENDAR
@@ -238,8 +290,6 @@ A customizable startup screen when launching Emacs. Be sure to comment-out ~doom
 
 * DIRED
 dired (/directory editor/) is a built-in file explorer / manager for Emacs
-
-Credit to Distrotube for these keybindings
 
 ** Keybindings to Open Dired
 
@@ -474,4 +524,3 @@ highlighting)
      (rainbow-mode 1))))
 (global-rainbow-mode 1 )
 #+end_src
-

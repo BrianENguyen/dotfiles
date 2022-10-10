@@ -45,6 +45,16 @@
       beacon-blink-when-buffer-changes t
       beacon-blink-when-window-scrolls t)
 
+(evil-define-key 'normal ibuffer-mode-map
+  (kbd "f c") 'ibuffer-filter-by-content
+  (kbd "f d") 'ibuffer-filter-by-directory
+  (kbd "f f") 'ibuffer-filter-by-filename
+  (kbd "f m") 'ibuffer-filter-by-mode
+  (kbd "f n") 'ibuffer-filter-by-name
+  (kbd "f x") 'ibuffer-filter-disable
+  (kbd "g h") 'ibuffer-do-kill-lines
+  (kbd "g H") 'ibuffer-update)
+
 (global-set-key (kbd "C-c c") '=calendar)
 
 (setq holiday-general-holidays nil
