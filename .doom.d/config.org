@@ -512,6 +512,9 @@ org-publish is used for mass-exporting files. I use this to convert my private w
 files to HTML. This specifically uses the ~org-html-publish-to-html~ function. To export media
 files like ~png~ or ~gif~, then you would need to use the ~org-publish-attachment~ function
 
+When trying to exclude directories for ~org-static~, the function would still include
+the ~html/~ directory. Be sure to use regex to exclude that directory too
+
 #+begin_src emacs-lisp
 (setq org-publish-use-timestamps-flag nil)
 (setq org-export-with-broken-links t)
@@ -525,12 +528,13 @@ files like ~png~ or ~gif~, then you would need to use the ~org-publish-attachmen
          :publishing-function org-html-publish-to-html
          :auto-preamble t)
         ("org-static"
-         :base-directory "~/Documents/notes/Life"
+         :base-directory "~/Documents/notes/Life/"
          :base-extension "css\\|js\\|png\\|jpg\\|jpeg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-         :publishing-directory "~/Documents/notes/Life/html"
+         :publishing-directory "~/Documents/notes/Life/html/"
          :recursive t
-         :exclude "org-html-themes/.*"
-         :publishing-function org-publish-attachment))
+         :exclude "org-html-themes/.*\\|html/"
+         :publishing-function org-publish-attachment
+    ))
 )
 #+end_src
 
