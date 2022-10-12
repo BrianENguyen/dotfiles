@@ -158,6 +158,9 @@
       :desc "Toggle emmet mode"
       "e m" #'emmet-mode)
 
+(use-package emojify
+  :hook (after-init . global-emojify-mode))
+
 (after! org
   (setq org-agenda-files '("~/Documents/notes/agenda.org")
       org-journal-dir "~/Documents/notes/journal/"
@@ -197,6 +200,26 @@
   :hook (org-mode . org-auto-tangle-mode)
   :config
   (setq org-auto-tangle-default t))
+
+(setq org-publish-use-timestamps-flag nil)
+(setq org-export-with-broken-links t)
+(setq org-publish-project-alist
+      '(("Life"
+         :base-directory "~/Documents/notes/Life/"
+         :base-extension "org"
+         :publishing-directory "~/Documents/notes/Life/html"
+         :recursive t
+         :exclude "org-html-themes/.*"
+         :publishing-function org-html-publish-to-html
+         :auto-preamble t)
+        ("org-static"
+         :base-directory "~/Documents/notes/Life"
+         :base-extension "css\\|js\\|png\\|jpg\\|jpeg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+         :publishing-directory "~/Documents/notes/Life/html"
+         :recursive t
+         :exclude "org-html-themes/.*"
+         :publishing-function org-publish-attachment))
+)
 
 (require 'neotree)
 (with-eval-after-load 'doom-themes

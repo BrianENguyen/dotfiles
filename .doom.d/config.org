@@ -24,11 +24,13 @@
   - [[#peep-dired-mode][Peep-Dired Mode]]
   - [[#making-deleted-files-go-to-the-trash-can][Making deleted files go to the trash can]]
 - [[#emmet-mode][EMMET MODE]]
+- [[#emojis][EMOJIS]]
 - [[#org-mode][ORG MODE]]
   - [[#basic-setup][Basic Setup]]
   - [[#org-roam][Org Roam]]
   - [[#org-roam-ui][Org Roam UI]]
   - [[#org-auto-tangle][Org Auto Tangle]]
+  - [[#org-publish][Org Publish]]
 - [[#neotree][NEOTREE]]
 - [[#rainbow-mode][RAINBOW MODE]]
 
@@ -428,6 +430,15 @@ Emmet is a plugin that improves HTML and CSS workflow
       "e m" #'emmet-mode)
 #+end_src
 
+* EMOJIS
+Emojify displays emojis. It can display GitHub / Discord style (~:name-of-emoji:~)
+like :smile: or plain ascii ones like :)
+
+#+begin_src emacs-lisp
+(use-package emojify
+  :hook (after-init . global-emojify-mode))
+#+end_src
+
 * ORG MODE
 Org mode is a markdown mode for note-taking, writing journals, planning agendas,
 etc. This is the main reason why I'm using Doom Emacs, and it has been an
@@ -494,6 +505,33 @@ Org auto tangle is used for taking block code inside org documents and transferr
   :hook (org-mode . org-auto-tangle-mode)
   :config
   (setq org-auto-tangle-default t))
+#+end_src
+
+** Org Publish
+org-publish is used for mass-exporting files. I use this to convert my private website's org
+files to HTML. This specifically uses the ~org-html-publish-to-html~ function. To export media
+files like ~png~ or ~gif~, then you would need to use the ~org-publish-attachment~ function
+
+#+begin_src emacs-lisp
+(setq org-publish-use-timestamps-flag nil)
+(setq org-export-with-broken-links t)
+(setq org-publish-project-alist
+      '(("Life"
+         :base-directory "~/Documents/notes/Life/"
+         :base-extension "org"
+         :publishing-directory "~/Documents/notes/Life/html"
+         :recursive t
+         :exclude "org-html-themes/.*"
+         :publishing-function org-html-publish-to-html
+         :auto-preamble t)
+        ("org-static"
+         :base-directory "~/Documents/notes/Life"
+         :base-extension "css\\|js\\|png\\|jpg\\|jpeg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+         :publishing-directory "~/Documents/notes/Life/html"
+         :recursive t
+         :exclude "org-html-themes/.*"
+         :publishing-function org-publish-attachment))
+)
 #+end_src
 
 * NEOTREE
