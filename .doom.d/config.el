@@ -173,6 +173,8 @@
   (setq org-fold-core-style 'overlays)
 )
 
+(setq org-ellipsis " ⤵")
+
 (after! org
   (setq org-roam-directory "~/Documents/notes/"))
 

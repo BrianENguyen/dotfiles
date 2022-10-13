@@ -27,6 +27,7 @@
 - [[#emojis][EMOJIS]]
 - [[#org-mode][ORG MODE]]
   - [[#basic-setup][Basic Setup]]
+  - [[#org-mode-ellipsis][org-mode Ellipsis]]
   - [[#org-roam][Org Roam]]
   - [[#org-roam-ui][Org Roam UI]]
   - [[#org-auto-tangle][Org Auto Tangle]]
@@ -54,7 +55,9 @@ Then to start emacsclient, you would run this command
 
 ~emacsclient -c -a 'emacs'~
 
-This will launch emacs a lot quicker than if you were to do it just by using the regular ~emacs~ command. The ~-a~ flag ensures that in case emacsclient fails to launch, then Emacs would launch instead
+This will launch emacs a lot quicker than if you were to do it just by using the
+regular ~emacs~ command. The ~-a~ flag ensures that in case emacsclient fails to
+launch, then Emacs would launch instead
 
 * GENERAL CONFIGS
 The configs in this section are not related to any third-pary packages
@@ -463,6 +466,16 @@ Included in this setup are org-agenda and org-journal
 
 #+end_src
 
+** org-mode Ellipsis
+The default dot-dot-dot ellipsis next to a header indicates hidden content below
+the header. Use org-ellipsis to change the style of it
+
+#+begin_src emacs-lisp
+(setq org-ellipsis " ⤵")
+#+end_src
+
+Other interesting characters are ▼, ↴, ⬎, ⤷, and ⋱.
+
 ** Org Roam
 Org roam is an efficient way of note-taking. Creating a org file creates a node, and you can
 link nodes together, forming a chain of relevant documents
@@ -473,7 +486,11 @@ link nodes together, forming a chain of relevant documents
 #+end_src
 
 ** Org Roam UI
-org-roam-ui is a beautiful frontend for your org-roam
+#+attr_org: :width 600
+[[./config-img/org-roam-ui.png]]
+
+org-roam-ui is a beautiful frontend for your org-roam. It displays all of your connected
+nodes in a network-like structure
 
 #+begin_src emacs-lisp
 (use-package! websocket
@@ -497,7 +514,9 @@ org-roam-ui is a beautiful frontend for your org-roam
 #+end_src
 
 ** Org Auto Tangle
-Org auto tangle is used for taking block code inside org documents and transferring them to other files. I mainly use this to write these config documents
+Org auto tangle is used for taking block code inside org documents and
+transferring them to other files. I mainly use this to write these config
+documents
 
 #+begin_src emacs-lisp
 (use-package! org-auto-tangle
@@ -509,11 +528,12 @@ Org auto tangle is used for taking block code inside org documents and transferr
 
 ** Org Publish
 org-publish is used for mass-exporting files. I use this to convert my private website's org
-files to HTML. This specifically uses the ~org-html-publish-to-html~ function. To export media
-files like ~png~ or ~gif~, then you would need to use the ~org-publish-attachment~ function
+files to HTML. This specifically uses the ~org-html-publish-to-html~ function. To
+export media files like ~png~ or ~gif~, then you would need to use the
+~org-publish-attachment~ function
 
-When trying to exclude directories for ~org-static~, the function would still include
-the ~html/~ directory. Be sure to use regex to exclude that directory too
+When trying to exclude directories for ~org-static~, the function would still
+include the ~html/~ directory. Be sure to use regex to exclude that directory too
 
 #+begin_src emacs-lisp
 (setq org-publish-use-timestamps-flag nil)
@@ -539,7 +559,8 @@ the ~html/~ directory. Be sure to use regex to exclude that directory too
 #+end_src
 
 * NEOTREE
-Neotree displays the list of files in your current project, just like VS Code or any IDE
+Neotree displays the list of files in your current project, just like VS Code or
+any IDE
 
 | COMMAND      | DESCRIPTION                                     | KEYBINDING |
 |--------------+-------------------------------------------------+------------|
