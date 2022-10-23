@@ -16,27 +16,32 @@
 - [[#bookmarks-and-buffers][BOOKMARKS AND BUFFERS]]
   - [[#buffers][Buffers]]
 - [[#calendar][CALENDAR]]
-- [[#centaur-tabs][CENTAUR TABS]]
 - [[#dashboard][DASHBOARD]]
 - [[#dired][DIRED]]
   - [[#keybindings-to-open-dired][Keybindings to Open Dired]]
   - [[#keybindings-within-dired][Keybindings Within Dired]]
   - [[#peep-dired-mode][Peep-Dired Mode]]
   - [[#making-deleted-files-go-to-the-trash-can][Making deleted files go to the trash can]]
-- [[#emmet-mode][EMMET MODE]]
 - [[#emojis][EMOJIS]]
+- [[#ide-like-development][IDE-LIKE DEVELOPMENT]]
+  - [[#centaur-tabs][centaur-tabs]]
+  - [[#company-mode][company-mode]]
+  - [[#emmet-mode][emmet-mode]]
+  - [[#hippie-expand][hippie-expand]]
+  - [[#lsp-mode][lsp-mode]]
+  - [[#neotree][neotree]]
 - [[#org-mode][ORG MODE]]
   - [[#basic-setup][Basic Setup]]
   - [[#org-mode-ellipsis][org-mode Ellipsis]]
-  - [[#org-roam][Org Roam]]
-  - [[#org-roam-ui][Org Roam UI]]
-  - [[#org-auto-tangle][Org Auto Tangle]]
-  - [[#org-publish][Org Publish]]
-- [[#neotree][NEOTREE]]
+  - [[#org-roam][org-roam]]
+  - [[#org-roam-ui][org-roam-ui]]
+  - [[#org-auto-tangle][org-auto-tangle]]
+  - [[#org-publish][org-publish]]
 - [[#rainbow-mode][RAINBOW MODE]]
 
 * ABOUT THIS CONFIG / DOOM EMACS
-[[./doom-emacs-dash.png]]
+#+attr_org: :width 400
+[[./splash/doomEmacsDoomOne.svg]]
 
 Doom Emacs is a configuration framework for GNU Emacs. It uses the "evil"
 keybindings set to emulate Vim keybindings. Doom Emacs has various different
@@ -63,7 +68,6 @@ launch, then Emacs would launch instead
 The configs in this section are not related to any third-pary packages
 
 ** Full Name / Email
-
 Some functionality uses this to identify you, e.g. GPG configuration, email
 clients, file templates and snippets. If you don't use any of these services, then
 you don't have to fill out these fields
@@ -250,22 +254,6 @@ Opens up a full graphical 12-month calendar with agendas and holidays listed.
       holiday-oriental-holidays nil)
 #+end_src
 
-* CENTAUR TABS
-Centaur tabs is part of the modern IDE look where different buffers are separated into tabs at the top of the screen
-
-#+begin_src emacs-lisp
-;; needed to work in emacsclient
-(require 'centaur-tabs)
-(setq centaur-tabs-set-bar 'over
-      centaur-tabs-set-icons t
-      centaur-tabs-gray-out-icons 'buffer
-      centaur-tabs-height 24
-      centaur-tabs-set-modified-marker t
-      centaur-tabs-style "bar"
-      centaur-tabs-modified-marker "•")
-
-#+end_src
-
 * DASHBOARD
 A customizable startup screen when launching Emacs. Be sure to comment-out ~doom-dashboard~ in ~init.el~ so that this wouldn't break
 
@@ -282,7 +270,7 @@ A customizable startup screen when launching Emacs. Be sure to comment-out ~doom
                                  \nEdit Doom Init     (SPC = i)\
                                  \nEdit Doom Packages (SPC = p)\
                                  \nEdit agenda        (SPC = a)"
-   dashboard-startup-banner "~/.doom.d/doom-emacs-dash.png"
+   dashboard-startup-banner "~/.doom.d/splash/doomEmacsDoomOne.svg"
    dashboard-set-heading-icons t
    dashboard-set-file-icons t
    dashboard-items '((recents . 5)
@@ -307,22 +295,22 @@ dired (/directory editor/) is a built-in file explorer / manager for Emacs
 
 *** Basic dired commands
 
-| COMMAND                | DESCRIPTION                                   | KEYBINDING |
-|------------------------+-----------------------------------------------+------------|
+| COMMAND                | DESCRIPTION                                 | KEYBINDING |
+|------------------------+---------------------------------------------+------------|
 | dired-view-file        | /View file in dired/                          | SPC d v    |
 | dired-up-directory     | /Go up in directory tree/                     | h          |
 | dired-find-file        | /Go down in directory tree (or open if file)/ | l          |
-| dired-next-line        | Move down to next line                        | j          |
-| dired-previous-line    | Move up to previous line                      | k          |
-| dired-mark             | Mark file at point                            | m          |
-| dired-unmark           | Unmark file at point                          | u          |
-| dired-do-copy          | Copy current file or marked files             | C          |
-| dired-do-rename        | Rename current file or marked files           | R          |
-| dired-hide-details     | Toggle detailed listings on/off               | (          |
-| dired-git-info-mode    | Toggle git information on/off                 | )          |
-| dired-create-directory | Create new empty directory                    | +          |
-| dired-diff             | Compare file at point with another            | =          |
-| dired-subtree-toggle   | Toggle viewing subtree at point               | TAB        |
+| dired-next-line        | Move down to next line                      | j          |
+| dired-previous-line    | Move up to previous line                    | k          |
+| dired-mark             | Mark file at point                          | m          |
+| dired-unmark           | Unmark file at point                        | u          |
+| dired-do-copy          | Copy current file or marked files           | C          |
+| dired-do-rename        | Rename or move current file or marked files | R          |
+| dired-hide-details     | Toggle detailed listings on/off             | (          |
+| dired-git-info-mode    | Toggle git information on/off               | )          |
+| dired-create-directory | Create new empty directory                  | +          |
+| dired-diff             | Compare file at point with another          | =          |
+| dired-subtree-toggle   | Toggle viewing subtree at point             | TAB        |
 
 *** Dired commands using regex
 
@@ -419,8 +407,50 @@ cd ~/
 ln -s ~/.local/share/Trash .
 #+end_example
 
-* EMMET MODE
-Emmet is a plugin that improves HTML and CSS workflow
+* EMOJIS
+Emojify displays emojis. It can display GitHub / Discord style (~:name-of-emoji:~)
+like :smile: or plain ascii ones like :)
+
+#+begin_src emacs-lisp
+(use-package emojify
+  :hook (after-init . global-emojify-mode))
+#+end_src
+
+* IDE-LIKE DEVELOPMENT
+** centaur-tabs
+centaur-tabs is part of the modern IDE look where different buffers are separated into tabs at the top of the screen
+
+#+begin_src emacs-lisp
+;; needed to work in emacsclient
+(require 'centaur-tabs)
+(setq centaur-tabs-set-bar 'over
+      centaur-tabs-set-icons t
+      centaur-tabs-gray-out-icons 'buffer
+      centaur-tabs-height 24
+      centaur-tabs-set-modified-marker t
+      centaur-tabs-style "bar"
+      centaur-tabs-modified-marker "•")
+#+end_src
+
+** company-mode
+company-mode is a text-completion framework. I set it up so that there is no time delay
+for the suggestions to pop up
+
+#+begin_src emacs-lisp
+(use-package company
+  :after lsp-mode
+  :hook (prog-mode . company-mode)
+  :bind (:map company-active-map
+          ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+          ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+#+end_src
+
+** emmet-mode
+emmet-mode is a plugin that improves HTML and CSS workflow
 
 #+begin_src emacs-lisp
 (use-package emmet-mode
@@ -433,13 +463,48 @@ Emmet is a plugin that improves HTML and CSS workflow
       "e m" #'emmet-mode)
 #+end_src
 
-* EMOJIS
-Emojify displays emojis. It can display GitHub / Discord style (~:name-of-emoji:~)
-like :smile: or plain ascii ones like :)
+** hippie-expand
+Since company-mode and emmet-mode conflict with each other, I use hippie-expand alongside
+emmet-mode to make emmet-mode work as I wanted
 
 #+begin_src emacs-lisp
-(use-package emojify
-  :hook (after-init . global-emojify-mode))
+(use-package hippie-exp
+  :ensure nil
+  :defer t
+  :bind ("<C-return>" . hippie-expand)
+  :config
+  (setq-default hippie-expand-try-functions-list
+                '(yas-hippie-try-expand emmet-expand-line)))
+#+end_src
+
+** lsp-mode
+lsp-mode (Language Server Protocol) provides an IDE-like experience. Some of the
+many features it includes are syntax highlighting, code completion, formatting,
+and more
+
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (lsp-enable-which-key-integration t))
+#+end_src
+
+** neotree
+neotree displays the list of files in your current project, just like VS Code or
+any IDE
+
+| COMMAND      | DESCRIPTION                                     | KEYBINDING |
+|--------------+-------------------------------------------------+------------|
+| neotree/open | Displays neotree on the left side of the window | ~SPC o p~  |
+
+#+begin_src emacs-lisp
+(require 'neotree)
+(with-eval-after-load 'doom-themes
+  (doom-themes-neotree-config)
+  (setq doom-themes-neotree-file-icons t)
+ )
 #+end_src
 
 * ORG MODE
@@ -476,7 +541,7 @@ the header. Use org-ellipsis to change the style of it
 
 Other interesting characters are ▼, ↴, ⬎, ⤷, and ⋱.
 
-** Org Roam
+** org-roam
 Org roam is an efficient way of note-taking. Creating a org file creates a node, and you can
 link nodes together, forming a chain of relevant documents
 
@@ -485,7 +550,7 @@ link nodes together, forming a chain of relevant documents
   (setq org-roam-directory "~/Documents/notes/"))
 #+end_src
 
-** Org Roam UI
+** org-roam-ui
 #+attr_org: :width 600
 [[./config-img/org-roam-ui.png]]
 
@@ -513,8 +578,8 @@ nodes in a network-like structure
       "n r u" #'org-roam-ui-mode)
 #+end_src
 
-** Org Auto Tangle
-Org auto tangle is used for taking block code inside org documents and
+** org-auto-tangle
+org-auto-tangle is used for taking block code inside org documents and
 transferring them to other files. I mainly use this to write these config
 documents
 
@@ -526,7 +591,7 @@ documents
   (setq org-auto-tangle-default t))
 #+end_src
 
-** Org Publish
+** org-publish
 org-publish is used for mass-exporting files. I use this to convert my private website's org
 files to HTML. This specifically uses the ~org-html-publish-to-html~ function. To
 export media files like ~png~ or ~gif~, then you would need to use the
@@ -558,21 +623,6 @@ include the ~html/~ directory. Be sure to use regex to exclude that directory to
 )
 #+end_src
 
-* NEOTREE
-Neotree displays the list of files in your current project, just like VS Code or
-any IDE
-
-| COMMAND      | DESCRIPTION                                     | KEYBINDING |
-|--------------+-------------------------------------------------+------------|
-| neotree/open | Displays neotree on the left side of the window | ~SPC o p~  |
-
-#+begin_src emacs-lisp
-(require 'neotree)
-(with-eval-after-load 'doom-themes
-  (doom-themes-neotree-config)
-  (setq doom-themes-neotree-file-icons t)
- )
-#+end_src
 
 * RAINBOW MODE
 Rainbow mode displays the actual color for any hex value. The following enables

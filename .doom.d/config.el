@@ -64,16 +64,6 @@
       holiday-bahai-holidays nil
       holiday-oriental-holidays nil)
 
-;; needed to work in emacsclient
-(require 'centaur-tabs)
-(setq centaur-tabs-set-bar 'over
-      centaur-tabs-set-icons t
-      centaur-tabs-gray-out-icons 'buffer
-      centaur-tabs-height 24
-      centaur-tabs-set-modified-marker t
-      centaur-tabs-style "bar"
-      centaur-tabs-modified-marker "•")
-
 (use-package dashboard
   :ensure t
   :config
@@ -86,7 +76,7 @@
                                  \nEdit Doom Init     (SPC = i)\
                                  \nEdit Doom Packages (SPC = p)\
                                  \nEdit agenda        (SPC = a)"
-   dashboard-startup-banner "~/.doom.d/doom-emacs-dash.png"
+   dashboard-startup-banner "~/.doom.d/splash/doomEmacsDoomOne.svg"
    dashboard-set-heading-icons t
    dashboard-set-file-icons t
    dashboard-items '((recents . 5)
@@ -149,6 +139,30 @@
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
 
+(use-package emojify
+  :hook (after-init . global-emojify-mode))
+
+;; needed to work in emacsclient
+(require 'centaur-tabs)
+(setq centaur-tabs-set-bar 'over
+      centaur-tabs-set-icons t
+      centaur-tabs-gray-out-icons 'buffer
+      centaur-tabs-height 24
+      centaur-tabs-set-modified-marker t
+      centaur-tabs-style "bar"
+      centaur-tabs-modified-marker "•")
+
+(use-package company
+  :after lsp-mode
+  :hook (prog-mode . company-mode)
+  :bind (:map company-active-map
+          ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+          ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+
 (use-package emmet-mode
   :ensure t
   :config
@@ -158,8 +172,26 @@
       :desc "Toggle emmet mode"
       "e m" #'emmet-mode)
 
-(use-package emojify
-  :hook (after-init . global-emojify-mode))
+(use-package hippie-exp
+  :ensure nil
+  :defer t
+  :bind ("<C-return>" . hippie-expand)
+  :config
+  (setq-default hippie-expand-try-functions-list
+                '(yas-hippie-try-expand emmet-expand-line)))
+
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (lsp-enable-which-key-integration t))
+
+(require 'neotree)
+(with-eval-after-load 'doom-themes
+  (doom-themes-neotree-config)
+  (setq doom-themes-neotree-file-icons t)
+ )
 
 (after! org
   (setq org-agenda-files '("~/Documents/notes/agenda.org")
@@ -223,12 +255,6 @@
          :publishing-function org-publish-attachment
     ))
 )
-
-(require 'neotree)
-(with-eval-after-load 'doom-themes
-  (doom-themes-neotree-config)
-  (setq doom-themes-neotree-file-icons t)
- )
 
 (define-globalized-minor-mode global-rainbow-mode rainbow-mode
   (lambda ()

@@ -53,7 +53,7 @@
 (package! emojify)
 (package! dashboard)
 (package! calfw-org)
-(package! org-bullets)
+(package! elfeed-goodies)
 (package! org-auto-tangle)
 (unpin! org-roam)
 (package! org-roam-ui)
