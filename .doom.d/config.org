@@ -93,12 +93,12 @@ As always, if you want to separate text bodies into different lines, you could u
 ** Open Specific Files
 These are keybindings to open files that I commonly use
 
-| PATH TO FILE                   | DESCRIPTION              | KEYBINDING |
-|--------------------------------+--------------------------+------------|
-| ~/.doom.d/config.org           | /Edit doom config.org/   | SPC = c  |
-| ~/.doom.d/init.el              | /Edit doom init.el/      | SPC = i  |
-| ~/.doom.d/packages.el          | /Edit doom packages.org/ | SPC = p  |
-| ~/Documents/journal/agenda.org | /Edit agenda file/       | SPC = a  |
+| PATH TO FILE                  | DESCRIPTION            | KEYBINDING |
+|-------------------------------+------------------------+------------|
+| ~/.doom.d/config.org          | /Edit doom config.org/   | SPC = c    |
+| ~/.doom.d/init.el             | /Edit doom init.el/      | SPC = i    |
+| ~/.doom.d/packages.el         | /Edit doom packages.org/ | SPC = p    |
+| ~/GitRepos/journal/agenda.org | /Edit agenda file/       | SPC = a    |
 
 #+begin_src emacs-lisp
 (map! :leader
@@ -106,7 +106,7 @@ These are keybindings to open files that I commonly use
        :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.org"))
        :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.doom.d/init.el"))
        :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.doom.d/packages.el"))
-       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/Documents/notes/agenda.org"))
+       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/GitRepos/notes/agenda.org"))
 ))
 #+end_src
 
@@ -274,10 +274,9 @@ A customizable startup screen when launching Emacs. Be sure to comment-out ~doom
    dashboard-set-heading-icons t
    dashboard-set-file-icons t
    dashboard-items '((recents . 5)
-                          (agenda . 5 )
+                          (agenda . 8)
                           (bookmarks . 5)
-                          (projects . 5)
-                          (registers . 5))))
+                          (projects . 5))))
 
 #+end_src
 
@@ -518,8 +517,8 @@ https://orgmode.org/
 Included in this setup are org-agenda and org-journal
 #+begin_src emacs-lisp
 (after! org
-  (setq org-agenda-files '("~/Documents/notes/agenda.org")
-      org-journal-dir "~/Documents/notes/journal/"
+  (setq org-agenda-files '("~/GitRepos/notes/agenda.org")
+      org-journal-dir "~/GitRepos/notes/journal/"
       org-journal-date-format "%A, %Y-%m-%d"
       org-journal-file-type 'monthly
       org-journal-file-format "%Y-%m.org"
@@ -547,7 +546,7 @@ link nodes together, forming a chain of relevant documents
 
 #+begin_src emacs-lisp
 (after! org
-  (setq org-roam-directory "~/Documents/notes/"))
+  (setq org-roam-directory "~/GitRepos/notes/"))
 #+end_src
 
 ** org-roam-ui
@@ -605,17 +604,17 @@ include the ~html/~ directory. Be sure to use regex to exclude that directory to
 (setq org-export-with-broken-links t)
 (setq org-publish-project-alist
       '(("Life"
-         :base-directory "~/Documents/notes/Life/"
+         :base-directory "~/GitRepos/notes/Life/"
          :base-extension "org"
-         :publishing-directory "~/Documents/notes/Life/html"
+         :publishing-directory "~/GitRepos/notes/Life/html"
          :recursive t
          :exclude "org-html-themes/.*"
          :publishing-function org-html-publish-to-html
          :auto-preamble t)
         ("org-static"
-         :base-directory "~/Documents/notes/Life/"
+         :base-directory "~/GitRepos/notes/Life/"
          :base-extension "css\\|js\\|png\\|jpg\\|jpeg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-         :publishing-directory "~/Documents/notes/Life/html/"
+         :publishing-directory "~/GitRepos/notes/Life/html/"
          :recursive t
          :exclude "org-html-themes/.*\\|html/"
          :publishing-function org-publish-attachment

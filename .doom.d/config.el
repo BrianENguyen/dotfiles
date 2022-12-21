@@ -9,7 +9,7 @@
        :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.doom.d/config.org"))
        :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.doom.d/init.el"))
        :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.doom.d/packages.el"))
-       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/Documents/notes/agenda.org"))
+       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/GitRepos/notes/agenda.org"))
 ))
 
 (setq doom-font (font-spec :family "JetBrainsMonoMedium Nerd Font Mono" :size 15)
@@ -80,10 +80,9 @@
    dashboard-set-heading-icons t
    dashboard-set-file-icons t
    dashboard-items '((recents . 5)
-                          (agenda . 5 )
+                          (agenda . 8)
                           (bookmarks . 5)
-                          (projects . 5)
-                          (registers . 5))))
+                          (projects . 5))))
 
 (map! :leader
       (:prefix ("d" . "dired")
@@ -194,8 +193,8 @@
  )
 
 (after! org
-  (setq org-agenda-files '("~/Documents/notes/agenda.org")
-      org-journal-dir "~/Documents/notes/journal/"
+  (setq org-agenda-files '("~/GitRepos/notes/agenda.org")
+      org-journal-dir "~/GitRepos/notes/journal/"
       org-journal-date-format "%A, %Y-%m-%d"
       org-journal-file-type 'monthly
       org-journal-file-format "%Y-%m.org"
@@ -208,7 +207,7 @@
 (setq org-ellipsis " ⤵")
 
 (after! org
-  (setq org-roam-directory "~/Documents/notes/"))
+  (setq org-roam-directory "~/GitRepos/notes/"))
 
 (use-package! websocket
     :after org-roam)
@@ -239,17 +238,17 @@
 (setq org-export-with-broken-links t)
 (setq org-publish-project-alist
       '(("Life"
-         :base-directory "~/Documents/notes/Life/"
+         :base-directory "~/GitRepos/notes/Life/"
          :base-extension "org"
-         :publishing-directory "~/Documents/notes/Life/html"
+         :publishing-directory "~/GitRepos/notes/Life/html"
          :recursive t
          :exclude "org-html-themes/.*"
          :publishing-function org-html-publish-to-html
          :auto-preamble t)
         ("org-static"
-         :base-directory "~/Documents/notes/Life/"
+         :base-directory "~/GitRepos/notes/Life/"
          :base-extension "css\\|js\\|png\\|jpg\\|jpeg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-         :publishing-directory "~/Documents/notes/Life/html/"
+         :publishing-directory "~/GitRepos/notes/Life/html/"
          :recursive t
          :exclude "org-html-themes/.*\\|html/"
          :publishing-function org-publish-attachment
