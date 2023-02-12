@@ -131,6 +131,10 @@ super + t
 super + b
 	librewolf
 
+# Firefox developer edition
+ctrl + alt + f
+    firefoxdeveloperedition
+
 #Pavucontrol (Post Audio Volume Control)
 super + v
     pavucontrol
