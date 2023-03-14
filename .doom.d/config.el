@@ -202,6 +202,17 @@
       )
   ;; Needed to fix tabbing on headers
   (setq org-fold-core-style 'overlays)
+
+  (setq
+   ;; org-fancy-priorities-list '("[A]" "[B]" "[C]")
+   ;; org-fancy-priorities-list '("❗" "[B]" "[C]")
+   org-fancy-priorities-list '("🟥" "🟧" "🟨")
+   org-priority-faces
+   '((?A :foreground "#ff6c6b" :weight bold)
+     (?B :foreground "#98be65" :weight bold)
+     (?C :foreground "#c678dd" :weight bold))
+   org-agenda-block-separator 8411)
+
 )
 
 (setq org-ellipsis " ⤵")
