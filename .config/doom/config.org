@@ -30,6 +30,7 @@
   - [[#org-mode-ellipsis][org-mode Ellipsis]]
   - [[#org-auto-tangle][org-auto-tangle]]
   - [[#org-publish][org-publish]]
+- [[#start-page][START PAGE]]
 
 * ABOUT THIS CONFIG / DOOM EMACS
 #+attr_org: :width 400
@@ -498,4 +499,23 @@ include the ~html/~ directory. Be sure to use regex to exclude that directory to
          :publishing-function org-publish-attachment
     ))
 )
+#+end_src
+
+* START PAGE
+#+begin_src emacs-lisp
+(setq initial-buffer-choice "~/.config/doom/start.org")
+
+(define-minor-mode start-mode
+  "Provide functions for custom start page."
+  :lighter " start"
+  :keymap (let ((map (make-sparse-keymap)))
+          ;;(define-key map (kbd "M-z") 'eshell)
+            (evil-define-key 'normal start-mode-map
+              (kbd "1") '(lambda () (interactive) (find-file "~/.config/doom/config.org"))
+              (kbd "2") '(lambda () (interactive) (find-file "~/.config/doom/init.el"))
+              (kbd "3") '(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
+          map))
+
+(add-hook 'start-mode-hook 'read-only-mode) ;; make start.org read-only; use 'SPC t r' to toggle off read-only.
+(provide 'start-mode)
 #+end_src
