@@ -1,0 +1,6 @@
+#+title: Archived Doom Emacs Files
+
+The contents inside of this directory are archived. With the recent updates for
+Doom Emacs, some packages / configs in this directory will break the application
+
+[[../.config/doom/][Please see the updated directory for new changes]]
