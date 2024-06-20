@@ -1,5 +1,5 @@
 (setq user-full-name "Brian Nguyen"
-      user-mail-address "brian.edison.nguyen@gmail.com")
+      user-mail-address "brianenguyen@proton.me")
 
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
@@ -27,7 +27,7 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (if (daemonp)
     (add-hook 'after-make-frame-functions

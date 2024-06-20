@@ -1,4 +1,4 @@
-#+title: Buraiyen's Doom Emacs Config
+#+title: Brian's Doom Emacs Config
 #+AUTHOR: Brian Nguyen (Buraiyen)
 #+PROPERTY: header-args :tangle config.el
 #+auto_tangle: t
@@ -67,7 +67,7 @@ you don't have to fill out these fields
 
 #+begin_src emacs-lisp
 (setq user-full-name "Brian Nguyen"
-      user-mail-address "brian.edison.nguyen@gmail.com")
+      user-mail-address "brianenguyen@proton.me")
 #+end_src
 
 ** General Keybindings
@@ -88,9 +88,9 @@ These are keybindings to open files that I commonly use
 
 | PATH TO FILE                  | DESCRIPTION            | KEYBINDING |
 |-------------------------------+------------------------+------------|
-| ~/.doom.d/config.org          | /Edit doom config.org/   | SPC = c    |
-| ~/.doom.d/init.el             | /Edit doom init.el/      | SPC = i    |
-| ~/.doom.d/packages.el         | /Edit doom packages.org/ | SPC = p    |
+| ~/.config/doom/config.org     | /Edit doom config.org/   | SPC = c    |
+| ~/.config/doom/init.el        | /Edit doom init.el/      | SPC = i    |
+| ~/.config/doom/packages.el    | /Edit doom packages.org/ | SPC = p    |
 | ~/GitRepos/journal/agenda.org | /Edit agenda file/       | SPC = a    |
 
 #+begin_src emacs-lisp
@@ -138,10 +138,12 @@ Set the theme for Doom Emacs. The 'enable' commands seem to not work for me. Wou
 #+end_src
 
 *** Window Size
-The setting below sets Emacs to open maximized without it being fully fullscreen
+The setting below sets Emacs to open maximized without it being fully
+fullscreen. For privacy, it's recommended to /not/ have your Emacs window to
+launch in full screen
 
 #+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+end_src
 
 *** Window Transparency

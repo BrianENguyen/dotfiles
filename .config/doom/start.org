@@ -37,4 +37,3 @@
 | (SPC h d h) [[elisp:(doom/help)][doom/help]]       | (SPC h d f) [[elisp:(doom/help-faq)][doom/help-faq]]   | (SPC h i) [[elisp:(info)][info]]                |
 | (SPC h f) [[elisp:(counsel-describe-function)][describe-function]] | (SPC h v) [[elisp:(counsel-describe-variable)][describe-variable]] | (SPC h b b) [[elisp:(counsel-descbinds)][describe-bindings]] |
 |-----------------------------+-----------------------------+-------------------------------|
-
