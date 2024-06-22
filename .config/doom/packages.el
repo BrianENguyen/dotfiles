@@ -55,3 +55,4 @@
 (package! org-auto-tangle)
 (package! peep-dired)
 (package! flycheck-aspell)
+(package! all-the-icons)

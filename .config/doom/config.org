@@ -1,5 +1,5 @@
 #+title: Brian's Doom Emacs Config
-#+AUTHOR: Brian Nguyen (Buraiyen)
+#+AUTHOR: Brian Nguyen (brianenguyen)
 #+PROPERTY: header-args :tangle config.el
 #+auto_tangle: t
 #+STARTUP: showeverything
@@ -25,6 +25,7 @@
 - [[#emojis][EMOJIS]]
 - [[#ide-like-development][IDE-LIKE DEVELOPMENT]]
   - [[#centaur-tabs][centaur-tabs]]
+  - [[#neotree][neotree]]
 - [[#org-mode][ORG MODE]]
   - [[#basic-setup][Basic Setup]]
   - [[#org-mode-ellipsis][org-mode Ellipsis]]
@@ -104,6 +105,7 @@ These are keybindings to open files that I commonly use
 #+end_src
 
 ** Looks
+
 *** Hiding Emphasis Markers
 Emacs by default shows emphasis markers (e.g. / ... / for italics, * ... * for bold, etc).
 The setting below hides the emphasis markers; note that they are still there even if hidden.
@@ -135,6 +137,25 @@ Set the theme for Doom Emacs. The 'enable' commands seem to not work for me. Wou
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
+#+end_src
+
+*** Font
+#+begin_src elisp
+;;(setq doom-font (font-spec :family "JetBrains Mono" :size 15)
+;;       doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15)
+;;       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
+
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+#+end_src
+
+*** all-the-icons
+all-the-icons enables visual icons
+
+#+begin_src elisp
+(use-package all-the-icons
+  :if (display-graphic-p))
 #+end_src
 
 *** Window Size
@@ -346,7 +367,7 @@ dired (/directory editor/) is a built-in file explorer / manager for Emacs
   (kbd "; d") 'epa-dired-do-decrypt
   (kbd "; e") 'epa-dired-do-encrypt)
 ;; Get file icons in dired
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+;; (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 ;; With dired-open plugin, you can launch external programs for certain extensions
 ;; For example, I set all .png files to open in 'sxiv' and all .mp4 files to open in 'mpv'
 (setq dired-open-extensions '(("gif" . "sxiv")
@@ -406,6 +427,13 @@ centaur-tabs is part of the modern IDE look where different buffers are separate
       centaur-tabs-set-modified-marker t
       centaur-tabs-style "bar"
       centaur-tabs-modified-marker "•")
+#+end_src
+
+** neotree
+neotree gives a visual tree of the files and directories in the current directory
+#+begin_src emacs-lisp
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
 #+end_src
 
 * ORG MODE
@@ -504,20 +532,23 @@ include the ~html/~ directory. Be sure to use regex to exclude that directory to
 #+end_src
 
 * START PAGE
+The org file that launches when you start Doom Emacs
+
+It's currently not working and I'm not sure why, so I'm commenting it out for now
 #+begin_src emacs-lisp
-(setq initial-buffer-choice "~/.config/doom/start.org")
+;; (setq initial-buffer-choice "~/.config/doom/start.org")
 
-(define-minor-mode start-mode
-  "Provide functions for custom start page."
-  :lighter " start"
-  :keymap (let ((map (make-sparse-keymap)))
-          ;;(define-key map (kbd "M-z") 'eshell)
-            (evil-define-key 'normal start-mode-map
-              (kbd "1") '(lambda () (interactive) (find-file "~/.config/doom/config.org"))
-              (kbd "2") '(lambda () (interactive) (find-file "~/.config/doom/init.el"))
-              (kbd "3") '(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
-          map))
-
-(add-hook 'start-mode-hook 'read-only-mode) ;; make start.org read-only; use 'SPC t r' to toggle off read-only.
-(provide 'start-mode)
+;; (define-minor-mode start-mode
+;;   "Provide functions for custom start page."
+;;   :lighter " start"
+;;   :keymap (let ((map (make-sparse-keymap)))
+;;           ;;(define-key map (kbd "M-z") 'eshell)
+;;             (evil-define-key 'normal start-mode-map
+;;               (kbd "1") '(lambda () (interactive) (find-file "~/.config/doom/config.org"))
+;;               (kbd "2") '(lambda () (interactive) (find-file "~/.config/doom/init.el"))
+;;               (kbd "3") '(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
+;;           map))
+;;
+;; (add-hook 'start-mode-hook 'read-only-mode) ;; make start.org read-only; use 'SPC t r' to toggle off read-only.
+;; (provide 'start-mode)
 #+end_src

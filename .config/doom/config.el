@@ -27,6 +27,17 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
+;;(setq doom-font (font-spec :family "JetBrains Mono" :size 15)
+;;       doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15)
+;;       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
+
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+
+(use-package all-the-icons
+  :if (display-graphic-p))
+
 ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (if (daemonp)
@@ -118,7 +129,7 @@
   (kbd "; d") 'epa-dired-do-decrypt
   (kbd "; e") 'epa-dired-do-encrypt)
 ;; Get file icons in dired
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+;; (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 ;; With dired-open plugin, you can launch external programs for certain extensions
 ;; For example, I set all .png files to open in 'sxiv' and all .mp4 files to open in 'mpv'
 (setq dired-open-extensions '(("gif" . "sxiv")
@@ -147,6 +158,9 @@
       centaur-tabs-set-modified-marker t
       centaur-tabs-style "bar"
       centaur-tabs-modified-marker "•")
+
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
 
 (after! org
   (setq org-agenda-files '("~/GitRepos/notes/agenda.org")
@@ -205,18 +219,18 @@
     ))
 )
 
-(setq initial-buffer-choice "~/.config/doom/start.org")
+;; (setq initial-buffer-choice "~/.config/doom/start.org")
 
-(define-minor-mode start-mode
-  "Provide functions for custom start page."
-  :lighter " start"
-  :keymap (let ((map (make-sparse-keymap)))
-          ;;(define-key map (kbd "M-z") 'eshell)
-            (evil-define-key 'normal start-mode-map
-              (kbd "1") '(lambda () (interactive) (find-file "~/.config/doom/config.org"))
-              (kbd "2") '(lambda () (interactive) (find-file "~/.config/doom/init.el"))
-              (kbd "3") '(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
-          map))
-
-(add-hook 'start-mode-hook 'read-only-mode) ;; make start.org read-only; use 'SPC t r' to toggle off read-only.
-(provide 'start-mode)
+;; (define-minor-mode start-mode
+;;   "Provide functions for custom start page."
+;;   :lighter " start"
+;;   :keymap (let ((map (make-sparse-keymap)))
+;;           ;;(define-key map (kbd "M-z") 'eshell)
+;;             (evil-define-key 'normal start-mode-map
+;;               (kbd "1") '(lambda () (interactive) (find-file "~/.config/doom/config.org"))
+;;               (kbd "2") '(lambda () (interactive) (find-file "~/.config/doom/init.el"))
+;;               (kbd "3") '(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
+;;           map))
+;;
+;; (add-hook 'start-mode-hook 'read-only-mode) ;; make start.org read-only; use 'SPC t r' to toggle off read-only.
+;; (provide 'start-mode)
