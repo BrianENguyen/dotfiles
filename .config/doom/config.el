@@ -27,9 +27,11 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-;;(setq doom-font (font-spec :family "JetBrains Mono" :size 15)
-;;       doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15)
-;;       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
+(set-face-attribute 'default nil :font "Roboto Mono")
+(set-face-attribute 'italic nil :font "Roboto Mono" :slant 'italic)
+(setq doom-font (font-spec :family "Roboto Mono" :size 16)
+       doom-variable-pitch-font (font-spec :family "Roboto Mono" :size 16)
+       doom-big-font (font-spec :family "Roboto Mono" :size 24))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
