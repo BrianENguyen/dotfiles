@@ -1,28 +1,8 @@
-#+title: Alacritty Config
-#+AUTHOR: Brian Nguyen (brianenguyen)
-#+PROPERTY: header-args :tangle alacritty.toml
-#+auto_tangle: t
-#+STARTUP: showeverything
-
-* TABLE OF CONTENTS :toc:
-- [[#about-this-config][ABOUT THIS CONFIG]]
-- [[#basic-configuration][BASIC CONFIGURATION]]
-- [[#theme][THEME]]
-
-* ABOUT THIS CONFIG
-Configuration for Alacritty, the GPU enhanced terminal emulator.
-
-#+begin_src shell
 #  ___ ___ _  _
 # | _ ) __| \| | Brian E Nguyen
 # | _ \ _|| .` | brianenguyen.com
 # |___/___|_|\_| github.com/brianenguyen/
-#+end_src
 
-* BASIC CONFIGURATION
-Mostly just generic configuration, such as the font, window, etc.
-
-#+BEGIN_SRC toml
 [window]
 decorations     = "none"
 dynamic_padding = false
@@ -34,14 +14,6 @@ title           = "Alacritty"
 x = 12
 y = 12
 
-#+END_SRC
-
-
-
-* THEME
-Currently using the One Dark Configuration
-
-#+BEGIN_SRC toml
 # Colors (One Dark)
 
 # Default colors
@@ -70,4 +42,3 @@ blue    = '#61afef'
 magenta = '#c678dd'
 cyan    = '#56b6c2'
 white   = '#ffffff'
-#+END_SRC
