@@ -9,8 +9,9 @@
        :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.config/doom/config.org"))
        :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
        :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el"))
-       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/GitRepos/notes/agenda.org"))
+       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/GitRepos/notes/Agenda/agenda.org"))
 ))
+;; test
 
 (setq org-hide-emphasis-markers t)
 
@@ -55,24 +56,14 @@
       beacon-blink-when-buffer-changes t
       beacon-blink-when-window-scrolls t)
 
-(evil-define-key 'normal ibuffer-mode-map
-  (kbd "f c") 'ibuffer-filter-by-content
-  (kbd "f d") 'ibuffer-filter-by-directory
-  (kbd "f f") 'ibuffer-filter-by-filename
-  (kbd "f m") 'ibuffer-filter-by-mode
-  (kbd "f n") 'ibuffer-filter-by-name
-  (kbd "f x") 'ibuffer-filter-disable
-  (kbd "g h") 'ibuffer-do-kill-lines
-  (kbd "g H") 'ibuffer-update)
-
-(global-set-key (kbd "C-c c") '=calendar)
-
-(setq holiday-general-holidays nil
-      holiday-christian-holidays nil
-      holiday-hebrew-holidays nil
-      holiday-islamic-holidays nil
-      holiday-bahai-holidays nil
-      holiday-oriental-holidays nil)
+;; (global-set-key (kbd "C-c c") '=calendar)
+;;
+;; (setq holiday-general-holidays nil
+;;       holiday-christian-holidays nil
+;;       holiday-hebrew-holidays nil
+;;       holiday-islamic-holidays nil
+;;       holiday-bahai-holidays nil
+;;       holiday-oriental-holidays nil)
 
 (use-package dashboard
   :ensure t
@@ -86,7 +77,7 @@
                                  \nEdit Doom Init     (SPC = i)\
                                  \nEdit Doom Packages (SPC = p)\
                                  \nEdit agenda        (SPC = a)"
-   dashboard-startup-banner "~/.doom.d/splash/doomEmacsDoomOne.svg"
+   dashboard-startup-banner "~/.config/doom/splash/doomEmacsDoomOne.svg"
    dashboard-set-heading-icons t
    dashboard-set-file-icons t
    dashboard-items '((recents . 5)
@@ -165,7 +156,7 @@
 (global-set-key [f8] 'neotree-toggle)
 
 (after! org
-  (setq org-agenda-files '("~/GitRepos/notes/agenda.org")
+  (setq org-agenda-files '("~/GitRepos/notes/Agenda/agenda.org")
       org-journal-dir "~/GitRepos/notes/journal/"
       org-journal-date-format "%A, %Y-%m-%d"
       org-journal-file-type 'monthly
@@ -175,21 +166,14 @@
   ;; Needed to fix tabbing on headers
   (setq org-fold-core-style 'overlays)
 
-(setq org-highest-priority ?A)
-(setq org-lowest-priority ?E)
-(setq org-default-priority ?A)
-(setq org-priority-faces '((?A . error)
+  (setq org-highest-priority ?A)
+  (setq org-lowest-priority ?E)
+  (setq org-default-priority ?A)
+  (setq org-priority-faces '((?A . error)
                             (?B . warning)
                             (?C . success)
                             (?D . font-lock-doc-face)
                             (?E . font-lock-comment-face)))
-
-(setq org-fancy-priorities-list '((?A . "🟥")
-                                  (?B . "🟧")
-                                  (?C . "🟨")
-                                  (?D . "🟩")
-                                  (?E . "🟦")
-                                  ))
 )
 
 (setq org-ellipsis " ⤵")
@@ -200,26 +184,30 @@
   :config
   (setq org-auto-tangle-default t))
 
-(setq org-publish-use-timestamps-flag nil)
-(setq org-export-with-broken-links t)
-(setq org-publish-project-alist
-      '(("Life"
-         :base-directory "~/GitRepos/notes/Life/"
-         :base-extension "org"
-         :publishing-directory "~/GitRepos/notes/Life/html"
-         :recursive t
-         :exclude "org-html-themes/.*"
-         :publishing-function org-html-publish-to-html
-         :auto-preamble t)
-        ("org-static"
-         :base-directory "~/GitRepos/notes/Life/"
-         :base-extension "css\\|js\\|png\\|jpg\\|jpeg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-         :publishing-directory "~/GitRepos/notes/Life/html/"
-         :recursive t
-         :exclude "org-html-themes/.*\\|html/"
-         :publishing-function org-publish-attachment
-    ))
-)
+;; (setq org-publish-use-timestamps-flag nil)
+;; (setq org-export-with-broken-links t)
+;; (setq org-publish-project-alist
+;;       '(("Life"
+;;          :base-directory "~/GitRepos/notes/Life/"
+;;          :base-extension "org"
+;;          :publishing-directory "~/GitRepos/notes/Life/html"
+;;          :recursive t
+;;          :exclude "org-html-themes/.*"
+;;          :publishing-function org-html-publish-to-html
+;;          :auto-preamble t)
+;;         ("org-static"
+;;          :base-directory "~/GitRepos/notes/Life/"
+;;          :base-extension "css\\|js\\|png\\|jpg\\|jpeg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+;;          :publishing-directory "~/GitRepos/notes/Life/html/"
+;;          :recursive t
+;;          :exclude "org-html-themes/.*\\|html/"
+;;          :publishing-function org-publish-attachment
+;;     ))
+;; )
+
+;; (use-package org-roam
+;;   :ensure t
+;; )
 
 ;; (setq initial-buffer-choice "~/.config/doom/start.org")
 
