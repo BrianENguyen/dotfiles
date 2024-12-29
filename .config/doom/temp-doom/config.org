@@ -1,0 +1,200 @@
+#+title: Brian's Doom Emacs Config
+#+AUTHOR: Brian Nguyen (brianenguyen)
+#+PROPERTY: header-args :tangle config.el
+#+auto_tangle: t
+#+STARTUP: showeverything
+
+* TABLE OF CONTENTS :TOC:
+- [[#about-this-config--doom-emacs][ABOUT THIS CONFIG / DOOM EMACS]]
+- [[#emacs-client--emacs-daemon][EMACS CLIENT / EMACS DAEMON]]
+- [[#general-configs][GENERAL CONFIGS]]
+  - [[#full-name--email][Full Name / Email]]
+  - [[#general-keybindings][General Keybindings]]
+  - [[#opening-specific-files][Opening Specific Files]]
+  - [[#looks][Looks]]
+- [[#beacon][BEACON]]
+- [[#org-mode][ORG-MODE]]
+  - [[#basic-setup][Basic Setup]]
+  - [[#org-mode-ellipsis][org-mode Ellipsis]]
+  - [[#org-auto-tangle][org-auto-tangle]]
+  - [[#org-roam][org-roam]]
+
+* ABOUT THIS CONFIG / DOOM EMACS
+
+Doom Emacs is a configuration framework for GNU Emacs. It uses the "evil"
+keybindings set to emulate Vim keybindings. Doom Emacs has various different
+packages and customization for you to choose.
+
+The majority of these configurations are inspired by [[https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/doom/config.org][Distrotube's Doom Emacs configurations.]]
+
+[[https://github.com/doomemacs/][Link to Doom Emacs GitHub project]]
+
+* EMACS CLIENT / EMACS DAEMON
+Doom Emacs is optimized for speed. The appropriate way to launch Doom Emacs is to set up an Emacs daemon
+
+=/usr/bin/emacs --daemon=
+
+Then to start emacsclient, you would run this command
+
+=emacsclient -c -a 'emacs'=
+
+This will launch emacs a lot quicker than if you were to do it just by using the
+regular =emacs= command. The =-a= flag ensures that in case emacsclient fails to
+launch, then Emacs would launch instead
+
+* GENERAL CONFIGS
+These initial configs are used for the initial setup of Doom Emacs
+
+** Full Name / Email
+Some functionality uses this to identify you, e.g. GPG configuration, email
+clients, file templates and snippets. If you don't use any of these services, then
+you don't have to fill out these fields
+
+#+begin_src emacs-lisp
+(setq user-full-name "Brian Nguyen"
+      user-mail-address "brianenguyen@proton.me")
+#+end_src
+
+** General Keybindings
+In default Vim, navigating up and down around a word wrap would just jump to the
+first or last character. The bindings below makes it so that navigating though a
+word wrap would go through each line
+
+As always, if you want to separate text bodies into different lines, you could use =gq=
+
+#+begin_src emacs-lisp
+(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+#+end_src
+
+** Opening Specific Files
+These are keybindings to open files that I commonly use
+
+| PATH TO FILE                       | DESCRIPTION              | KEYBINDING |
+|------------------------------------+--------------------------+------------|
+| ~/.config/doom/config.org          | /Edit doom config.org/   | SPC = c    |
+| ~/.config/doom/init.el             | /Edit doom init.el/      | SPC = i    |
+| ~/.config/doom/packages.el         | /Edit doom packages.org/ | SPC = p    |
+| ~/GitRepos/notes/Agenda/agenda.org | /Edit agenda file/       | SPC = a    |
+
+#+begin_src emacs-lisp
+(map! :leader
+      (:prefix ("=" . "open file")
+       :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.config/doom/config.org"))
+       :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
+       :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el"))
+       :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/GitRepos/notes/Agenda/agenda.org"))
+))
+#+end_src
+
+** Looks
+*** Hiding Emphasis Markers
+Emacs by default shows emphasis markers (e.g. / ... / for italics, * ... * for bold, etc).
+The setting below hides the emphasis markers; note that they are still there even if hidden.
+You would need to backspace into the emphasis marker if you want to change the text
+
+#+begin_src emacs-lisp
+(setq org-hide-emphasis-markers t)
+#+end_src
+
+*** Line Numbers
+Line numbers are currently set to relative. Using ~'nil~ removes line numbers
+
+#+begin_src emacs-lisp
+(setq display-line-numbers-type 'relative)
+#+end_src
+
+*** Font
+#+begin_src elisp
+(set-face-attribute 'default nil :font "Roboto Mono")
+(set-face-attribute 'italic nil :font "Roboto Mono" :slant 'italic)
+(setq doom-font (font-spec :family "Roboto Mono" :size 16)
+       doom-variable-pitch-font (font-spec :family "Roboto Mono" :size 16)
+       doom-big-font (font-spec :family "Roboto Mono" :size 24))
+#+end_src
+
+*** all-the-icons
+all-the-icons enables visual icons
+
+#+begin_src elisp
+(use-package all-the-icons
+  :if (display-graphic-p))
+#+end_src
+
+* BEACON
+Beacon is a very useful tool for locating your cursor. Whenever you scroll, a flashing light flashes horizontally on your cursor
+
+#+BEGIN_SRC elisp
+(beacon-mode 1)
+(setq beacon-blink-when-point-moves-vertically 1
+      beacon-color "#F28AB3" ;; light pink color
+      beacon-blink-when-buffer-changes t
+      beacon-blink-when-window-scrolls t)
+#+END_SRC
+
+* ORG-MODE
+Org mode is a markdown mode for note-taking, writing journals, planning agendas,
+etc. This is the main reason why I'm using Doom Emacs, and it has been an
+enjoyable experience for me.
+
+https://orgmode.org/
+
+** Basic Setup
+Included in this setup are org-agenda and org-journal
+#+begin_src emacs-lisp
+(after! org
+  (setq org-agenda-files '("~/GitRepos/notes/Agenda/agenda.org")
+      org-journal-dir "~/GitRepos/notes/journal/"
+      org-journal-date-format "%A, %Y-%m-%d"
+      org-journal-file-type 'monthly
+      org-journal-file-format "%Y-%m.org"
+      org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
+      )
+  ;; Needed to fix tabbing on headers
+  (setq org-fold-core-style 'overlays)
+
+  (setq org-highest-priority ?A)
+  (setq org-lowest-priority ?E)
+  (setq org-default-priority ?A)
+  (setq org-priority-faces '((?A . error)
+                            (?B . warning)
+                            (?C . success)
+                            (?D . font-lock-doc-face)
+                            (?E . font-lock-comment-face)))
+)
+#+end_src
+
+** org-mode Ellipsis
+The default dot-dot-dot ellipsis next to a header indicates hidden content below
+the header. Use org-ellipsis to change the style of it
+
+#+begin_src emacs-lisp
+(setq org-ellipsis " ⤵")
+#+end_src
+
+Other interesting characters are ▼, ↴, ⬎, ⤷, and ⋱.
+
+** org-auto-tangle
+org-auto-tangle is used for taking block code inside org documents and
+transferring them to other files. I mainly use this to write these config
+documents
+
+#+BEGIN_SRC elisp
+(use-package! org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode)
+  :config
+  (setq org-auto-tangle-default t))
+#+END_SRC
+
+** org-roam
+#+BEGIN_SRC elisp
+(use-package org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode))
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory (file-truename "~/GitRepos/notes/"))
+  (require 'org-roam-protocol))
+#+END_SRC
