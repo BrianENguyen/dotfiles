@@ -4,38 +4,22 @@
 #+auto_tangle: t
 #+STARTUP: showeverything
 
-* TABLE OF CONTENTS :toc:
+* TABLE OF CONTENTS :TOC:
 - [[#about-this-config--doom-emacs][ABOUT THIS CONFIG / DOOM EMACS]]
 - [[#emacs-client--emacs-daemon][EMACS CLIENT / EMACS DAEMON]]
 - [[#general-configs][GENERAL CONFIGS]]
   - [[#full-name--email][Full Name / Email]]
   - [[#general-keybindings][General Keybindings]]
-  - [[#open-specific-files][Open Specific Files]]
+  - [[#opening-specific-files][Opening Specific Files]]
   - [[#looks][Looks]]
 - [[#beacon][BEACON]]
-- [[#bookmarks-and-buffers][BOOKMARKS AND BUFFERS]]
-- [[#calendar][CALENDAR]]
-- [[#dashboard][DASHBOARD]]
-- [[#dired][DIRED]]
-  - [[#keybindings-to-open-dired][Keybindings to Open Dired]]
-  - [[#keybindings-within-dired][Keybindings Within Dired]]
-  - [[#peep-dired-mode][Peep-Dired Mode]]
-  - [[#making-deleted-files-go-to-the-trash-can][Making deleted files go to the trash can]]
-- [[#emojis][EMOJIS]]
-- [[#ide-like-development][IDE-LIKE DEVELOPMENT]]
-  - [[#centaur-tabs][centaur-tabs]]
-  - [[#neotree][neotree]]
-- [[#org-mode][ORG MODE]]
+- [[#org-mode][ORG-MODE]]
   - [[#basic-setup][Basic Setup]]
   - [[#org-mode-ellipsis][org-mode Ellipsis]]
   - [[#org-auto-tangle][org-auto-tangle]]
-  - [[#org-publish][org-publish]]
   - [[#org-roam][org-roam]]
-- [[#start-page][START PAGE]]
 
 * ABOUT THIS CONFIG / DOOM EMACS
-#+attr_org: :width 400
-[[./splash/doomEmacsDoomOne.svg]]
 
 Doom Emacs is a configuration framework for GNU Emacs. It uses the "evil"
 keybindings set to emulate Vim keybindings. Doom Emacs has various different
@@ -48,18 +32,18 @@ The majority of these configurations are inspired by [[https://gitlab.com/dwt1/d
 * EMACS CLIENT / EMACS DAEMON
 Doom Emacs is optimized for speed. The appropriate way to launch Doom Emacs is to set up an Emacs daemon
 
-~/usr/bin/emacs --daemon~
+=/usr/bin/emacs --daemon=
 
 Then to start emacsclient, you would run this command
 
-~emacsclient -c -a 'emacs'~
+=emacsclient -c -a 'emacs'=
 
 This will launch emacs a lot quicker than if you were to do it just by using the
-regular ~emacs~ command. The ~-a~ flag ensures that in case emacsclient fails to
+regular =emacs= command. The =-a= flag ensures that in case emacsclient fails to
 launch, then Emacs would launch instead
 
 * GENERAL CONFIGS
-The configs in this section are not related to any third-pary packages
+These initial configs are used for the initial setup of Doom Emacs
 
 ** Full Name / Email
 Some functionality uses this to identify you, e.g. GPG configuration, email
@@ -76,23 +60,22 @@ In default Vim, navigating up and down around a word wrap would just jump to the
 first or last character. The bindings below makes it so that navigating though a
 word wrap would go through each line
 
-As always, if you want to separate text bodies into different lines, you could use ~gq~
+As always, if you want to separate text bodies into different lines, you could use =gq=
 
 #+begin_src emacs-lisp
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 #+end_src
 
-
-** Open Specific Files
+** Opening Specific Files
 These are keybindings to open files that I commonly use
 
-| PATH TO FILE                  | DESCRIPTION            | KEYBINDING |
-|-------------------------------+------------------------+------------|
-| ~/.config/doom/config.org     | /Edit doom config.org/   | SPC = c    |
-| ~/.config/doom/init.el        | /Edit doom init.el/      | SPC = i    |
-| ~/.config/doom/packages.el    | /Edit doom packages.org/ | SPC = p    |
-| ~/GitRepos/journal/agenda.org | /Edit agenda file/       | SPC = a    |
+| PATH TO FILE                       | DESCRIPTION              | KEYBINDING |
+|------------------------------------+--------------------------+------------|
+| ~/.config/doom/config.org          | /Edit doom config.org/   | SPC = c    |
+| ~/.config/doom/init.el             | /Edit doom init.el/      | SPC = i    |
+| ~/.config/doom/packages.el         | /Edit doom packages.org/ | SPC = p    |
+| ~/GitRepos/notes/Agenda/agenda.org | /Edit agenda file/       | SPC = a    |
 
 #+begin_src emacs-lisp
 (map! :leader
@@ -102,11 +85,9 @@ These are keybindings to open files that I commonly use
        :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el"))
        :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/GitRepos/notes/Agenda/agenda.org"))
 ))
-;; test
 #+end_src
 
 ** Looks
-
 *** Hiding Emphasis Markers
 Emacs by default shows emphasis markers (e.g. / ... / for italics, * ... * for bold, etc).
 The setting below hides the emphasis markers; note that they are still there even if hidden.
@@ -123,34 +104,17 @@ Line numbers are currently set to relative. Using ~'nil~ removes line numbers
 (setq display-line-numbers-type 'relative)
 #+end_src
 
-*** Theme
-Set the theme for Doom Emacs. The 'enable' commands seem to not work for me. Would need to find out why
-
-#+begin_src emacs-lisp
-(use-package doom-themes
-  :ensure t
-  :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  :init
-  (load-theme 'doom-one t))
-(custom-set-faces!
-  '(font-lock-comment-face :slant italic)
-  '(font-lock-keyword-face :slant italic))
-
-#+end_src
-
 *** Font
 #+begin_src elisp
-(set-face-attribute 'default nil :font "Roboto Mono")
-(set-face-attribute 'italic nil :font "Roboto Mono" :slant 'italic)
-(setq doom-font (font-spec :family "Roboto Mono" :size 16)
-       doom-variable-pitch-font (font-spec :family "Roboto Mono" :size 16)
-       doom-big-font (font-spec :family "Roboto Mono" :size 24))
-
+(setq doom-font (font-spec :family "Roboto Mono" :size 15)
+      doom-variable-pitch-font (font-spec :family "Roboto Mono" :size 15)
+      doom-big-font (font-spec :family "Roboto Mono" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
 #+end_src
 
 *** all-the-icons
@@ -161,257 +125,21 @@ all-the-icons enables visual icons
   :if (display-graphic-p))
 #+end_src
 
-*** Window Size
-The setting below sets Emacs to open maximized without it being fully
-fullscreen. For privacy, it's recommended to /not/ have your Emacs window to
-launch in full screen
-
-#+begin_src emacs-lisp
-;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
-#+end_src
-
-*** Window Transparency
-The transparency is set to 90%. It looks great if you are using window blur with a compositor
-
-#+begin_src emacs-lisp
-(if (daemonp)
-    (add-hook 'after-make-frame-functions
-        (lambda (frame)
-            (select-frame frame)
-            (set-frame-parameter (selected-frame) 'alpha '(95 95)))
-   (set-frame-parameter (selected-frame) 'alpha '(95 95))))
-#+end_src
-
 * BEACON
 Beacon is a very useful tool for locating your cursor. Whenever you scroll, a flashing light flashes horizontally on your cursor
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC elisp
 (beacon-mode 1)
 (setq beacon-blink-when-point-moves-vertically 1
       beacon-color "#F28AB3" ;; light pink color
       beacon-blink-when-buffer-changes t
       beacon-blink-when-window-scrolls t)
-#+end_src
+#+END_SRC
 
-
-* BOOKMARKS AND BUFFERS
-Doom Emacs uses ~SPC b~ for keybindings related to bookmarks and buffers
-
-Emacs uses /buffers/ to hold the file's text. Multiple buffers can be running at
-the same time, allowing you to conveniently switch between them
-
-| COMMAND         | DESCRIPTION           | KEYBINDING |
-|-----------------+-----------------------+------------|
-| ibuffer         | Launch ibuffer        | SPC b i    |
-| kill-buffer     | Kill current buffer   | SPC b k    |
-| next-buffer     | Go to next buffer     | SPC b n    |
-| previous-buffer | Go to previous buffer | SPC b p    |
-| save-buffer     | Save current buffer   | SPC b s    |
-
-* CALENDAR
-*NOTE*: No longer using this. Feel free to copy my configs if you wish
-
-Opens up a full graphical 12-month calendar with agendas and holidays listed.
-
-#+begin_src emacs-lisp
-;; (global-set-key (kbd "C-c c") '=calendar)
-;;
-;; (setq holiday-general-holidays nil
-;;       holiday-christian-holidays nil
-;;       holiday-hebrew-holidays nil
-;;       holiday-islamic-holidays nil
-;;       holiday-bahai-holidays nil
-;;       holiday-oriental-holidays nil)
-#+end_src
-
-* DASHBOARD
-A customizable startup screen when launching Emacs. Be sure to comment-out ~doom-dashboard~ in ~init.el~ so that this wouldn't break
-
-#+begin_src emacs-lisp
-(use-package dashboard
-  :ensure t
-  :config
-  (dashboard-setup-startup-hook))
-(after! dashboard
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))
-   dashboard-banner-logo-title "\nKEYBINDINGS\
-                                 \nFind file          (SPC .)\
-                                 \nEdit Doom Config   (SPC = c)\
-                                 \nEdit Doom Init     (SPC = i)\
-                                 \nEdit Doom Packages (SPC = p)\
-                                 \nEdit agenda        (SPC = a)"
-   dashboard-startup-banner "~/.config/doom/splash/doomEmacsDoomOne.svg"
-   dashboard-set-heading-icons t
-   dashboard-set-file-icons t
-   dashboard-items '((recents . 5)
-                          (agenda . 8)
-                          (bookmarks . 5)
-                          (projects . 5))))
-
-#+end_src
-
-* DIRED
-dired (/directory editor/) is a built-in file explorer / manager for Emacs
-
-** Keybindings to Open Dired
-
-| COMMAND    | DESCRIPTION                          | KEYBINDING |
-|------------+--------------------------------------+------------|
-| dired      | /Open dired file manager/            | SPC d d    |
-| dired-jump | /Jump to current directory in dired/ | SPC d j    |
-
-** Keybindings Within Dired
-
-*** Basic dired commands
-
-| COMMAND                | DESCRIPTION                                 | KEYBINDING |
-|------------------------+---------------------------------------------+------------|
-| dired-view-file        | /View file in dired/                          | SPC d v    |
-| dired-up-directory     | /Go up in directory tree/                     | h          |
-| dired-find-file        | /Go down in directory tree (or open if file)/ | l          |
-| dired-next-line        | Move down to next line                      | j          |
-| dired-previous-line    | Move up to previous line                    | k          |
-| dired-mark             | Mark file at point                          | m          |
-| dired-unmark           | Unmark file at point                        | u          |
-| dired-do-copy          | Copy current file or marked files           | C          |
-| dired-do-rename        | Rename or move current file or marked files | R          |
-| dired-hide-details     | Toggle detailed listings on/off             | (          |
-| dired-git-info-mode    | Toggle git information on/off               | )          |
-| dired-create-directory | Create new empty directory                  | +          |
-| dired-diff             | Compare file at point with another          | =          |
-| dired-subtree-toggle   | Toggle viewing subtree at point             | TAB        |
-
-*** Dired commands using regex
-
-| COMMAND                 | DESCRIPTION                | KEYBINDING |
-|-------------------------+----------------------------+------------|
-| dired-mark-files-regexp | Mark files using regex     | % m        |
-| dired-do-copy-regexp    | Copy files using regex     | % C        |
-| dired-do-rename-regexp  | Rename files using regex   | % R        |
-| dired-mark-files-regexp | Mark all files using regex | * %        |
-
-
-*** File permissions and ownership
-
-| COMMAND         | DESCRIPTION                      | KEYBINDING |
-|-----------------+----------------------------------+------------|
-| dired-do-chgrp  | Change the group of marked files | g G        |
-| dired-do-chmod  | Change the mode of marked files  | M          |
-| dired-do-chown  | Change the owner of marked files | O          |
-| dired-do-rename | Rename file or all marked files  | R          |
-
-
-#+begin_src emacs-lisp
-(map! :leader
-      (:prefix ("d" . "dired")
-       :desc "Open dired" "d" #'dired
-       :desc "Dired jump to current" "j" #'dired-jump)
-      (:after dired
-       (:map dired-mode-map
-        :desc "Peep-dired image previews" "d p" #'peep-dired
-        :desc "Dired view file" "d v" #'dired-view-file)))
-
-(evil-define-key 'normal dired-mode-map
-  (kbd "M-RET") 'dired-display-file
-  (kbd "h") 'dired-up-directory
-  (kbd "l") 'dired-find-file ; use dired-find-file instead of dired-open.
-  (kbd "m") 'dired-mark
-  (kbd "t") 'dired-toggle-marks
-  (kbd "u") 'dired-unmark
-  (kbd "C") 'dired-do-copy
-  (kbd "D") 'dired-do-delete
-  (kbd "J") 'dired-goto-file
-  (kbd "M") 'dired-do-chmod
-  (kbd "O") 'dired-do-chown
-  (kbd "P") 'dired-do-print
-  (kbd "R") 'dired-do-rename
-  (kbd "T") 'dired-do-touch
-  (kbd "Y") 'dired-copy-filenamecopy-filename-as-kill ; copies filename to kill ring.
-  (kbd "Z") 'dired-do-compress
-  (kbd "+") 'dired-create-directory
-  (kbd "-") 'dired-do-kill-lines
-  (kbd "% l") 'dired-downcase
-  (kbd "% m") 'dired-mark-files-regexp
-  (kbd "% u") 'dired-upcase
-  (kbd "* %") 'dired-mark-files-regexp
-  (kbd "* .") 'dired-mark-extension
-  (kbd "* /") 'dired-mark-directories
-  (kbd "; d") 'epa-dired-do-decrypt
-  (kbd "; e") 'epa-dired-do-encrypt)
-;; Get file icons in dired
-;; (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-;; With dired-open plugin, you can launch external programs for certain extensions
-;; For example, I set all .png files to open in 'sxiv' and all .mp4 files to open in 'mpv'
-(setq dired-open-extensions '(("gif" . "sxiv")
-                              ("jpg" . "sxiv")
-                              ("png" . "sxiv")
-                              ("mkv" . "mpv")
-                              ("mp4" . "mpv")))
-#+end_src
-
-** Peep-Dired Mode
-peep-dired allows you to get image previews as you navigate through image files
-
-Be sure that the package is installed in ~package.el~
-
-#+begin_src emacs-lisp
-(evil-define-key 'normal peep-dired-mode-map
-  (kbd "j") 'peep-dired-next-file
-  (kbd "k") 'peep-dired-prev-file)
-(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
-#+end_src
-
-** Making deleted files go to the trash can
-While navigating dired, use the ~D~ key to move files to the trash bin
-
-#+begin_src emacs-lisp
-(setq delete-by-moving-to-trash t
-      trash-directory "~/.local/share/Trash/files/")
-#+end_src
-
-=NOTE=: For convenience, you may want to create a symlink to 'local/share/Trash' in your home directory:
-
-#+begin_example
-cd ~/
-ln -s ~/.local/share/Trash .
-#+end_example
-
-* EMOJIS
-Emojify displays emojis. It can display GitHub / Discord style (~:name-of-emoji:~)
-like :smile: or plain ascii ones like :)
-
-#+begin_src emacs-lisp
-(use-package emojify
-  :hook (after-init . global-emojify-mode))
-#+end_src
-
-* IDE-LIKE DEVELOPMENT
-** centaur-tabs
-centaur-tabs is part of the modern IDE look where different buffers are separated into tabs at the top of the screen
-
-#+begin_src emacs-lisp
-;; needed to work in emacsclient
-(require 'centaur-tabs)
-(setq centaur-tabs-set-bar 'over
-      centaur-tabs-set-icons t
-      centaur-tabs-gray-out-icons 'buffer
-      centaur-tabs-height 24
-      centaur-tabs-set-modified-marker t
-      centaur-tabs-style "bar"
-      centaur-tabs-modified-marker "•")
-#+end_src
-
-** neotree
-neotree gives a visual tree of the files and directories in the current directory
-#+begin_src emacs-lisp
-(require 'neotree)
-(global-set-key [f8] 'neotree-toggle)
-#+end_src
-
-* ORG MODE
+* ORG-MODE
 Org mode is a markdown mode for note-taking, writing journals, planning agendas,
 etc. This is the main reason why I'm using Doom Emacs, and it has been an
-enjoyable experience for me
+enjoyable experience for me.
 
 https://orgmode.org/
 
@@ -455,74 +183,37 @@ org-auto-tangle is used for taking block code inside org documents and
 transferring them to other files. I mainly use this to write these config
 documents
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC elisp
 (use-package! org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode)
   :config
   (setq org-auto-tangle-default t))
-#+end_src
-
-** org-publish
-**NOTE** I'm commenting this out as I'm not using it anymore, but feel free to use my example
-configs if you wish
-
-=org-publish= is used for mass-exporting files. I use this to convert my private website's org
-files to HTML. This specifically uses the ~org-html-publish-to-html~ function. To
-export media files like ~png~ or ~gif~, then you would need to use the
-~org-publish-attachment~ function
-
-When trying to exclude directories for ~org-static~, the function would still
-include the ~html/~ directory. Be sure to use regex to exclude that directory too
-
-#+begin_src emacs-lisp
-;; (setq org-publish-use-timestamps-flag nil)
-;; (setq org-export-with-broken-links t)
-;; (setq org-publish-project-alist
-;;       '(("Life"
-;;          :base-directory "~/GitRepos/notes/Life/"
-;;          :base-extension "org"
-;;          :publishing-directory "~/GitRepos/notes/Life/html"
-;;          :recursive t
-;;          :exclude "org-html-themes/.*"
-;;          :publishing-function org-html-publish-to-html
-;;          :auto-preamble t)
-;;         ("org-static"
-;;          :base-directory "~/GitRepos/notes/Life/"
-;;          :base-extension "css\\|js\\|png\\|jpg\\|jpeg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-;;          :publishing-directory "~/GitRepos/notes/Life/html/"
-;;          :recursive t
-;;          :exclude "org-html-themes/.*\\|html/"
-;;          :publishing-function org-publish-attachment
-;;     ))
-;; )
-#+end_src
+#+END_SRC
 
 ** org-roam
-#+begin_src elisp
-;; (use-package org-roam
-;;   :ensure t
-;; )
-#+end_src
+#+BEGIN_SRC elisp
+(use-package org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode))
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory (file-truename "~/GitRepos/notes/"))
+  (require 'org-roam-protocol))
 
-* START PAGE
-The org file that launches when you start Doom Emacs
+(use-package! websocket
+    :after org-roam)
 
-It's currently not working and I'm not sure why, so I'm commenting it out for now
-#+begin_src emacs-lisp
-;; (setq initial-buffer-choice "~/.config/doom/start.org")
-
-;; (define-minor-mode start-mode
-;;   "Provide functions for custom start page."
-;;   :lighter " start"
-;;   :keymap (let ((map (make-sparse-keymap)))
-;;           ;;(define-key map (kbd "M-z") 'eshell)
-;;             (evil-define-key 'normal start-mode-map
-;;               (kbd "1") '(lambda () (interactive) (find-file "~/.config/doom/config.org"))
-;;               (kbd "2") '(lambda () (interactive) (find-file "~/.config/doom/init.el"))
-;;               (kbd "3") '(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
-;;           map))
-;;
-;; (add-hook 'start-mode-hook 'read-only-mode) ;; make start.org read-only; use 'SPC t r' to toggle off read-only.
-;; (provide 'start-mode)
-#+end_src
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+#+END_SRC

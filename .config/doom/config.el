@@ -11,149 +11,29 @@
        :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el"))
        :desc "Edit agenda.org" "a" #'(lambda () (interactive) (find-file "~/GitRepos/notes/Agenda/agenda.org"))
 ))
-;; test
 
 (setq org-hide-emphasis-markers t)
 
 (setq display-line-numbers-type 'relative)
 
-(use-package doom-themes
-  :ensure t
-  :config
+(setq doom-font (font-spec :family "Roboto Mono" :size 15)
+      doom-variable-pitch-font (font-spec :family "Roboto Mono" :size 15)
+      doom-big-font (font-spec :family "Roboto Mono" :size 24))
+(after! doom-themes
   (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  :init
-  (load-theme 'doom-one t))
+        doom-themes-enable-italic t))
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(set-face-attribute 'default nil :font "Roboto Mono")
-(set-face-attribute 'italic nil :font "Roboto Mono" :slant 'italic)
-(setq doom-font (font-spec :family "Roboto Mono" :size 16)
-       doom-variable-pitch-font (font-spec :family "Roboto Mono" :size 16)
-       doom-big-font (font-spec :family "Roboto Mono" :size 24))
-
-(after! doom-themes
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t))
-
 (use-package all-the-icons
   :if (display-graphic-p))
-
-;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-(if (daemonp)
-    (add-hook 'after-make-frame-functions
-        (lambda (frame)
-            (select-frame frame)
-            (set-frame-parameter (selected-frame) 'alpha '(95 95)))
-   (set-frame-parameter (selected-frame) 'alpha '(95 95))))
 
 (beacon-mode 1)
 (setq beacon-blink-when-point-moves-vertically 1
       beacon-color "#F28AB3" ;; light pink color
       beacon-blink-when-buffer-changes t
       beacon-blink-when-window-scrolls t)
-
-;; (global-set-key (kbd "C-c c") '=calendar)
-;;
-;; (setq holiday-general-holidays nil
-;;       holiday-christian-holidays nil
-;;       holiday-hebrew-holidays nil
-;;       holiday-islamic-holidays nil
-;;       holiday-bahai-holidays nil
-;;       holiday-oriental-holidays nil)
-
-(use-package dashboard
-  :ensure t
-  :config
-  (dashboard-setup-startup-hook))
-(after! dashboard
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))
-   dashboard-banner-logo-title "\nKEYBINDINGS\
-                                 \nFind file          (SPC .)\
-                                 \nEdit Doom Config   (SPC = c)\
-                                 \nEdit Doom Init     (SPC = i)\
-                                 \nEdit Doom Packages (SPC = p)\
-                                 \nEdit agenda        (SPC = a)"
-   dashboard-startup-banner "~/.config/doom/splash/doomEmacsDoomOne.svg"
-   dashboard-set-heading-icons t
-   dashboard-set-file-icons t
-   dashboard-items '((recents . 5)
-                          (agenda . 8)
-                          (bookmarks . 5)
-                          (projects . 5))))
-
-(map! :leader
-      (:prefix ("d" . "dired")
-       :desc "Open dired" "d" #'dired
-       :desc "Dired jump to current" "j" #'dired-jump)
-      (:after dired
-       (:map dired-mode-map
-        :desc "Peep-dired image previews" "d p" #'peep-dired
-        :desc "Dired view file" "d v" #'dired-view-file)))
-
-(evil-define-key 'normal dired-mode-map
-  (kbd "M-RET") 'dired-display-file
-  (kbd "h") 'dired-up-directory
-  (kbd "l") 'dired-find-file ; use dired-find-file instead of dired-open.
-  (kbd "m") 'dired-mark
-  (kbd "t") 'dired-toggle-marks
-  (kbd "u") 'dired-unmark
-  (kbd "C") 'dired-do-copy
-  (kbd "D") 'dired-do-delete
-  (kbd "J") 'dired-goto-file
-  (kbd "M") 'dired-do-chmod
-  (kbd "O") 'dired-do-chown
-  (kbd "P") 'dired-do-print
-  (kbd "R") 'dired-do-rename
-  (kbd "T") 'dired-do-touch
-  (kbd "Y") 'dired-copy-filenamecopy-filename-as-kill ; copies filename to kill ring.
-  (kbd "Z") 'dired-do-compress
-  (kbd "+") 'dired-create-directory
-  (kbd "-") 'dired-do-kill-lines
-  (kbd "% l") 'dired-downcase
-  (kbd "% m") 'dired-mark-files-regexp
-  (kbd "% u") 'dired-upcase
-  (kbd "* %") 'dired-mark-files-regexp
-  (kbd "* .") 'dired-mark-extension
-  (kbd "* /") 'dired-mark-directories
-  (kbd "; d") 'epa-dired-do-decrypt
-  (kbd "; e") 'epa-dired-do-encrypt)
-;; Get file icons in dired
-;; (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-;; With dired-open plugin, you can launch external programs for certain extensions
-;; For example, I set all .png files to open in 'sxiv' and all .mp4 files to open in 'mpv'
-(setq dired-open-extensions '(("gif" . "sxiv")
-                              ("jpg" . "sxiv")
-                              ("png" . "sxiv")
-                              ("mkv" . "mpv")
-                              ("mp4" . "mpv")))
-
-(evil-define-key 'normal peep-dired-mode-map
-  (kbd "j") 'peep-dired-next-file
-  (kbd "k") 'peep-dired-prev-file)
-(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
-
-(setq delete-by-moving-to-trash t
-      trash-directory "~/.local/share/Trash/files/")
-
-(use-package emojify
-  :hook (after-init . global-emojify-mode))
-
-;; needed to work in emacsclient
-(require 'centaur-tabs)
-(setq centaur-tabs-set-bar 'over
-      centaur-tabs-set-icons t
-      centaur-tabs-gray-out-icons 'buffer
-      centaur-tabs-height 24
-      centaur-tabs-set-modified-marker t
-      centaur-tabs-style "bar"
-      centaur-tabs-modified-marker "•")
-
-(require 'neotree)
-(global-set-key [f8] 'neotree-toggle)
 
 (after! org
   (setq org-agenda-files '("~/GitRepos/notes/Agenda/agenda.org")
@@ -184,43 +64,26 @@
   :config
   (setq org-auto-tangle-default t))
 
-;; (setq org-publish-use-timestamps-flag nil)
-;; (setq org-export-with-broken-links t)
-;; (setq org-publish-project-alist
-;;       '(("Life"
-;;          :base-directory "~/GitRepos/notes/Life/"
-;;          :base-extension "org"
-;;          :publishing-directory "~/GitRepos/notes/Life/html"
-;;          :recursive t
-;;          :exclude "org-html-themes/.*"
-;;          :publishing-function org-html-publish-to-html
-;;          :auto-preamble t)
-;;         ("org-static"
-;;          :base-directory "~/GitRepos/notes/Life/"
-;;          :base-extension "css\\|js\\|png\\|jpg\\|jpeg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-;;          :publishing-directory "~/GitRepos/notes/Life/html/"
-;;          :recursive t
-;;          :exclude "org-html-themes/.*\\|html/"
-;;          :publishing-function org-publish-attachment
-;;     ))
-;; )
+(use-package org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode))
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory (file-truename "~/GitRepos/notes/"))
+  (require 'org-roam-protocol))
 
-;; (use-package org-roam
-;;   :ensure t
-;; )
+(use-package! websocket
+    :after org-roam)
 
-;; (setq initial-buffer-choice "~/.config/doom/start.org")
-
-;; (define-minor-mode start-mode
-;;   "Provide functions for custom start page."
-;;   :lighter " start"
-;;   :keymap (let ((map (make-sparse-keymap)))
-;;           ;;(define-key map (kbd "M-z") 'eshell)
-;;             (evil-define-key 'normal start-mode-map
-;;               (kbd "1") '(lambda () (interactive) (find-file "~/.config/doom/config.org"))
-;;               (kbd "2") '(lambda () (interactive) (find-file "~/.config/doom/init.el"))
-;;               (kbd "3") '(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
-;;           map))
-;;
-;; (add-hook 'start-mode-hook 'read-only-mode) ;; make start.org read-only; use 'SPC t r' to toggle off read-only.
-;; (provide 'start-mode)
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
