@@ -1,32 +1,4 @@
-#  ___ ___ _  _
-# | _ ) __| \| | Brian E Nguyen
-# | _ \ _|| .` | brianenguyen.com
-# |___/___|_|\_| github.com/Buraiyen/
-#
-# ZSH configurations. Most of them are automatically impletmented
-# from ArcoLinux
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-#installation via script from github
-#export ZSH="/home/$USER/.oh-my-zsh"
-#installation via paru -S oh-my-zsh-git
-export ZSH=/usr/share/oh-my-zsh/
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# if you installed the package oh-my-zsh-powerline-theme-git then you type here "powerline" as zsh theme
+export ZSH="$HOME/.oh-my-zsh/"
 ZSH_THEME="mikeh"
 
 # Case senstive completion
@@ -49,46 +21,10 @@ HIST_STAMPS="yyyy.mm.dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git 
+    git
 )
 
 source $ZSH/oh-my-zsh.sh
-
-if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-
-if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-
-######################
-# ARCOLINUX SETTINGS # 
-######################
-
-setopt GLOB_DOTS
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
-export HISTCONTROL=ignoreboth:erasedups
-
-# Make nvim the default editor
-
-export EDITOR="emacsclient -c -a emacs"
-export VISUAL="emacsclient -c -a emacs"
-
-#PS1='[\u@\h \W]\$ '
-
-if [ -d "$HOME/.bin" ] ;
-  then PATH="$HOME/.bin:$PATH"
-fi
-
-if [ -d "$HOME/.local/bin" ] ;
-  then PATH="$HOME/.local/bin:$PATH"
-fi
-
 #####################
 # MY CUSTOM ALIASES #
 #####################
@@ -158,7 +94,7 @@ alias code='codium'
 alias ls='exa -lh --color=always --group-directories-first'
 alias la='exa -lha --color=always --group-directories-first'
 
-# ( ͡° ͜ʖ ͡°) 
+# ( ͡° ͜ʖ ͡°)
 alias plz='sudo'
 
 #fix obvious typo's
@@ -329,4 +265,4 @@ ex ()
 # source ~/.cache/wal/colors-tty.sh
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 #neofetch
-colorscript -r
+fastfetch

@@ -106,9 +106,9 @@ Line numbers are currently set to relative. Using ~'nil~ removes line numbers
 
 *** Font
 #+begin_src elisp
-(setq doom-font (font-spec :family "Roboto Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "Roboto Mono" :size 15)
-      doom-big-font (font-spec :family "Roboto Mono" :size 24))
+(setq doom-font (font-spec :family "Liberation Mono" :size 15)
+      doom-variable-pitch-font (font-spec :family "Liberation Mono" :size 15)
+      doom-big-font (font-spec :family "Liberation Mono" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -124,6 +124,7 @@ all-the-icons enables visual icons
 (use-package all-the-icons
   :if (display-graphic-p))
 #+end_src
+
 
 * BEACON
 Beacon is a very useful tool for locating your cursor. Whenever you scroll, a flashing light flashes horizontally on your cursor
@@ -148,7 +149,7 @@ Included in this setup are org-agenda and org-journal
 #+begin_src emacs-lisp
 (after! org
   (setq org-agenda-files '("~/GitRepos/notes/Agenda/agenda.org")
-      org-journal-dir "~/GitRepos/notes/journal/"
+      org-journal-dir "~/GitRepos/notes/Journal/"
       org-journal-date-format "%A, %Y-%m-%d"
       org-journal-file-type 'monthly
       org-journal-file-format "%Y-%m.org"

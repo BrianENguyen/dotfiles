@@ -16,9 +16,9 @@
 
 (setq display-line-numbers-type 'relative)
 
-(setq doom-font (font-spec :family "Roboto Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "Roboto Mono" :size 15)
-      doom-big-font (font-spec :family "Roboto Mono" :size 24))
+(setq doom-font (font-spec :family "Liberation Mono" :size 15)
+      doom-variable-pitch-font (font-spec :family "Liberation Mono" :size 15)
+      doom-big-font (font-spec :family "Liberation Mono" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -37,7 +37,7 @@
 
 (after! org
   (setq org-agenda-files '("~/GitRepos/notes/Agenda/agenda.org")
-      org-journal-dir "~/GitRepos/notes/journal/"
+      org-journal-dir "~/GitRepos/notes/Journal/"
       org-journal-date-format "%A, %Y-%m-%d"
       org-journal-file-type 'monthly
       org-journal-file-format "%Y-%m.org"
