@@ -125,6 +125,10 @@ all-the-icons enables visual icons
   :if (display-graphic-p))
 #+end_src
 
+*** Theme
+#+begin_src elisp
+(setq doom-theme 'catppuccin)
+#+end_src
 
 * BEACON
 Beacon is a very useful tool for locating your cursor. Whenever you scroll, a flashing light flashes horizontally on your cursor

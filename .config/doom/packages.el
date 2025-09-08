@@ -56,3 +56,4 @@
 (package! all-the-icons)
 (unpin! org-roam)
 (package! org-roam-ui)
+(package! catppuccin-theme)

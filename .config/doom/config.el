@@ -29,6 +29,8 @@
 (use-package all-the-icons
   :if (display-graphic-p))
 
+(setq doom-theme 'catppuccin)
+
 (beacon-mode 1)
 (setq beacon-blink-when-point-moves-vertically 1
       beacon-color "#F28AB3" ;; light pink color
