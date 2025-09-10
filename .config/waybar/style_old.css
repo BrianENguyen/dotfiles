@@ -263,7 +263,7 @@ window#waybar {
 
 /* Some Modules that I am not using right now */
 #custom-cava {
-  color: #cba6f7;
+  color: @green;
   border-left: 0px;
   border-right: 0px;
   padding: 6px;
